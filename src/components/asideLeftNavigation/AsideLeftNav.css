@@ -1,0 +1,14 @@
+.aside-left-nav {
+  border: 2px solid red;
+}
+.app-name {
+  border: 2px solid red;
+}
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav a {
+  text-decoration: none;
+}
