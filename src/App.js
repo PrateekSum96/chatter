@@ -1,8 +1,12 @@
 import "./App.css";
+import AppRouter from "./router/AppRouter";
 
 function App() {
-  console.log(process.env.REACT_APP_JWT_SECRET);
-  return <div className="App">Start</div>;
+  return (
+    <div className="App">
+      <AppRouter />
+    </div>
+  );
 }
 
 export default App;
