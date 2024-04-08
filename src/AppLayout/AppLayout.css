@@ -1,0 +1,45 @@
+.app-layout {
+  display: grid;
+}
+
+.app-logo-pl {
+  grid-area: appLogo;
+  border-right: 1px solid var(--primary-color);
+}
+
+.search-pl {
+  grid-area: search;
+}
+
+.user-info-pl {
+  grid-area: userInfo;
+  border-left: 1px solid var(--primary-color);
+}
+
+.aside-left-pl {
+  grid-area: asideLeft;
+  border-right: 1px solid var(--primary-color);
+}
+
+.outlet-pl {
+  grid-area: outlet;
+  border-top: 1px solid var(--primary-color);
+}
+
+.aside-right-pl {
+  grid-area: asideRight;
+  border-left: 1px solid var(--primary-color);
+}
+
+@media (min-width: 1201px) {
+  .app-layout {
+    grid-template-rows: 70px 1fr;
+    grid-template-columns: 250px 1fr 250px;
+    grid-template-areas:
+      "appLogo search userInfo"
+      "asideLeft outlet asideRight";
+  }
+  .search-pl {
+    margin: auto;
+  }
+}

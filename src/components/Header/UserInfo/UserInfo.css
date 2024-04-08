@@ -1,0 +1,72 @@
+@media (min-width: 1201px) {
+  .user-info-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0.2rem;
+  }
+  .dark-light-theme {
+    display: flex;
+    align-items: center;
+  }
+
+  .dark-light-icons {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    transform: rotate(360deg);
+    transition: 0.2s linear;
+  }
+  .dark-light-toggle {
+    width: 45px;
+    height: 20px;
+    border-radius: 50px;
+    margin: 0 0.2rem;
+    padding: 2px 5px;
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-color);
+  }
+  .dark-light-toggle:hover {
+    cursor: pointer;
+  }
+  .theme-change-light {
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    height: 17px;
+    width: 17px;
+    transition: 0.2s linear;
+  }
+  .theme-change-dark {
+    background-color: var(--primary-color);
+    transform: translateX(27px);
+    border-radius: 50%;
+    height: 17px;
+    width: 17px;
+    transition: 0.2s linear;
+  }
+  .image-container {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
+    padding: 0 0.6rem;
+  }
+  .image-container:hover {
+    cursor: pointer;
+  }
+  .user-name {
+    padding-left: 5px;
+    color: var(--primary-color);
+  }
+
+  #user-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+    outline: 2px solid var(--primary-color);
+  }
+}
