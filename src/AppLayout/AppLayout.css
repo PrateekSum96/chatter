@@ -4,7 +4,7 @@
 
 .app-logo-pl {
   grid-area: appLogo;
-  border-right: 1px solid var(--primary-color);
+  outline: 1px solid var(--primary-color);
 }
 
 .search-pl {
@@ -13,22 +13,22 @@
 
 .user-info-pl {
   grid-area: userInfo;
-  border-left: 1px solid var(--primary-color);
+  outline: 1px solid var(--primary-color);
 }
 
 .aside-left-pl {
   grid-area: asideLeft;
-  border-right: 1px solid var(--primary-color);
+  outline: 1px solid var(--primary-color);
 }
 
 .outlet-pl {
   grid-area: outlet;
-  border-top: 1px solid var(--primary-color);
+  outline: 1px solid var(--primary-color);
 }
 
 .aside-right-pl {
   grid-area: asideRight;
-  border-left: 1px solid var(--primary-color);
+  outline: 1px solid var(--primary-color);
 }
 
 @media (min-width: 1201px) {
