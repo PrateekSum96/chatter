@@ -4,7 +4,7 @@ import Home from "../pages/Home/Home";
 import Explore from "../pages/Explore/Explore";
 import Bookmarks from "../pages/Bookmarks/Bookmarks";
 import LikedPost from "../pages/LikedPost/LikedPost";
-import AppLayout from "../AppLayout/AppLayout";
+import AppLayout from "../appLayout/AppLayout";
 
 const Router = () => {
   const appRouter = createBrowserRouter([

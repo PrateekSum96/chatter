@@ -22,7 +22,7 @@ const UserInfo = () => {
       <div className="image-container">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Jack_Reacher-_Never_Go_Back_Japan_Premiere_Red_Carpet-_Tom_Cruise_%2835338493152%29_%28cropped%29.jpg/800px-Jack_Reacher-_Never_Go_Back_Japan_Premiere_Red_Carpet-_Tom_Cruise_%2835338493152%29_%28cropped%29.jpg"
-          alt="user-image"
+          alt="user_image"
           id="user-image"
         />
         <div className="user-name">Prateek</div>

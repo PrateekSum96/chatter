@@ -23,7 +23,7 @@
 
 .outlet-pl {
   grid-area: outlet;
-  outline: 1px solid var(--primary-color);
+  outline: 1px solid red;
 }
 
 .aside-right-pl {
@@ -41,5 +41,9 @@
   }
   .search-pl {
     margin: auto;
+  }
+  .outlet-pl {
+    display: flex;
+    justify-content: center;
   }
 }
