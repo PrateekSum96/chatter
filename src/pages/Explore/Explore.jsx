@@ -6,7 +6,6 @@ import "./Explore.css";
 const Explore = () => {
   const allPosts = useGetAllPosts();
 
-  // console.log(allPosts);
   return (
     <div className="explore">
       {allPosts?.map((post) => (
