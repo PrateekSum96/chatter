@@ -1,0 +1,9 @@
+.explore {
+  /* width: 600px; */
+}
+
+@media (min-width: 1201px) {
+  .explore {
+    width: 550px;
+  }
+}

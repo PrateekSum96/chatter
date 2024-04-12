@@ -4,31 +4,36 @@
 
 .app-logo-pl {
   grid-area: appLogo;
-  outline: 1px solid var(--primary-color);
+  border-right: 1px solid var(--primary-color);
+  box-sizing: border-box;
 }
 
 .search-pl {
   grid-area: search;
+  border-bottom: 1px solid var(--primary-color);
+  box-sizing: border-box;
 }
 
 .user-info-pl {
   grid-area: userInfo;
-  outline: 1px solid var(--primary-color);
+  border-left: 1px solid var(--primary-color);
+  box-sizing: border-box;
 }
 
 .aside-left-pl {
   grid-area: asideLeft;
-  outline: 1px solid var(--primary-color);
+  border-right: 1px solid var(--primary-color);
+  box-sizing: border-box;
 }
 
 .outlet-pl {
   grid-area: outlet;
-  outline: 1px solid var(--primary-color);
 }
 
 .aside-right-pl {
   grid-area: asideRight;
-  outline: 1px solid var(--primary-color);
+  border-left: 1px solid var(--primary-color);
+  box-sizing: border-box;
 }
 
 @media (min-width: 1201px) {
@@ -39,7 +44,39 @@
       "appLogo search userInfo"
       "asideLeft outlet asideRight";
   }
+  .app-logo-pl {
+    position: sticky;
+    top: 0;
+    background-color: white;
+  }
   .search-pl {
-    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: white;
+  }
+  .user-info-pl {
+    position: sticky;
+    top: 0;
+    background-color: white;
+  }
+  .aside-left-pl {
+    position: sticky;
+    height: calc(100vh - 70px);
+    top: 70px;
+    background-color: white;
+  }
+  .outlet-pl {
+    display: flex;
+    justify-content: center;
+  }
+
+  .aside-right-pl {
+    position: sticky;
+    height: calc(100vh - 70px);
+    top: 70px;
+    background-color: white;
   }
 }
