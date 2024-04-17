@@ -5,6 +5,8 @@ import Explore from "../pages/Explore/Explore";
 import Bookmarks from "../pages/Bookmarks/Bookmarks";
 import LikedPost from "../pages/LikedPost/LikedPost";
 import AppLayout from "../appLayout/AppLayout";
+import Login from "../pages/Login/Login";
+import Signup from "../pages/Signup/Signup";
 
 const Router = () => {
   const appRouter = createBrowserRouter([
@@ -29,6 +31,14 @@ const Router = () => {
           path: "/liked-post",
         },
       ],
+    },
+    {
+      element: <Login />,
+      path: "/login",
+    },
+    {
+      element: <Signup />,
+      path: "/signup",
     },
   ]);
   return (

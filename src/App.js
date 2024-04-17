@@ -12,6 +12,7 @@ function App() {
     if (userSliceStatus === "idle") {
       dispatch(getAllUsers());
     }
+    // eslint-disable-next-line
   }, []);
   return (
     <div className="App">
