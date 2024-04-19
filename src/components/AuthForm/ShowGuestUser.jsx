@@ -1,19 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./ShowGuestUser.css";
+import { handleUserLogin } from "../../features/authSlice";
 
-const ShowGuestUser = ({ setUserData, handleLogIn }) => {
+const ShowGuestUser = () => {
+  const dispatch = useDispatch();
   const appUser = useSelector((store) => store.appUsers.allUsers);
 
-  const handleGuestLogin = (guestUser) => {
-    const { email, password } = guestUser;
-    setUserData((user) => ({
-      ...user,
-      email,
-      password,
-    }));
-
-    handleLogIn(email, password);
-  };
   return (
     <div className="show-guest">
       {appUser?.map((user) => (
@@ -21,7 +13,11 @@ const ShowGuestUser = ({ setUserData, handleLogIn }) => {
           key={user._id}
           role="button"
           className="show-guest-container"
-          onClick={() => handleGuestLogin(user)}
+          onClick={() =>
+            dispatch(
+              handleUserLogin({ email: user.email, password: user.password })
+            )
+          }
         >
           <img src={user.avatarUrl} alt="guest-user" id="guest-user-img" />
           <div className="guest-user-detail">
