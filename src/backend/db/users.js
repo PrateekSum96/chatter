@@ -26,6 +26,7 @@ export const users = [
     lastName: "Doe",
     username: "johndoe",
     password: "johndoe123",
+    email: "john@ab.com",
     bio: "Hello World",
     bookmarks: [],
     avatarUrl:
@@ -40,6 +41,7 @@ export const users = [
     lastName: "Doe",
     username: "janedoe",
     password: "janedoe123",
+    email: "jane@ab.com",
     bio: "Whats in bio?",
     bookmarks: [],
     avatarUrl:
@@ -54,6 +56,7 @@ export const users = [
     lastName: "Smith",
     username: "carlsmith",
     password: "carlsmith123",
+    email: "carl@ab.com",
     bio: "Whats in bio?",
     avatarUrl:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1651563581/socialmedia/avatars/carl-smith_mehw0u.webp",
@@ -68,6 +71,7 @@ export const users = [
     lastName: "Bulani",
     username: "romabulani",
     password: "romabulani123",
+    email: "roma@ab.com",
     bio: "Aspiring Frontend Engineer",
     bookmarks: [],
     avatarUrl:
@@ -83,6 +87,7 @@ export const users = [
     lastName: "Maxwell",
     username: "alexmaxwell",
     password: "alexmaxwell123",
+    email: "alex@ab.com",
     bio: "What's up?",
     bookmarks: [],
     avatarUrl:
@@ -97,7 +102,8 @@ export const users = [
     firstName: "Sophia",
     lastName: "Jones",
     username: "sophiajones",
-    password: "sophiajones123",
+    password: "sophia123",
+    email: "sophia@ab.com",
     bio: "Frontend Engineer",
     bookmarks: [],
     avatarUrl:

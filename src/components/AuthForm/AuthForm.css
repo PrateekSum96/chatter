@@ -4,10 +4,31 @@
 .auth-form-container > div > label {
   display: block;
 }
+.guest-option-auth-form {
+  position: relative;
+}
+.guest-user-auth-form {
+  position: absolute;
+  border-radius: 0.3rem;
+  background-color: var(--secondary-color);
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 0 0.5rem;
+}
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--secondary-color);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 0.3rem;
+}
 @media (min-width: 1201px) {
   .auth-form {
     /* border: 3px solid var(--primary-color); */
-    padding: 1rem;
+    padding-bottom: 0.5rem;
     box-sizing: border-box;
   }
   #auth-logo-img {
@@ -17,7 +38,7 @@
     margin-bottom: 1.5rem;
   }
   .auth-form > p {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     text-align: center;
     font-weight: bold;
     margin: 0;
@@ -66,7 +87,7 @@
     background-color: white;
     margin: 0.2rem 0;
     background-color: black;
-    border: 2px solid white;
+    border: 1px solid white;
     box-sizing: border-box;
     color: white;
     transition: all 0.2s ease-in-out;
@@ -78,10 +99,37 @@
   #form-button {
     margin-top: 1rem;
     background-color: var(--primary-color);
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
     color: white;
   }
   #form-button:hover {
     background-color: var(--hover-color);
+  }
+  .guest-user-auth-form {
+    width: 200px;
+    height: 300px;
+    left: -240px;
+    top: -200px;
+  }
+  .guest-user-cross {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: -260px;
+    left: -160px;
+    background-color: var(--secondary-color);
+    outline: 3px solid var(--primary-color);
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    transition: all 0.2s linear;
+  }
+  .guest-user-cross:hover {
+    cursor: pointer;
+    font-weight: 900;
+    outline: 4px solid var(--primary-color);
   }
 }
