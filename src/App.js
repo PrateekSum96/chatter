@@ -7,7 +7,6 @@ import { getAllUsers } from "./features/userSlice";
 function App() {
   const dispatch = useDispatch();
   const userSliceStatus = useSelector((state) => state.appUsers.status);
-  console.log(userSliceStatus);
   useEffect(() => {
     if (userSliceStatus === "idle") {
       dispatch(getAllUsers());

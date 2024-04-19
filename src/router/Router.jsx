@@ -8,10 +8,18 @@ import AppLayout from "../appLayout/AppLayout";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import RequireAuth from "../components/Auth/RequireAuth";
+
 const Router = () => {
   const appRouter = createBrowserRouter([
     {
-      element: <AppLayout />,
+      element: (
+        <RequireAuth>
+          <AppLayout />
+        </RequireAuth>
+      ),
       path: "/",
       children: [
         {
@@ -44,6 +52,17 @@ const Router = () => {
   return (
     <div>
       <RouterProvider router={appRouter} />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1200}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        theme="dark"
+      />
     </div>
   );
 };

@@ -15,16 +15,19 @@ const sign = require("jwt-encode");
  * */
 
 export const signupHandler = function (schema, request) {
-  const { username, password, ...rest } = JSON.parse(request.requestBody);
+  const { username, password, email, ...rest } = JSON.parse(
+    request.requestBody
+  );
   try {
     // check if username already exists
     const foundUser = schema.users.findBy({ username: username });
-    if (foundUser) {
+    const foundUserEmail = schema.users.findBy({ email: email });
+    if (foundUser || foundUserEmail) {
       return new Response(
         422,
         {},
         {
-          errors: ["Unprocessable Entity. Username Already Exists."],
+          errors: ["Unprocessable Entity. Username or Email Already Exists."],
         }
       );
     }
@@ -36,6 +39,7 @@ export const signupHandler = function (schema, request) {
       updatedAt: formatDate(),
       username,
       password,
+      email,
       ...rest,
       followers: [],
       following: [],
@@ -65,21 +69,22 @@ export const signupHandler = function (schema, request) {
  * */
 
 export const loginHandler = function (schema, request) {
-  const { username, password } = JSON.parse(request.requestBody);
+  const { email, password } = JSON.parse(request.requestBody);
   try {
-    const foundUser = schema.users.findBy({ username: username });
+    const foundUser = schema.users.findBy({ email: email });
+
     if (!foundUser) {
       return new Response(
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          errors: ["The email you entered is not Registered. Not Found error"],
         }
       );
     }
+
     if (password === foundUser.password) {
+      const { username } = foundUser;
       const encodedToken = sign(
         { _id: foundUser._id, username },
         process.env.REACT_APP_JWT_SECRET

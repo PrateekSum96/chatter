@@ -1,20 +1,99 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
+export const handleUserLogin = createAsyncThunk(
+  "auth/handleUserLogin",
+  async ({ email, password }) => {
+    const response = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+    const result = await response.json();
+    return result;
+  }
+);
+
+export const handleUserSignUp = createAsyncThunk(
+  "auth/handleUserSignUp",
+  async ({ firstName, lastName, username, email, password }) => {
+    const response = await fetch("/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ firstName, lastName, username, email, password }),
+    });
+    const result = await response.json();
+    return result;
+  }
+);
 const initialState = {
   isLoggedIn: false,
+  status: "idle", // "loading"||"succeeded"||"error"
+  error: null,
+  user: null,
 };
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    loginButtonPressed: (state) => {
-      state.isLoggedIn = true;
-    },
-    logoutButtonPressed: (state) => {
-      state.isLoggedIn = false;
-    },
+  reducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(handleUserLogin.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(handleUserLogin.fulfilled, (state, action) => {
+        const { foundUser, encodedToken, errors } = action.payload;
+        if (errors) {
+          state.error = "The email you entered is not registered.";
+          state.status = "error";
+          toast.error(state.error);
+          return;
+        }
+
+        state.error = null;
+        state.status = "succeeded";
+        state.isLoggedIn = true;
+        state.user = foundUser;
+        localStorage.setItem("token", encodedToken);
+        localStorage.setItem("foundUser", JSON.stringify(foundUser));
+        toast.success("Login successful!");
+      })
+      .addCase(handleUserLogin.rejected, (state) => {
+        state.status = "error";
+        state.error = "Something went wrong!";
+        toast.error(state.error);
+      })
+      .addCase(handleUserSignUp.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(handleUserSignUp.fulfilled, (state, action) => {
+        const { createdUser, encodedToken, errors } = action.payload;
+        if (errors) {
+          state.status = "error";
+          state.error = "Email or Username already exists";
+          toast.error(state.error);
+          return;
+        }
+        state.error = null;
+        state.status = "succeeded";
+        state.isLoggedIn = true;
+        state.user = createdUser;
+        localStorage.setItem("token", encodedToken);
+        localStorage.setItem("foundUser", JSON.stringify(createdUser));
+        toast.success("Successfully account created!");
+      })
+      .addCase(handleUserSignUp.rejected, (state) => {
+        state.status = "error";
+        state.error = "Something went wrong!";
+        toast.error(state.error);
+      });
   },
 });
 
-export const { loginButtonPressed, logoutButtonPressed } = authSlice.actions;
 export default authSlice.reducer;
