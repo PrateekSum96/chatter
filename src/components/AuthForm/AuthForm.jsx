@@ -7,14 +7,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleUserLogin, handleUserSignUp } from "../../features/authSlice.js";
 import { useLocation, useNavigate } from "react-router-dom";
 import ShowGuestUser from "./ShowGuestUser.jsx";
+import { validateData } from "../../utils/Validate/validate.js";
 
 const AuthForm = ({ signup }) => {
-  //hooks
-  const [eyeOne, setEyeOne] = useState(false);
-  const [eyeTwo, setEyeTwo] = useState(false);
-  const [showGuestUser, setShowGuestUser] = useState(false);
+  return (
+    <div className="auth-form">
+      <img src="./chatter-logo.png" alt="auth-logo-img" id="auth-logo-img" />
+      <p> {signup ? "Signup" : "Login"}</p>
+      <FormComponent signup={signup} />
+      <GuestComponent signup={signup} />
+    </div>
+  );
+};
+
+const FormComponent = ({ signup }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [eyeOne, setEyeOne] = useState(false);
+  const [eyeTwo, setEyeTwo] = useState(false);
+  const [errorMsg, setErrorMsg] = useState();
   const initialUserDataState = {
     firstName: "",
     lastName: "",
@@ -24,9 +36,16 @@ const AuthForm = ({ signup }) => {
     confirmPassword: "",
   };
   const [userData, setUserData] = useState(initialUserDataState);
-  const dispatch = useDispatch();
-
   const isLoggedIn = useSelector((store) => store?.auth?.isLoggedIn);
+  const { firstName, lastName, email, username, password, confirmPassword } =
+    userData;
+
+  useEffect(() => {
+    return () => {
+      setUserData(initialUserDataState);
+    };
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -37,16 +56,10 @@ const AuthForm = ({ signup }) => {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    return () => {
-      setUserData(initialUserDataState);
-    };
-    // eslint-disable-next-line
-  }, []);
+    toast.error(errorMsg);
+  }, [errorMsg]);
 
   //function
-  const { firstName, lastName, email, username, password, confirmPassword } =
-    userData;
-
   const handleLogIn = (email, password) => {
     dispatch(handleUserLogin({ email, password }));
   };
@@ -60,16 +73,26 @@ const AuthForm = ({ signup }) => {
       toast.error("Passwords are not matching!");
     }
   };
-
+  const handleSubmit = () => {
+    if (signup && password !== confirmPassword) {
+      toast.error("Passwords are not matching!");
+      return;
+    }
+    const validateMsg = signup && validateData(email, password);
+    if (!validateMsg) {
+      signup ? handleSignUp() : handleLogIn(email, password);
+    } else {
+      setErrorMsg(validateMsg);
+    }
+  };
   return (
-    <div className="auth-form">
-      <img src="./chatter-logo.png" alt="auth-logo-img" id="auth-logo-img" />
-      <p> {signup ? "Signup" : "Login"}</p>
+    <div>
       <form
         className="auth-form-container"
         onSubmit={(e) => {
           e.preventDefault();
-          signup ? handleSignUp() : handleLogIn(email, password);
+          // signup ? handleSignUp() : handleLogIn(email, password);
+          handleSubmit();
         }}
       >
         {signup && (
@@ -185,32 +208,35 @@ const AuthForm = ({ signup }) => {
           {signup ? "Sign Up" : "Log In"}
         </button>
       </form>
-      <div className="guest-option-auth-form">
-        {!signup && showGuestUser && (
-          <div
-            className="guest-user-cross"
-            onClick={() => setShowGuestUser(!showGuestUser)}
-          >
-            &#10006;
-          </div>
-        )}
-        {!signup && showGuestUser && (
-          <div className="guest-user-auth-form">
-            <ShowGuestUser
-              setUserData={setUserData}
-              handleLogIn={handleLogIn}
-            />
-          </div>
-        )}
-        {!signup && (
-          <button
-            className="auth-button"
-            onClick={() => setShowGuestUser(!showGuestUser)}
-          >
-            Guest Mode
-          </button>
-        )}
-      </div>
+    </div>
+  );
+};
+
+const GuestComponent = ({ signup }) => {
+  const [showGuestUserBox, setShowGuestUserBox] = useState(false);
+  return (
+    <div className="guest-option-auth-form">
+      {!signup && showGuestUserBox && (
+        <div
+          className="guest-user-cross"
+          onClick={() => setShowGuestUserBox(!showGuestUserBox)}
+        >
+          &#10006;
+        </div>
+      )}
+      {!signup && showGuestUserBox && (
+        <div className="guest-user-auth-form">
+          <ShowGuestUser />
+        </div>
+      )}
+      {!signup && (
+        <button
+          className="auth-button"
+          onClick={() => setShowGuestUserBox(!showGuestUserBox)}
+        >
+          Guest Mode
+        </button>
+      )}
     </div>
   );
 };
