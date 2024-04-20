@@ -55,12 +55,12 @@ const authSlice = createSlice({
           return;
         }
 
-        state.error = null;
-        state.status = "succeeded";
         state.isLoggedIn = true;
+        state.error = null;
         state.user = foundUser;
         localStorage.setItem("token", encodedToken);
         localStorage.setItem("foundUser", JSON.stringify(foundUser));
+        state.status = "succeeded";
         toast.success("Login successful!");
       })
       .addCase(handleUserLogin.rejected, (state) => {
@@ -80,12 +80,12 @@ const authSlice = createSlice({
           toast.error(state.error);
           return;
         }
-        state.error = null;
-        state.status = "succeeded";
         state.isLoggedIn = true;
+        state.error = null;
         state.user = createdUser;
         localStorage.setItem("token", encodedToken);
         localStorage.setItem("foundUser", JSON.stringify(createdUser));
+        state.status = "succeeded";
         toast.success("Successfully account created!");
       })
       .addCase(handleUserSignUp.rejected, (state) => {

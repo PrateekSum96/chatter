@@ -1,0 +1,65 @@
+@media (min-width: 1201px) {
+  .show-user-container-su {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
+    padding: 0.5rem 0.4rem;
+
+    box-sizing: border-box;
+    transition: all 0.2s ease-in;
+    border-bottom: 1px solid var(--primary-color);
+  }
+  .show-user-container-su:hover {
+    cursor: pointer;
+    border-radius: 0.3rem;
+    background-color: var(--secondary-color);
+  }
+  .img-container-su {
+    width: 45px;
+    height: 45px;
+    outline: 3px solid var(--primary-color);
+    border-radius: 50%;
+  }
+  #user-img-su {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+  }
+  .user-info-container-su {
+    margin: 0 0.4rem;
+    flex-grow: 1;
+    color: var(--primary-color);
+
+    overflow: hidden;
+  }
+  .user-name-su {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  .user-name-su > span:nth-of-type(1) {
+    margin-right: 0.2rem;
+  }
+  .user-info-container-su > div:nth-of-type(2) {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .f-btn-container-su {
+    /* outline: 1px solid red; */
+  }
+  .f-btn-container-su > button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0.3rem;
+    height: 35px;
+    width: 55px;
+    box-sizing: border-box;
+    font-weight: 600;
+  }
+  .f-btn-container-su > button:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+  }
+}

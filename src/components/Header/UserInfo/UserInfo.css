@@ -3,62 +3,85 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1rem 0.2rem;
-  }
-  .dark-light-theme {
-    display: flex;
-    align-items: center;
+    margin: 0.3rem 0.2rem;
   }
 
   .dark-light-icons {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--primary-color);
     transform: rotate(360deg);
     transition: 0.2s linear;
   }
   .dark-light-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
     width: 45px;
-    height: 20px;
-    border-radius: 50px;
+    height: 30px;
+    border-radius: 0.3rem;
     margin: 0 0.2rem;
     padding: 2px 5px;
-    display: flex;
-    align-items: center;
     background-color: var(--secondary-color);
   }
   .dark-light-toggle:hover {
     cursor: pointer;
   }
+  #toggle-pointer {
+    height: 20px;
+    width: 20px;
+    border-radius: 0.3rem;
+    position: absolute;
+  }
   .theme-change-light {
     background-color: var(--primary-color);
-    border-radius: 50%;
-    height: 17px;
-    width: 17px;
     transition: 0.2s linear;
   }
   .theme-change-dark {
     background-color: var(--primary-color);
-    transform: translateX(27px);
-    border-radius: 50%;
-    height: 17px;
-    width: 17px;
+    transform: translateX(24px);
     transition: 0.2s linear;
   }
-  .image-container {
+
+  .user-login-ui {
     display: flex;
     align-items: center;
     font-weight: bold;
+    width: 140px;
+    color: var(--primary-color);
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.3rem;
+    transition: background-color 0.2s ease-in;
+
+    margin-right: 0.6rem;
+  }
+  .user-login-ui:hover {
+    cursor: pointer;
+    background-color: var(--secondary-color);
+  }
+  .image-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    outline: 3px solid var(--primary-color);
+    background-color: rgb(238, 207, 144);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  .user-name-ui {
+    padding-left: 0.4rem;
+    overflow: hidden;
+  }
+  .user-fn-ln-ui {
     font-size: 1.1rem;
     color: var(--primary-color);
-    border-left: 3px solid var(--primary-color);
-    padding: 0 0.6rem;
   }
-  .image-container:hover {
-    cursor: pointer;
-  }
-  .user-name {
-    padding-left: 5px;
-    color: var(--primary-color);
+
+  .user-fn-ln-ui > span:nth-last-of-type(2) {
+    padding-right: 0.2rem;
   }
 
   #user-image {
@@ -67,6 +90,8 @@
     object-fit: cover;
     object-position: top;
     border-radius: 50%;
-    outline: 2px solid var(--primary-color);
+  }
+  #username-ui {
+    font-size: 0.9rem;
   }
 }
