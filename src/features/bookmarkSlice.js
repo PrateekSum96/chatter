@@ -61,7 +61,7 @@ const bookmarkSlice = createSlice({
         state.status = "succeeded";
         state.error = null;
         state.bookmarkedPost = action.payload.bookmarks;
-        toast.success("bookmark added!");
+        toast.success("Added to bookmark!");
       })
       .addCase(bookmarkPost.rejected, (state) => {
         state.status = "failed";
@@ -82,11 +82,11 @@ const bookmarkSlice = createSlice({
         state.status = "succeeded";
         state.error = null;
         state.bookmarkedPost = action.payload.bookmarks;
-        toast.success("bookmark removed!");
+        toast.success("Removed from bookmark!");
       })
       .addCase(removeBookmarkPost.rejected, (state) => {
         state.status = "failed";
-        state.error = "Failed to bookmark the post";
+        state.error = "Failed to remove from bookmark";
       });
   },
 });
