@@ -59,7 +59,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logOutUser: (state) => {
-      state = initialState;
+      state.isLoggedIn = false;
+      state.status = "idle";
+      state.error = null;
+      state.user = null;
       localStorage.removeItem("foundUser");
       localStorage.removeItem("token");
     },

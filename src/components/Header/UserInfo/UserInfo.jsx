@@ -3,6 +3,7 @@ import "./UserInfo.css";
 import { IoIosSunny, IoIosMoon } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutUser } from "../../../features/authSlice";
+import { clearBookmarks } from "../../../features/bookmarkSlice";
 
 const UserInfo = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,13 @@ const UserInfo = () => {
         <IoIosMoon className="dark-light-icons" />
       </div>
 
-      <div className="user-login-ui" onClick={() => dispatch(logOutUser())}>
+      <div
+        className="user-login-ui"
+        onClick={() => {
+          dispatch(logOutUser());
+          dispatch(clearBookmarks());
+        }}
+      >
         <div className="image-container">
           {avatarUrl ? (
             <img src={avatarUrl} alt="user_image" id="user-image" />
