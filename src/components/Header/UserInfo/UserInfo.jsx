@@ -1,9 +1,11 @@
 import { useState } from "react";
 import "./UserInfo.css";
 import { IoIosSunny, IoIosMoon } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logOutUser } from "../../../features/authSlice";
 
 const UserInfo = () => {
+  const dispatch = useDispatch();
   const [themeDark, setThemeDark] = useState(false);
   const user = useSelector((store) => store.auth.user);
   const { firstName, lastName, username, avatarUrl } = user;
@@ -22,7 +24,7 @@ const UserInfo = () => {
         <IoIosMoon className="dark-light-icons" />
       </div>
 
-      <div className="user-login-ui">
+      <div className="user-login-ui" onClick={() => dispatch(logOutUser())}>
         <div className="image-container">
           {avatarUrl ? (
             <img src={avatarUrl} alt="user_image" id="user-image" />

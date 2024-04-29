@@ -1,0 +1,15 @@
+@media (min-width: 1201px) {
+  .home {
+    width: 550px;
+  }
+  .no-post-home {
+    width: 550px;
+
+    margin: 0;
+    font-size: 2rem;
+    color: var(--primary-color);
+    font-weight: bold;
+    padding: 0.5rem;
+    text-align: center;
+  }
+}

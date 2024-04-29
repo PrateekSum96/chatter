@@ -6,4 +6,32 @@
     margin: 0;
     color: var(--primary-color);
   }
+  .filter-sort-ar {
+    /* border: 1px solid red; */
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+  }
+  .filter-sort-ar button {
+    height: 40px;
+    width: 110px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: var(--secondary-color);
+    border: none;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+  }
+  .filter-sort-ar button:hover {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+  }
+  .icon-ar {
+    margin-right: 0.2rem;
+    font-size: 1.3rem;
+  }
 }

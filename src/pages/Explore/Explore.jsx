@@ -1,11 +1,10 @@
+import { useSelector } from "react-redux";
 import ShowPost from "../../components/ShowPosts/ShowPost";
-import useGetAllPosts from "../../utils/CustomHook/useGetAllPosts";
 
 import "./Explore.css";
 
 const Explore = () => {
-  const allPosts = useGetAllPosts();
-
+  const allPosts = useSelector((store) => store.appPosts.allPosts);
   return (
     <div className="explore">
       {allPosts?.map((post) => (
