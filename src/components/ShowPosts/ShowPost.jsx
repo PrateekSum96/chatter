@@ -2,14 +2,16 @@ import "./ShowPost.css";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  FaHeart,
   FaRegHeart,
   FaRegBookmark,
+  FaBookmark,
   FaRegComment,
   FaRegShareSquare,
-  FaHeart,
 } from "react-icons/fa";
 import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
 import { disLikePost, likePost } from "../../features/postSlice";
+import { bookmarkPost, removeBookmarkPost } from "../../features/bookmarkSlice";
 
 const ShowPost = ({ post }) => {
   const allUsers = useSelector((state) => state.appUsers?.allUsers);
@@ -86,11 +88,18 @@ const UserContentPost = ({ post }) => {
 const UserInteraction = ({ post }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((store) => store.auth.user);
+  const bookmarkedPosts = useSelector(
+    (store) => store.appBookmarks.bookmarkedPost
+  );
 
   const isLoggedInUserLikedPost = post?.likes?.likedBy.some(
     (user) => user._id === loggedInUser._id
   );
-  console.log(post);
+
+  const isBookmarked = bookmarkedPosts.some(
+    (bkPost) => bkPost._id === post._id
+  );
+
   return (
     <div className="user-interaction-show-post">
       <div className="icon-show-post">
@@ -104,7 +113,15 @@ const UserInteraction = ({ post }) => {
         )}
         <span id="like-count-show-post">{post.likes.likeCount}</span>
       </div>
-      <FaRegBookmark className="icon-show-post" />
+
+      <div className="icon-show-post">
+        {isBookmarked ? (
+          <FaBookmark onClick={() => dispatch(removeBookmarkPost(post._id))} />
+        ) : (
+          <FaRegBookmark onClick={() => dispatch(bookmarkPost(post._id))} />
+        )}
+      </div>
+
       <FaRegComment className="icon-show-post" />
       <FaRegShareSquare className="icon-show-post" />
     </div>
