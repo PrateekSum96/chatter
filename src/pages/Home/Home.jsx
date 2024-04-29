@@ -28,7 +28,7 @@ const Home = () => {
       dispatch(trendingPost());
     }
     // eslint-disable-next-line
-  }, [sortBy, allUsersPosts]);
+  }, [sortBy, allUsersPosts, userLoggedIn]);
 
   return (
     <div className="home">
