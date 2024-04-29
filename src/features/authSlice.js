@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
+//Auth
 export const handleUserLogin = createAsyncThunk(
   "auth/handleUserLogin",
   async ({ email, password }) => {
@@ -30,6 +31,23 @@ export const handleUserSignUp = createAsyncThunk(
     return result;
   }
 );
+
+//Following
+export const followUser = createAsyncThunk(
+  "follow/followUser",
+  async (followUserId) => {
+    const encodedToken = localStorage.getItem("token");
+    const response = await fetch(`/api/users/follow/${followUserId}`, {
+      method: "POST",
+      headers: { authorization: encodedToken },
+      body: {},
+    });
+
+    const result = await response.json();
+    return result;
+  }
+);
+
 const initialState = {
   isLoggedIn: false,
   status: "idle", // "loading"||"succeeded"||"error"
@@ -39,9 +57,16 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logOutUser: (state) => {
+      state = initialState;
+      localStorage.removeItem("foundUser");
+      localStorage.removeItem("token");
+    },
+  },
   extraReducers(builder) {
     builder
+      //LOGIN
       .addCase(handleUserLogin.pending, (state) => {
         state.status = "loading";
         state.error = null;
@@ -51,7 +76,7 @@ const authSlice = createSlice({
         if (errors) {
           state.error = "The email you entered is not registered.";
           state.status = "error";
-          toast.error(state.error);
+          toast.error("The email you entered is not registered.");
           return;
         }
 
@@ -68,6 +93,7 @@ const authSlice = createSlice({
         state.error = "Something went wrong!";
         toast.error(state.error);
       })
+      // SIGNUP
       .addCase(handleUserSignUp.pending, (state) => {
         state.status = "loading";
         state.error = null;
@@ -92,8 +118,23 @@ const authSlice = createSlice({
         state.status = "error";
         state.error = "Something went wrong!";
         toast.error(state.error);
+      })
+      //FOLLOW
+      .addCase(followUser.pending, (state) => {
+        state.status = "pending";
+        state.error = null;
+      })
+      .addCase(followUser.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.error = null;
+        state.user = action.payload.user;
+      })
+      .addCase(followUser.rejected, (state) => {
+        state.status = "failed";
+        state.error = "Failed to follow";
       });
   },
 });
 
+export const { logOutUser } = authSlice.actions;
 export default authSlice.reducer;

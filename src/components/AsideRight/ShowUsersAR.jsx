@@ -1,7 +1,11 @@
+import { useDispatch } from "react-redux";
 import "./ShowUsersAR.css";
+import { followUser } from "../../features/authSlice";
 
 const ShowUsersAR = ({ user }) => {
-  const { firstName, lastName, username, avatarUrl } = user;
+  const dispatch = useDispatch();
+  const { firstName, lastName, username, avatarUrl, _id } = user;
+
   return (
     <div className="show-user-container-su" onClick={() => console.log("cont")}>
       <div className="img-container-su">
@@ -22,7 +26,7 @@ const ShowUsersAR = ({ user }) => {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            console.log("click");
+            dispatch(followUser(_id));
           }}
         >
           Follow

@@ -1,16 +1,17 @@
 import "./ShowPost.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   FaRegHeart,
   FaRegBookmark,
   FaRegComment,
   FaRegShareSquare,
+  FaHeart,
 } from "react-icons/fa";
 import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
+import { disLikePost, likePost } from "../../features/postSlice";
 
 const ShowPost = ({ post }) => {
-  // console.log(post);
   const allUsers = useSelector((state) => state.appUsers?.allUsers);
 
   return (
@@ -22,7 +23,10 @@ const ShowPost = ({ post }) => {
   );
 };
 
+//components
+
 const UserInfo = ({ post, allUsers }) => {
+  const loggedInUser = useSelector((store) => store.auth?.user);
   const getUserImage = allUsers?.find(
     (user) => user.username === post.username
   );
@@ -32,6 +36,7 @@ const UserInfo = ({ post, allUsers }) => {
       month: "short",
     })} ${date.getDate()}, ${date.getFullYear()}`;
   };
+
   return (
     <div className="userinfo-container-show-post">
       <div className="user-info-show-post">
@@ -42,8 +47,12 @@ const UserInfo = ({ post, allUsers }) => {
         />
         <div className="username-show-post">
           <div>
-            <span>{post.firstname}</span>
-            <span>{post.lastname}</span>
+            <span>
+              {post.firstname ? post.firstname : loggedInUser?.firstName}
+            </span>
+            <span>
+              {post.lastname ? post.lastname : loggedInUser?.lastName}
+            </span>
           </div>
           <div className="post-username-show-post">@{post.username}</div>
         </div>
@@ -59,14 +68,14 @@ const UserContentPost = ({ post }) => {
     <div className="user-content-show-post">
       <div>{post.content}</div>
       <div>
-        {post.mediaURL.includes("mp4") && (
+        {post.mediaURL?.includes("mp4") && (
           <video controls className="video-container-show-post">
             <source src={post.mediaURL} type="video/mp4" id="video-show-post" />
           </video>
         )}
       </div>
       <div>
-        {post.mediaURL.includes("webp") && (
+        {post.mediaURL?.includes("webp") && (
           <img src={post.mediaURL} alt="post-media" id="image-show-post" />
         )}
       </div>
@@ -75,10 +84,24 @@ const UserContentPost = ({ post }) => {
 };
 
 const UserInteraction = ({ post }) => {
+  const dispatch = useDispatch();
+  const loggedInUser = useSelector((store) => store.auth.user);
+
+  const isLoggedInUserLikedPost = post?.likes?.likedBy.some(
+    (user) => user._id === loggedInUser._id
+  );
+  console.log(post);
   return (
     <div className="user-interaction-show-post">
       <div className="icon-show-post">
-        <FaRegHeart />
+        {!isLoggedInUserLikedPost ? (
+          <FaRegHeart onClick={() => dispatch(likePost(post._id))} />
+        ) : (
+          <FaHeart
+            className="liked"
+            onClick={() => dispatch(disLikePost(post._id))}
+          />
+        )}
         <span id="like-count-show-post">{post.likes.likeCount}</span>
       </div>
       <FaRegBookmark className="icon-show-post" />
