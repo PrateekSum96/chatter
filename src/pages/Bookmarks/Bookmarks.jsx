@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import ShowPost from "../../components/ShowPosts/ShowPost";
 
 import "./Bookmarks.css";
+import { useLatestPost } from "../../utils/CustomHooks/useLatestPost";
 
 const Bookmarks = () => {
   const bookmarkedPosts = useSelector(
@@ -13,13 +14,15 @@ const Bookmarks = () => {
     return bookmarkedPosts.some((bkPost) => bkPost._id === post._id);
   });
 
+  const getLatestBookmarkPost = useLatestPost(postsInBookmarks);
+
   if (bookmarkedPosts?.length === 0) {
     return <div className="no-bookmarks">No Bookmarks Yet!</div>;
   }
 
   return (
     <div className="bookmarks">
-      {postsInBookmarks?.map((post) => (
+      {getLatestBookmarkPost?.map((post) => (
         <div key={post._id}>{<ShowPost post={post} />}</div>
       ))}
     </div>
