@@ -42,11 +42,18 @@ const UserInfo = ({ post, allUsers }) => {
   return (
     <div className="userinfo-container-show-post">
       <div className="user-info-show-post">
-        <img
-          src={getUserImage?.avatarUrl}
-          alt="user-avatar"
-          id="user-image-show-post"
-        />
+        {getUserImage?.avatarUrl ? (
+          <img
+            src={getUserImage?.avatarUrl}
+            alt="user-avatar"
+            id="user-image-show-post"
+          />
+        ) : (
+          <div className="no-avatar-sp">
+            {loggedInUser?.firstName.substring(0, 1)}
+          </div>
+        )}
+
         <div className="username-show-post">
           <div>
             <span>

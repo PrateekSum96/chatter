@@ -16,11 +16,15 @@ const PostContent = () => {
     <div className="post-content-container">
       <div className="post-input-pc">
         <div className="img-container-pc">
-          <img
-            src={userLoggedIn?.avatarUrl}
-            alt="post-user-img"
-            id="image-pc"
-          />
+          {userLoggedIn?.avatarUrl ? (
+            <img
+              src={userLoggedIn?.avatarUrl}
+              alt="post-user-img"
+              id="image-pc"
+            />
+          ) : (
+            <div>{userLoggedIn.firstName?.substring(0, 1)}</div>
+          )}
         </div>
 
         <textarea
