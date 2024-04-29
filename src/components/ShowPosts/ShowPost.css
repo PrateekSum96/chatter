@@ -78,14 +78,15 @@
   }
   .icon-show-post {
     display: block;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: var(--primary-color);
-    padding: 0.7rem 1.5rem 0 0.2rem;
+    padding: 0.7rem 0.5rem 0;
     display: flex;
     align-items: center;
   }
+
   #like-count-show-post {
-    padding-left: 0.3rem;
+    padding-left: 0.2rem;
   }
   .icon-show-post:hover {
     cursor: pointer;

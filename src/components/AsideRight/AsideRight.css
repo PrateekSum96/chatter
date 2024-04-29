@@ -34,4 +34,8 @@
     margin-right: 0.2rem;
     font-size: 1.3rem;
   }
+  #sort-active {
+    background-color: var(--hover-color);
+    color: white;
+  }
 }

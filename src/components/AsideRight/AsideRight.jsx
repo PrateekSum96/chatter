@@ -14,6 +14,8 @@ const AsideRight = () => {
 
   const appUsersList = useSelector((store) => store.appUsers.allUsers);
   const userLoggedInInfo = useSelector((store) => store.auth.user);
+  const sortByPost = useSelector((store) => store.appPosts.sortBy);
+
   const usersNotFollowing = appUsersList.filter(
     (user) =>
       userLoggedInInfo?.following.every((x) => x._id !== user._id) &&
@@ -28,11 +30,17 @@ const AsideRight = () => {
     <div className="aside-right-container">
       {pathname === "/" && (
         <div className="filter-sort-ar">
-          <button onClick={() => dispatch(sortPost("trending"))}>
+          <button
+            id={`${sortByPost === "trending" ? "sort-active" : ""}`}
+            onClick={() => dispatch(sortPost("trending"))}
+          >
             <MdTrendingUp className="icon-ar" />
             Trending
           </button>
-          <button onClick={() => dispatch(sortPost("latest"))}>
+          <button
+            id={`${sortByPost === "latest" ? "sort-active" : ""}`}
+            onClick={() => dispatch(sortPost("latest"))}
+          >
             <MdOutlineFiberNew className="icon-ar" />
             Latest
           </button>
