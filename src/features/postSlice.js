@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
+const getEncodedToken = () => localStorage.getItem("token");
+
 export const getAllPosts = createAsyncThunk(
   "appPosts/getAllPosts",
   async () => {
@@ -18,14 +20,13 @@ export const getUserPost = createAsyncThunk(
       method: "GET",
     });
     const result = await response.json();
-    console.log(result);
+
     return result;
   }
 );
 
 export const addPost = createAsyncThunk("appPosts/addPost", async (post) => {
-  const encodedToken = localStorage.getItem("token");
-
+  const encodedToken = getEncodedToken();
   const response = await fetch("/api/posts", {
     method: "POST",
     headers: {
@@ -41,7 +42,7 @@ export const addPost = createAsyncThunk("appPosts/addPost", async (post) => {
 export const likePost = createAsyncThunk(
   "appPosts/likePost",
   async (postId) => {
-    const encodedToken = localStorage.getItem("token");
+    const encodedToken = getEncodedToken();
     const response = await fetch(`/api/posts/like/${postId}`, {
       method: "POST",
       headers: {
@@ -55,7 +56,7 @@ export const likePost = createAsyncThunk(
 export const disLikePost = createAsyncThunk(
   "appPosts/disLikePost",
   async (postId) => {
-    const encodedToken = localStorage.getItem("token");
+    const encodedToken = getEncodedToken();
     const response = await fetch(`/api/posts/dislike/${postId}`, {
       method: "POST",
       headers: {
@@ -105,6 +106,7 @@ const postSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      //get-all-post
       .addCase(getAllPosts.pending, (state) => {
         state.status = "loading";
         state.error = null;
@@ -118,6 +120,7 @@ const postSlice = createSlice({
         state.status = "failed";
         state.error = "Failed to load posts";
       })
+      //add-post
       .addCase(addPost.pending, (state) => {
         state.status = "loading";
         state.error = null;
@@ -131,6 +134,7 @@ const postSlice = createSlice({
         state.status = "failed";
         state.error = "Failed to add post";
       })
+      //like-post
       .addCase(likePost.pending, (state) => {
         state.status = "loading";
         state.error = null;
@@ -149,6 +153,7 @@ const postSlice = createSlice({
         state.status = "failed";
         state.error = "Failed to like post";
       })
+      //dislike-Post
       .addCase(disLikePost.pending, (state) => {
         state.status = "loading";
         state.error = null;
