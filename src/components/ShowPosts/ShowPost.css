@@ -14,6 +14,7 @@
 .username-show-post > div:nth-of-type(1) {
   font-weight: bold;
 }
+
 .liked {
   color: red;
 }
@@ -26,16 +27,28 @@
   }
 
   #user-image-show-post {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     object-fit: cover;
     object-position: top;
     border-radius: 50%;
-    border: 3px solid var(--primary-color);
-    box-sizing: border-box;
+    outline: 3px solid var(--primary-color);
+  }
+  .no-avatar-sp {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    outline: 3px solid var(--primary-color);
+    background-color: rgb(238, 207, 144);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: var(--primary-color);
   }
   .username-show-post {
-    margin-left: 0.3rem;
+    margin-left: 0.4rem;
   }
   .username-show-post > div:nth-of-type(1) {
     font-size: 1.1rem;
