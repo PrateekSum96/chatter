@@ -1,0 +1,12 @@
+@media (min-width: 1201px) {
+  .bookmarks {
+    width: 550px;
+    margin-bottom: 2rem;
+  }
+  .no-bookmarks {
+    margin-top: 2rem;
+    color: var(--primary-color);
+    font-size: 2rem;
+    font-weight: bold;
+  }
+}

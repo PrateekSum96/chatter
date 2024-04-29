@@ -96,7 +96,7 @@ const UserInteraction = ({ post }) => {
     (user) => user._id === loggedInUser._id
   );
 
-  const isBookmarked = bookmarkedPosts.some(
+  const isBookmarked = bookmarkedPosts?.some(
     (bkPost) => bkPost._id === post._id
   );
 

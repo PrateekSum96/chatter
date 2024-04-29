@@ -34,6 +34,21 @@ export const removeBookmarkPost = createAsyncThunk(
   }
 );
 
+export const getBookmarkedPost = createAsyncThunk(
+  "appPosts/getBookmarkedPost",
+  async () => {
+    const encodedToken = getEncodedToken();
+    const response = await fetch("/api/users/bookmark/", {
+      method: "GET",
+      headers: {
+        authorization: encodedToken,
+      },
+    });
+    const result = await response.json();
+    return result;
+  }
+);
+
 const initialState = {
   status: "idle",
   error: null,
@@ -43,7 +58,11 @@ const initialState = {
 const bookmarkSlice = createSlice({
   name: "appBookmarks",
   initialState,
-  reducers: {},
+  reducers: {
+    clearBookmarks: (state) => {
+      state.bookmarkedPost = [];
+    },
+  },
   extraReducers(builder) {
     builder
       //bookmark-post
@@ -87,8 +106,29 @@ const bookmarkSlice = createSlice({
       .addCase(removeBookmarkPost.rejected, (state) => {
         state.status = "failed";
         state.error = "Failed to remove from bookmark";
+      })
+      //get-all-bookmark-post
+      .addCase(getBookmarkedPost.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(getBookmarkedPost.fulfilled, (state, action) => {
+        if (action.payload.errors) {
+          state.status = "failed";
+          state.error = action.payload.errors[0];
+          toast.error(state.error);
+          return;
+        }
+        state.status = "succeeded";
+        state.error = null;
+        state.bookmarkedPost = action.payload.bookmarks;
+      })
+      .addCase(getBookmarkedPost.rejected, (state) => {
+        state.status = "failed";
+        state.error = "Failed to load bookmarked posts";
       });
   },
 });
 
+export const { clearBookmarks } = bookmarkSlice.actions;
 export default bookmarkSlice.reducer;
