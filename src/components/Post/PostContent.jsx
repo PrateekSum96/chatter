@@ -4,6 +4,7 @@ import { MdEmojiEmotions, MdImage } from "react-icons/md";
 import "./PostContent.css";
 import { useState } from "react";
 import { addPost } from "../../features/postSlice";
+
 const PostContent = () => {
   const dispatch = useDispatch();
   const [postInput, setPostInput] = useState();
@@ -39,7 +40,13 @@ const PostContent = () => {
           <MdImage className="icon-pc" />
           <MdEmojiEmotions className="icon-pc" />
         </div>
-        <button onClick={handlePostClick}>Post</button>
+        <button
+          id={`${postInput === "" ? "disabled-btn" : ""}`}
+          disabled={postInput === ""}
+          onClick={handlePostClick}
+        >
+          Post
+        </button>
       </div>
     </div>
   );

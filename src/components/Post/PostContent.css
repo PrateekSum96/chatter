@@ -1,3 +1,11 @@
+#disabled-btn {
+  opacity: 0.5;
+  cursor: default;
+}
+#disabled-btn:hover {
+  background-color: var(--primary-color);
+}
+
 @media (min-width: 1201px) {
   .post-content-container {
     width: 100%;
