@@ -11,6 +11,7 @@ import Signup from "../pages/Signup/Signup";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAuth from "../components/Auth/RequireAuth";
+import UserProfile from "../pages/UserProfile/UserProfile.jsx";
 
 const Router = () => {
   const appRouter = createBrowserRouter([
@@ -37,6 +38,10 @@ const Router = () => {
         {
           element: <LikedPost />,
           path: "/liked-post",
+        },
+        {
+          element: <UserProfile />,
+          path: "/profile/:username",
         },
       ],
     },

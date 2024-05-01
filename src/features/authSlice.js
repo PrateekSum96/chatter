@@ -44,6 +44,22 @@ export const followUser = createAsyncThunk(
     });
 
     const result = await response.json();
+
+    return result;
+  }
+);
+export const unFollowUser = createAsyncThunk(
+  "follow/unFollowUser",
+  async (followUserId) => {
+    const encodedToken = localStorage.getItem("token");
+    const response = await fetch(`/api/users/unfollow/${followUserId}`, {
+      method: "POST",
+      headers: { authorization: encodedToken },
+      body: {},
+    });
+
+    const result = await response.json();
+
     return result;
   }
 );
@@ -135,6 +151,20 @@ const authSlice = createSlice({
       .addCase(followUser.rejected, (state) => {
         state.status = "failed";
         state.error = "Failed to follow";
+      })
+      // unFollowUser
+      .addCase(unFollowUser.pending, (state) => {
+        state.status = "pending";
+        state.error = null;
+      })
+      .addCase(unFollowUser.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.error = null;
+        state.user = action.payload.user;
+      })
+      .addCase(unFollowUser.rejected, (state) => {
+        state.status = "failed";
+        state.error = "Failed to unfollow";
       });
   },
 });

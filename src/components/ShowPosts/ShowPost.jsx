@@ -12,6 +12,7 @@ import {
 import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
 import { disLikePost, likePost } from "../../features/postSlice";
 import { bookmarkPost, removeBookmarkPost } from "../../features/bookmarkSlice";
+import { useNavigate } from "react-router-dom";
 
 const ShowPost = ({ post }) => {
   const allUsers = useSelector((state) => state.appUsers?.allUsers);
@@ -28,6 +29,8 @@ const ShowPost = ({ post }) => {
 //components
 
 const UserInfo = ({ post, allUsers }) => {
+  const navigate = useNavigate();
+
   const loggedInUser = useSelector((store) => store.auth?.user);
   const getUserImage = allUsers?.find(
     (user) => user.username === post.username
@@ -41,7 +44,10 @@ const UserInfo = ({ post, allUsers }) => {
 
   return (
     <div className="userinfo-container-show-post">
-      <div className="user-info-show-post">
+      <div
+        className="user-info-show-post"
+        onClick={() => navigate(`/profile/${post.username}`)}
+      >
         {getUserImage?.avatarUrl ? (
           <img
             src={getUserImage?.avatarUrl}
@@ -56,18 +62,16 @@ const UserInfo = ({ post, allUsers }) => {
 
         <div className="username-show-post">
           <div>
-            <span>
-              {post.firstname ? post.firstname : loggedInUser?.firstName}
-            </span>
-            <span>
-              {post.lastname ? post.lastname : loggedInUser?.lastName}
-            </span>
+            <span>{post?.firstname}</span>
+            <span>{post?.lastname}</span>
           </div>
           <div className="post-username-show-post">@{post.username}</div>
         </div>
         <div className="postdate-show-post">{formatDate(post.createdAt)}</div>
       </div>
-      <PiDotsThreeOutlineVerticalLight className="icon-post-show-post" />
+      {loggedInUser.username === post.username && (
+        <PiDotsThreeOutlineVerticalLight className="icon-post-show-post" />
+      )}
     </div>
   );
 };

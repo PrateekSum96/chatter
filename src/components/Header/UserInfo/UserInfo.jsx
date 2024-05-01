@@ -1,12 +1,11 @@
 import { useState } from "react";
 import "./UserInfo.css";
 import { IoIosSunny, IoIosMoon } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
-import { logOutUser } from "../../../features/authSlice";
-import { clearBookmarks } from "../../../features/bookmarkSlice";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const UserInfo = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [themeDark, setThemeDark] = useState(false);
   const user = useSelector((store) => store.auth.user);
   const { firstName, lastName, username, avatarUrl } = user;
@@ -28,8 +27,7 @@ const UserInfo = () => {
       <div
         className="user-login-ui"
         onClick={() => {
-          dispatch(logOutUser());
-          dispatch(clearBookmarks());
+          navigate(`/profile/${username}`);
         }}
       >
         <div className="image-container">

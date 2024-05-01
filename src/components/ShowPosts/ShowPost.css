@@ -8,6 +8,9 @@
 .user-info-show-post {
   display: flex;
 }
+.user-info-show-post:hover {
+  cursor: pointer;
+}
 #user-image-show-post {
   display: block;
 }
@@ -89,6 +92,7 @@
     display: flex;
     align-items: center;
   }
+
   .icon-show-post {
     display: block;
     font-size: 1.2rem;

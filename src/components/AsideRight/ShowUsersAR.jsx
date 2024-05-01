@@ -1,13 +1,18 @@
 import { useDispatch } from "react-redux";
 import "./ShowUsersAR.css";
 import { followUser } from "../../features/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const ShowUsersAR = ({ user }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { firstName, lastName, username, avatarUrl, _id } = user;
 
   return (
-    <div className="show-user-container-su" onClick={() => console.log("cont")}>
+    <div
+      className="show-user-container-su"
+      onClick={() => navigate(`/profile/${username}`)}
+    >
       <div className="img-container-su">
         {avatarUrl ? (
           <img src={avatarUrl} alt="user-img" id="user-img-su" />

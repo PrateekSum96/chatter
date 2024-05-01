@@ -1,0 +1,90 @@
+@media (min-width: 1201px) {
+  .user-detail {
+    width: 100%;
+    border-bottom: 2px solid var(--primary-color);
+    margin-top: 1rem;
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+  }
+  .user-image-ud {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    outline: 3px solid var(--primary-color);
+    object-position: top;
+    object-fit: cover;
+  }
+  .user-not-image-ud {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    outline: 3px solid var(--primary-color);
+    background-color: rgb(238, 207, 144);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+  .user-info-detail-ud p {
+    margin: 0;
+    padding: 0;
+  }
+  .user-info-detail-ud {
+    width: 100%;
+    margin-left: 0.5rem;
+  }
+  .user-name-detail-ud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .user-name-ud > p > span {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding-right: 0.2rem;
+  }
+  .user-name-ud p:nth-of-type(2) {
+    font-size: 1.1rem;
+  }
+  .user-button-ud button {
+    background-color: var(--secondary-color);
+    font-weight: bold;
+    border: none;
+    border-radius: 0.3rem;
+    padding: 0.5rem 1rem;
+    margin-left: 0.3rem;
+    transition: all 0.2s ease-in-out;
+  }
+  .user-button-ud button:hover {
+    cursor: pointer;
+    background-color: var(--hover-color);
+    color: white;
+  }
+  #user-bio-ud {
+    font-size: 1.1rem;
+    padding: 0.3rem 0;
+  }
+  #user-website-ud {
+    text-decoration: none;
+    color: black;
+  }
+  #user-website-ud:hover {
+    text-decoration: underline;
+  }
+  .user-follow-info-ud {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+  }
+  .user-follow-info-ud > p {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--hover-color);
+  }
+  .user-follow-info-ud > p > span {
+    padding-left: 0.2rem;
+  }
+}
