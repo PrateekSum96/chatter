@@ -79,7 +79,7 @@ export const posts = [
   {
     _id: "MTYtVhecCj",
     firstname: "Adarsh",
-    lastname: "",
+    lastname: "Kumar",
     content:
       "You are never too old to set another goal or to dream a new dream.",
     mediaURL: "",
@@ -96,7 +96,7 @@ export const posts = [
   {
     _id: "3XHvLP9kC",
     firstname: "Adarsh",
-    lastname: "",
+    lastname: "Kumar",
     content: "Yayy! Its my Birthday Today. Made this cake for myself!",
     mediaURL:
       "https://res.cloudinary.com/dtrjdcrme/image/upload/v1647014336/ecommerce/chocolatecake4.webp",
@@ -132,7 +132,7 @@ export const posts = [
   {
     _id: "tHaThLyFQh",
     firstname: "Adarsh",
-    lastname: "",
+    lastname: "Kumar",
     content:
       "Life has got all those twists and turns. You’ve got to hold on tight and off you go.",
     mediaURL: "",
@@ -149,7 +149,7 @@ export const posts = [
   {
     _id: "G-Gi3lSZP9",
     firstname: "Adarsh",
-    lastname: "",
+    lastname: "Kumar",
     content: "When you have a dream, you’ve got to grab it and never let go.",
     mediaURL: "",
     likes: {
@@ -165,7 +165,7 @@ export const posts = [
   {
     _id: "GeMUAdi9mh",
     firstname: "Adarsh",
-    lastname: "",
+    lastname: "Kumar",
     content:
       "No matter what people tell you, words and ideas can change the world.",
     mediaURL: "",
@@ -209,7 +209,7 @@ export const posts = [
   {
     _id: "Ie92xOSVeU",
     firstname: "Alex",
-    lastname: "Maxwell",
+    lastname: "Maxwell Jones",
     content:
       "Check out this amazing video from BakinZone https://bakinzone.netlify.app/videos/qtlhdIfojmc",
     mediaURL: "",
@@ -298,7 +298,7 @@ export const posts = [
   {
     _id: "e-knMEsoLq",
     firstname: "Alex",
-    lastname: "Maxwell",
+    lastname: "Maxwell Jones",
     content: "More is lost by indecision than wrong decision.",
     mediaURL: "",
     likes: {
@@ -403,7 +403,7 @@ export const posts = [
   {
     _id: "G5xd30tMCR",
     firstname: "Alex",
-    lastname: "Maxwell",
+    lastname: "Maxwell Jones",
     content:
       "Optimism is the faith that leads to achievement. Nothing can be done without hope and confidence.",
     mediaURL: "",

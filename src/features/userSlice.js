@@ -33,18 +33,40 @@ export const getAllPostsOfAUser = createAsyncThunk(
   }
 );
 
+export const editUserInfo = createAsyncThunk(
+  "appUsers/editUserInfo",
+  async (userData) => {
+    const encodedToken = localStorage.getItem("token");
+    const response = await fetch("/api/users/edit", {
+      method: "POST",
+      headers: {
+        authorization: encodedToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userData }),
+    });
+    const result = await response.json();
+    return result;
+  }
+);
+
 const initialState = {
   allUsers: [],
   user: null,
   allPostsUser: [],
   status: "idle", //"loading"||"error"||"succeeded"
   error: null,
+  showLayover: false,
 };
 
 const userSlice = createSlice({
   name: "appUsers",
   initialState,
-  reducers: {},
+  reducers: {
+    setLayover: (state, action) => {
+      state.showLayover = action.payload;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getAllUsers.pending, (state) => {
@@ -87,8 +109,24 @@ const userSlice = createSlice({
       .addCase(getAllPostsOfAUser.rejected, (state) => {
         state.status = "error";
         state.error = "Failed to get the user";
+      })
+      //editUserInfo
+      .addCase(editUserInfo.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(editUserInfo.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.status = "succeeded";
+        state.error = null;
+      })
+      .addCase(editUserInfo.rejected, (state) => {
+        state.status = "error";
+        state.error = "Failed to edit the user info";
       });
   },
 });
+
+export const { setLayover } = userSlice.actions;
 
 export default userSlice.reducer;

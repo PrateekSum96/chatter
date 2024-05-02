@@ -87,4 +87,49 @@
   .user-follow-info-ud > p > span {
     padding-left: 0.2rem;
   }
+  .follow-ud:hover {
+    cursor: pointer;
+  }
+  .show-followers {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--secondary-color);
+    width: 200px;
+    max-height: 300px;
+    border-radius: 0.3rem;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    z-index: 11;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .follower-title-ud {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .cross-followers-ud {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    transition: all 0.2s ease-in-out;
+  }
+  .cross-followers-ud:hover {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+  }
+  .no-follow-msg {
+    text-align: center;
+  }
 }

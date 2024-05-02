@@ -84,7 +84,7 @@ export const users = [
   {
     _id: "M1NR81Bzlz",
     firstName: "Alex",
-    lastName: "Maxwell",
+    lastName: "Maxwell Jones",
     username: "alexmaxwell",
     password: "alexmaxwell123",
     email: "alex@ab.com",
