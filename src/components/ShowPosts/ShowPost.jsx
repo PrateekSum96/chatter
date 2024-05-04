@@ -62,12 +62,8 @@ const UserInfo = ({ post, allUsers }) => {
 
         <div className="username-show-post">
           <div>
-            <span>
-              {post?.firstname ? post?.firstname : loggedInUser.firstName}
-            </span>
-            <span>
-              {post?.lastname ? post?.lastname : loggedInUser.lastName}
-            </span>
+            <span>{getUserFromUsername?.firstName}</span>
+            <span>{getUserFromUsername?.lastName}</span>
           </div>
           <div className="post-username-show-post">@{post.username}</div>
         </div>
