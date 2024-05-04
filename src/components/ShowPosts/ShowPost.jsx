@@ -10,9 +10,10 @@ import {
   FaRegShareSquare,
 } from "react-icons/fa";
 import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
-import { disLikePost, likePost } from "../../features/postSlice";
+import { deletePost, disLikePost, likePost } from "../../features/postSlice";
 import { bookmarkPost, removeBookmarkPost } from "../../features/bookmarkSlice";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const ShowPost = ({ post }) => {
   const allUsers = useSelector((state) => state.appUsers?.allUsers);
@@ -30,8 +31,9 @@ const ShowPost = ({ post }) => {
 
 //UserInfo
 const UserInfo = ({ post, allUsers }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [showPostControl, setPostControl] = useState(false);
   const loggedInUser = useSelector((store) => store.auth?.user);
   const getUserFromUsername = allUsers?.find(
     (user) => user.username === post.username
@@ -70,7 +72,18 @@ const UserInfo = ({ post, allUsers }) => {
         <div className="postdate-show-post">{formatDate(post.createdAt)}</div>
       </div>
       {loggedInUser.username === post.username && (
-        <PiDotsThreeOutlineVerticalLight className="icon-post-show-post" />
+        <PiDotsThreeOutlineVerticalLight
+          className="icon-post-show-post"
+          onClick={() => {
+            setPostControl(!showPostControl);
+          }}
+        />
+      )}
+      {showPostControl && (
+        <div className="post-control-sp">
+          <div>Edit</div>
+          <div onClick={() => dispatch(deletePost(post?._id))}>Delete</div>
+        </div>
       )}
     </div>
   );

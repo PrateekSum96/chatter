@@ -1,6 +1,7 @@
 .userinfo-container-show-post {
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 .icon-post-show-post:hover {
   cursor: pointer;
@@ -73,6 +74,7 @@
     color: var(--primary-color);
     font-size: 1.4rem;
   }
+
   .user-content-show-post > div:nth-of-type(1) {
     margin-bottom: 1rem;
     word-wrap: break-word;
@@ -107,5 +109,31 @@
   }
   .icon-show-post:hover {
     cursor: pointer;
+  }
+  .post-control-sp {
+    position: absolute;
+    top: 30px;
+    right: -50px;
+    width: 80px;
+    border-radius: 0.3rem;
+    background-color: var(--secondary-color);
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .post-control-sp:hover {
+    cursor: pointer;
+  }
+  .post-control-sp div {
+    width: 100%;
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.2s linear;
+  }
+  .post-control-sp div:hover {
+    background-color: var(--primary-color);
+    color: white;
   }
 }
