@@ -6,5 +6,5 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 10;
-  transition: all 0.2s linear;
+  transition: all 0.1s linear;
 }

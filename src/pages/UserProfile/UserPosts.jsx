@@ -10,7 +10,6 @@ const UserPost = ({ username }) => {
     dispatch(getAllPostsOfAUser(username));
     // eslint-disable-next-line
   }, [username]);
-
   return (
     <div>
       {allUserPosts?.map((post) => (

@@ -8,6 +8,7 @@ const Explore = () => {
   const allPosts = useSelector((store) => store.appPosts.allPosts);
 
   const getLatestPost = useLatestPost(allPosts);
+
   return (
     <div className="explore">
       {getLatestPost?.map((post) => (

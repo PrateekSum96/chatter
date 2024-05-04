@@ -1,13 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 export const getAllUsers = createAsyncThunk(
   "appUsers/getAllUsers",
   async () => {
-    const response = await fetch("api/users", {
-      method: "GET",
-    });
-    const result = await response.json();
-    return result;
+    try {
+      const response = await fetch("api/users", {
+        method: "GET",
+      });
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
   }
 );
 
@@ -57,6 +62,7 @@ const initialState = {
   status: "idle", //"loading"||"error"||"succeeded"
   error: null,
   showLayover: false,
+  toggleEdit: false,
 };
 
 const userSlice = createSlice({
@@ -65,6 +71,17 @@ const userSlice = createSlice({
   reducers: {
     setLayover: (state, action) => {
       state.showLayover = action.payload;
+    },
+    updateAllUserList: (state, action) => {
+      const userInfo = action.payload;
+      const updatedUserList = state.allUsers?.map((user) => {
+        if (user?._id === userInfo?._id) {
+          user.avatarUrl = userInfo.avatarUrl;
+          return { ...user, avatarUrl: userInfo.avatarUrl };
+        }
+        return user;
+      });
+      state.allUsers = updatedUserList;
     },
   },
   extraReducers(builder) {
@@ -78,7 +95,7 @@ const userSlice = createSlice({
         state.status = "succeeded";
         state.error = null;
       })
-      .addCase(getAllUsers.rejected, (state) => {
+      .addCase(getAllUsers.rejected, (state, action) => {
         state.status = "error";
         state.error = "Failed to get all users";
       })
@@ -119,14 +136,17 @@ const userSlice = createSlice({
         state.user = action.payload.user;
         state.status = "succeeded";
         state.error = null;
+        state.toggleEdit = !state.toggleEdit;
+        toast.success("Details updated!");
       })
       .addCase(editUserInfo.rejected, (state) => {
         state.status = "error";
         state.error = "Failed to edit the user info";
+        toast.error("Failed to update details!");
       });
   },
 });
 
-export const { setLayover } = userSlice.actions;
+export const { setLayover, updateAllUserList } = userSlice.actions;
 
 export default userSlice.reducer;

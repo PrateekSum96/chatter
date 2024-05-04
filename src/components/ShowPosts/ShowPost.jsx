@@ -28,11 +28,12 @@ const ShowPost = ({ post }) => {
 
 //components
 
+//UserInfo
 const UserInfo = ({ post, allUsers }) => {
   const navigate = useNavigate();
 
   const loggedInUser = useSelector((store) => store.auth?.user);
-  const getUserImage = allUsers?.find(
+  const getUserFromUsername = allUsers?.find(
     (user) => user.username === post.username
   );
   const formatDate = (timestamp) => {
@@ -41,16 +42,15 @@ const UserInfo = ({ post, allUsers }) => {
       month: "short",
     })} ${date.getDate()}, ${date.getFullYear()}`;
   };
-
   return (
     <div className="userinfo-container-show-post">
       <div
         className="user-info-show-post"
         onClick={() => navigate(`/profile/${post.username}`)}
       >
-        {getUserImage?.avatarUrl ? (
+        {getUserFromUsername?.avatarUrl ? (
           <img
-            src={getUserImage?.avatarUrl}
+            src={getUserFromUsername?.avatarUrl}
             alt="user-avatar"
             id="user-image-show-post"
           />
@@ -62,8 +62,12 @@ const UserInfo = ({ post, allUsers }) => {
 
         <div className="username-show-post">
           <div>
-            <span>{post?.firstname}</span>
-            <span>{post?.lastname}</span>
+            <span>
+              {post?.firstname ? post?.firstname : loggedInUser.firstName}
+            </span>
+            <span>
+              {post?.lastname ? post?.lastname : loggedInUser.lastName}
+            </span>
           </div>
           <div className="post-username-show-post">@{post.username}</div>
         </div>
@@ -76,6 +80,7 @@ const UserInfo = ({ post, allUsers }) => {
   );
 };
 
+//UserContentPost
 const UserContentPost = ({ post }) => {
   return (
     <div className="user-content-show-post">
@@ -96,6 +101,7 @@ const UserContentPost = ({ post }) => {
   );
 };
 
+//UserInteraction
 const UserInteraction = ({ post }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((store) => store.auth.user);

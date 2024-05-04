@@ -5,14 +5,17 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getBookmarkedPost } from "../../../features/bookmarkSlice";
 import { getAllPosts } from "../../../features/postSlice";
+import { getAllUsers } from "../../../features/userSlice";
 
 const Search = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllPosts());
     dispatch(getBookmarkedPost());
+    dispatch(getAllUsers());
     // eslint-disable-next-line
   }, []);
+
   return (
     <div className="search-container">
       <IoMdSearch id="search-icon" />
