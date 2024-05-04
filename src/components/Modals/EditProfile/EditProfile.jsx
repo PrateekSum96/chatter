@@ -71,6 +71,7 @@ const EditProfile = ({ user, setEditProfile }) => {
           <input
             type="file"
             id="image-edit-user"
+            accept="image/*"
             ref={inputRef}
             onChange={(e) => {
               setEditUser({

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const getEncodedToken = () => localStorage.getItem("token");
 
@@ -65,6 +66,26 @@ export const disLikePost = createAsyncThunk(
     });
     const result = await response.json();
     return result;
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  "appPosts/deletePost",
+  async (postId, { rejectWithValue }) => {
+    const encodedToken = getEncodedToken();
+    try {
+      const response = await fetch(`/api/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+          authorization: encodedToken,
+        },
+      });
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
 
@@ -171,6 +192,22 @@ const postSlice = createSlice({
       .addCase(disLikePost.rejected, (state) => {
         state.status = "failed";
         state.error = "Failed to dislike post";
+      })
+      //deletePost
+      .addCase(deletePost.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.error = null;
+        state.allPosts = action.payload.posts;
+        toast.success("Post deleted successfully!");
+      })
+      .addCase(deletePost.rejected, (state) => {
+        state.status = "failed";
+        state.error = "Failed to delete post";
+        toast.error("failed to delete post!");
       });
   },
 });
