@@ -1,9 +1,10 @@
 import "./AppLogo.css";
+import img1 from "../../../asset/chatter-logo.png";
 
 const AppLogo = () => {
   return (
     <div className="app-logo-container">
-      <img src="./chatter-logo.png" alt="app-logo" className="app-logo" />
+      <img src={img1} alt="app-logo" className="app-logo" />
     </div>
   );
 };

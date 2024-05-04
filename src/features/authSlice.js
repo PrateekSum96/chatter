@@ -44,7 +44,6 @@ export const followUser = createAsyncThunk(
     });
 
     const result = await response.json();
-    console.log(result);
     return result;
   }
 );
@@ -55,7 +54,6 @@ export const unFollowUser = createAsyncThunk(
     const response = await fetch(`/api/users/unfollow/${followUserId}`, {
       method: "POST",
       headers: { authorization: encodedToken },
-      body: {},
     });
 
     const result = await response.json();
@@ -81,6 +79,9 @@ const authSlice = createSlice({
       state.user = null;
       localStorage.removeItem("foundUser");
       localStorage.removeItem("token");
+    },
+    updateLoggedInUser: (state, action) => {
+      state.user.avatarUrl = action.payload;
     },
   },
   extraReducers(builder) {
@@ -169,5 +170,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logOutUser } = authSlice.actions;
+export const { logOutUser, updateLoggedInUser } = authSlice.actions;
 export default authSlice.reducer;

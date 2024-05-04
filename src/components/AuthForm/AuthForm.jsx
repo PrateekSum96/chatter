@@ -5,14 +5,15 @@ import "./AuthForm.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleUserLogin, handleUserSignUp } from "../../features/authSlice.js";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ShowGuestUser from "./ShowGuestUser.jsx";
 import { validateData } from "../../utils/Validate/validate.js";
+import img1 from "../../asset/chatter-logo.png";
 
 const AuthForm = ({ signup }) => {
   return (
     <div className="auth-form">
-      <img src="./chatter-logo.png" alt="auth-logo-img" id="auth-logo-img" />
+      <img src={img1} alt="auth-logo-img" id="auth-logo-img" />
       <p> {signup ? "Signup" : "Login"}</p>
       <FormComponent signup={signup} />
       <GuestComponent signup={signup} />
@@ -21,7 +22,6 @@ const AuthForm = ({ signup }) => {
 };
 
 const FormComponent = ({ signup }) => {
-  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [eyeOne, setEyeOne] = useState(false);
@@ -49,8 +49,8 @@ const FormComponent = ({ signup }) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      const returnLocation = location?.state?.from?.pathname || "/";
-      navigate(returnLocation);
+      // const returnLocation = location?.state?.from?.pathname || "/";
+      navigate("/");
     }
     // eslint-disable-next-line
   }, [isLoggedIn]);
