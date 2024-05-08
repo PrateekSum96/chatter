@@ -10,13 +10,20 @@ import {
   FaRegShareSquare,
 } from "react-icons/fa";
 import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
-import { deletePost, disLikePost, likePost } from "../../features/postSlice";
+import {
+  deletePost,
+  disLikePost,
+  likePost,
+  setPostLayover,
+} from "../../features/postSlice";
 import { bookmarkPost, removeBookmarkPost } from "../../features/bookmarkSlice";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Layover from "../Layover/Layover";
+import EditPost from "../Modals/EditPost/EditPost";
 
 const ShowPost = ({ post }) => {
-  const allUsers = useSelector((state) => state.appUsers?.allUsers);
+  const allUsers = useSelector((store) => store.appUsers?.allUsers);
 
   return (
     <div className="show-post-container">
@@ -33,11 +40,40 @@ const ShowPost = ({ post }) => {
 const UserInfo = ({ post, allUsers }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const refPostControl = useRef();
   const [showPostControl, setPostControl] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const loggedInUser = useSelector((store) => store.auth?.user);
+  const showLayover = useSelector((store) => store.appPosts.postLayover);
+
+  //modal-open-hide-scrollbar
+  useEffect(() => {
+    if (showLayover) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [showLayover]);
+
+  //outside click close box
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [showPostControl]);
+
+  const handleClickOutside = (e) => {
+    if (!refPostControl.current?.contains(e.target)) {
+      setPostControl(false);
+    }
+  };
+
   const getUserFromUsername = allUsers?.find(
     (user) => user.username === post.username
   );
+
   const formatDate = (timestamp) => {
     const date = new Date(timestamp);
     return `${date.toLocaleString("default", {
@@ -72,18 +108,32 @@ const UserInfo = ({ post, allUsers }) => {
         <div className="postdate-show-post">{formatDate(post.createdAt)}</div>
       </div>
       {loggedInUser.username === post.username && (
-        <PiDotsThreeOutlineVerticalLight
-          className="icon-post-show-post"
+        <div
+          ref={refPostControl}
           onClick={() => {
-            setPostControl(!showPostControl);
+            setPostControl((prev) => !prev);
           }}
-        />
+        >
+          <PiDotsThreeOutlineVerticalLight className="icon-post-show-post" />
+        </div>
       )}
+
       {showPostControl && (
         <div className="post-control-sp">
-          <div>Edit</div>
+          <div
+            onClick={() => {
+              setShowEditModal(!showEditModal);
+              dispatch(setPostLayover(true));
+            }}
+          >
+            Edit
+          </div>
           <div onClick={() => dispatch(deletePost(post?._id))}>Delete</div>
         </div>
+      )}
+      {showEditModal && <Layover showLayover={showLayover} />}
+      {showEditModal && (
+        <EditPost post={post} setShowEditModal={setShowEditModal} />
       )}
     </div>
   );
@@ -102,7 +152,8 @@ const UserContentPost = ({ post }) => {
         )}
       </div>
       <div>
-        {post.mediaURL?.includes("webp") && (
+        {(post.mediaURL?.includes("webp") ||
+          post.mediaURL?.includes("blob")) && (
           <img src={post.mediaURL} alt="post-media" id="image-show-post" />
         )}
       </div>

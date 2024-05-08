@@ -71,21 +71,37 @@ export const disLikePost = createAsyncThunk(
 
 export const deletePost = createAsyncThunk(
   "appPosts/deletePost",
-  async (postId, { rejectWithValue }) => {
+  async (postId) => {
     const encodedToken = getEncodedToken();
-    try {
-      const response = await fetch(`/api/posts/${postId}`, {
-        method: "DELETE",
-        headers: {
-          authorization: encodedToken,
-        },
-      });
 
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
+    const response = await fetch(`/api/posts/${postId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: encodedToken,
+      },
+    });
+
+    const result = await response.json();
+    return result;
+  }
+);
+
+export const editUserPost = createAsyncThunk(
+  "appPosts/editUserPost",
+  async ({ postId, postData }) => {
+    const encodedToken = getEncodedToken();
+
+    const response = await fetch(`/api/posts/edit/${postId}`, {
+      method: "POST",
+      headers: {
+        authorization: encodedToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ postData }),
+    });
+
+    const result = await response.json();
+    return result;
   }
 );
 
@@ -95,12 +111,16 @@ const initialState = {
   status: "idle",
   error: null,
   sortBy: "latest", //"latest" || "trending"
+  postLayover: false,
 };
 
 const postSlice = createSlice({
   name: "appPosts",
   initialState,
   reducers: {
+    setPostLayover: (state, action) => {
+      state.postLayover = action.payload;
+    },
     latestPost: (state) => {
       state.userHomePost?.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -193,7 +213,7 @@ const postSlice = createSlice({
         state.status = "failed";
         state.error = "Failed to dislike post";
       })
-      //deletePost
+      //delete-Post
       .addCase(deletePost.pending, (state) => {
         state.status = "loading";
         state.error = null;
@@ -208,10 +228,31 @@ const postSlice = createSlice({
         state.status = "failed";
         state.error = "Failed to delete post";
         toast.error("failed to delete post!");
+      })
+      //edit-post
+      .addCase(editUserPost.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(editUserPost.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.error = null;
+        state.allPosts = action.payload.posts;
+        toast.success("Post updated successfully!");
+      })
+      .addCase(editUserPost.rejected, (state) => {
+        state.status = "failed";
+        state.error = "Failed to update post";
+        toast.error("failed to update post!");
       });
   },
 });
 
-export const { latestPost, sortPost, showHomePost, trendingPost } =
-  postSlice.actions;
+export const {
+  latestPost,
+  sortPost,
+  showHomePost,
+  trendingPost,
+  setPostLayover,
+} = postSlice.actions;
 export default postSlice.reducer;
