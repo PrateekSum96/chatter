@@ -69,6 +69,7 @@
   .user-content-show-post {
     font-size: 1.1rem;
     margin: 0.5rem 0;
+    cursor: pointer;
   }
   .icon-post-show-post {
     color: var(--primary-color);
