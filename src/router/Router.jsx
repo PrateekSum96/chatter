@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAuth from "../components/Auth/RequireAuth";
 import UserProfile from "../pages/UserProfile/UserProfile.jsx";
+import PostPage from "../pages/Post/PostPage.jsx";
 
 const Router = () => {
   const appRouter = createBrowserRouter([
@@ -42,6 +43,10 @@ const Router = () => {
         {
           element: <UserProfile />,
           path: "/profile/:username",
+        },
+        {
+          element: <PostPage />,
+          path: "/post/:postId",
         },
       ],
     },

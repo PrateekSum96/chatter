@@ -54,6 +54,7 @@ export const likePost = createAsyncThunk(
     return result;
   }
 );
+
 export const disLikePost = createAsyncThunk(
   "appPosts/disLikePost",
   async (postId) => {
@@ -105,9 +106,21 @@ export const editUserPost = createAsyncThunk(
   }
 );
 
+export const getAPost = createAsyncThunk(
+  "appPosts/getAPost",
+  async (postId) => {
+    const response = await fetch(`/api/posts/${postId}`, {
+      method: "GET",
+    });
+    const result = await response.json();
+    return result;
+  }
+);
+
 const initialState = {
   allPosts: [],
   userHomePost: [],
+  post: null,
   status: "idle",
   error: null,
   sortBy: "latest", //"latest" || "trending"
@@ -244,6 +257,20 @@ const postSlice = createSlice({
         state.status = "failed";
         state.error = "Failed to update post";
         toast.error("failed to update post!");
+      })
+      //get-a-post
+      .addCase(getAPost.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(getAPost.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.error = null;
+        state.post = action.payload.post;
+      })
+      .addCase(getAPost.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = "Failed to get post";
       });
   },
 });

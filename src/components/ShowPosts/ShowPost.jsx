@@ -71,7 +71,7 @@ const UserInfo = ({ post, allUsers }) => {
   };
 
   const getUserFromUsername = allUsers?.find(
-    (user) => user.username === post.username
+    (user) => user?.username === post?.username
   );
 
   const formatDate = (timestamp) => {
@@ -103,11 +103,11 @@ const UserInfo = ({ post, allUsers }) => {
             <span>{getUserFromUsername?.firstName}</span>
             <span>{getUserFromUsername?.lastName}</span>
           </div>
-          <div className="post-username-show-post">@{post.username}</div>
+          <div className="post-username-show-post">@{post?.username}</div>
         </div>
-        <div className="postdate-show-post">{formatDate(post.createdAt)}</div>
+        <div className="postdate-show-post">{formatDate(post?.createdAt)}</div>
       </div>
-      {loggedInUser.username === post.username && (
+      {loggedInUser.username === post?.username && (
         <div
           ref={refPostControl}
           onClick={() => {
@@ -140,21 +140,26 @@ const UserInfo = ({ post, allUsers }) => {
 };
 
 //UserContentPost
+
 const UserContentPost = ({ post }) => {
+  const navigate = useNavigate();
   return (
-    <div className="user-content-show-post">
-      <div>{post.content}</div>
+    <div
+      className="user-content-show-post"
+      onClick={() => navigate(`/post/${post._id}`)}
+    >
+      <div>{post?.content}</div>
       <div>
-        {post.mediaURL?.includes("mp4") && (
+        {post?.mediaURL?.includes("mp4") && (
           <video controls className="video-container-show-post">
             <source src={post.mediaURL} type="video/mp4" id="video-show-post" />
           </video>
         )}
       </div>
       <div>
-        {(post.mediaURL?.includes("webp") ||
-          post.mediaURL?.includes("blob")) && (
-          <img src={post.mediaURL} alt="post-media" id="image-show-post" />
+        {(post?.mediaURL?.includes("webp") ||
+          post?.mediaURL?.includes("blob")) && (
+          <img src={post?.mediaURL} alt="post-media" id="image-show-post" />
         )}
       </div>
     </div>
@@ -188,7 +193,7 @@ const UserInteraction = ({ post }) => {
             onClick={() => dispatch(disLikePost(post._id))}
           />
         )}
-        <span id="like-count-show-post">{post.likes.likeCount}</span>
+        <span id="like-count-show-post">{post?.likes.likeCount}</span>
       </div>
 
       <div className="icon-show-post">
