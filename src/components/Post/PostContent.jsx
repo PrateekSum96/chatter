@@ -7,7 +7,7 @@ import { addPost } from "../../features/postSlice";
 
 const PostContent = () => {
   const dispatch = useDispatch();
-  const [postInput, setPostInput] = useState();
+  const [postInput, setPostInput] = useState("");
   const userLoggedIn = useSelector((store) => store.auth.user);
   const handlePostClick = () => {
     dispatch(addPost(postInput));
