@@ -1,4 +1,4 @@
-import "./SinglePost.css";
+import "./SinglePostShimmer.css";
 
 const SinglePost = () => {
   return (

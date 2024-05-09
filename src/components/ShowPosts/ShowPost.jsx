@@ -14,19 +14,31 @@ import {
   deletePost,
   disLikePost,
   likePost,
+  loadingStatus,
   setPostLayover,
 } from "../../features/postSlice";
 import { bookmarkPost, removeBookmarkPost } from "../../features/bookmarkSlice";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import Layover from "../Layover/Layover";
 import EditPost from "../Modals/EditPost/EditPost";
 
 const ShowPost = ({ post }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { pathname } = useLocation();
   const allUsers = useSelector((store) => store.appUsers?.allUsers);
 
   return (
-    <div className="show-post-container">
+    <div
+      className="show-post-container"
+      onClick={() => {
+        if (!pathname.includes("/post/")) {
+          dispatch(loadingStatus());
+          navigate(`/post/${post._id}`);
+        }
+      }}
+    >
       <UserInfo post={post} allUsers={allUsers} />
       <UserContentPost post={post} />
       <UserInteraction post={post} />
@@ -84,7 +96,10 @@ const UserInfo = ({ post, allUsers }) => {
     <div className="userinfo-container-show-post">
       <div
         className="user-info-show-post"
-        onClick={() => navigate(`/profile/${post.username}`)}
+        onClick={(e) => {
+          navigate(`/profile/${post.username}`);
+          e.stopPropagation();
+        }}
       >
         {getUserFromUsername?.avatarUrl ? (
           <img
@@ -142,12 +157,8 @@ const UserInfo = ({ post, allUsers }) => {
 //UserContentPost
 
 const UserContentPost = ({ post }) => {
-  const navigate = useNavigate();
   return (
-    <div
-      className="user-content-show-post"
-      onClick={() => navigate(`/post/${post._id}`)}
-    >
+    <div className="user-content-show-post">
       <div>{post?.content}</div>
       <div>
         {post?.mediaURL?.includes("mp4") && (
@@ -184,7 +195,7 @@ const UserInteraction = ({ post }) => {
 
   return (
     <div className="user-interaction-show-post">
-      <div className="icon-show-post">
+      <div className="icon-show-post" onClick={(e) => e.stopPropagation()}>
         {!isLoggedInUserLikedPost ? (
           <FaRegHeart onClick={() => dispatch(likePost(post._id))} />
         ) : (
@@ -196,7 +207,7 @@ const UserInteraction = ({ post }) => {
         <span id="like-count-show-post">{post?.likes.likeCount}</span>
       </div>
 
-      <div className="icon-show-post">
+      <div className="icon-show-post" onClick={(e) => e.stopPropagation()}>
         {isBookmarked ? (
           <FaBookmark onClick={() => dispatch(removeBookmarkPost(post._id))} />
         ) : (
@@ -204,8 +215,14 @@ const UserInteraction = ({ post }) => {
         )}
       </div>
 
-      <FaRegComment className="icon-show-post" />
-      <FaRegShareSquare className="icon-show-post" />
+      <FaRegComment
+        className="icon-show-post"
+        onClick={(e) => e.stopPropagation()}
+      />
+      <FaRegShareSquare
+        className="icon-show-post"
+        onClick={(e) => e.stopPropagation()}
+      />
     </div>
   );
 };
