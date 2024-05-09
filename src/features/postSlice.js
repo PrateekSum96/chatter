@@ -157,6 +157,9 @@ const postSlice = createSlice({
       );
       state.userHomePost = showPostHome;
     },
+    loadingStatus: (state) => {
+      state.status = "loading";
+    },
   },
   extraReducers(builder) {
     builder
@@ -281,5 +284,6 @@ export const {
   showHomePost,
   trendingPost,
   setPostLayover,
+  loadingStatus,
 } = postSlice.actions;
 export default postSlice.reducer;

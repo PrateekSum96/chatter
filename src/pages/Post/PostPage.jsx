@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getAPost } from "../../features/postSlice";
 import ShowPost from "../../components/ShowPosts/ShowPost";
 import "./PostPage.css";
-import SinglePost from "../../components/Shimmer/SinglePost/SinglePost";
+import SinglePostShimmer from "../../components/Shimmer/SinglePost/SinglePostShimmer";
 
 const PostPage = () => {
   const { postId } = useParams();
@@ -18,15 +18,20 @@ const PostPage = () => {
     // eslint-disable-next-line
   }, [allPosts]);
 
+  // conditional rendering - shimmer
   if (status === "loading") {
     return (
       <div>
-        <SinglePost />
+        <SinglePostShimmer />
       </div>
     );
   }
 
-  return <div className="post-page">{<ShowPost post={post} />}</div>;
+  return (
+    <div className="post-page">
+      <ShowPost post={post} />
+    </div>
+  );
 };
 
 export default PostPage;

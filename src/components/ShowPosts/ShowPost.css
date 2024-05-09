@@ -1,3 +1,7 @@
+.show-post-container:hover {
+  cursor: pointer;
+}
+
 .userinfo-container-show-post {
   display: flex;
   justify-content: space-between;
