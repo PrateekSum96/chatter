@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import ShowPost from "../../components/ShowPosts/ShowPost";
+import AddPostContent from "../../components/AddPost/AddPostContent";
 import "./Home.css";
 import { useEffect } from "react";
 import {
@@ -7,7 +8,6 @@ import {
   showHomePost,
   trendingPost,
 } from "../../features/postSlice";
-import PostContent from "../../components/Post/PostContent";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <PostContent />
+      <AddPostContent />
       {userHomePosts?.length === 0 ? (
         <p className="no-post-home">No Posts Yet!</p>
       ) : (
