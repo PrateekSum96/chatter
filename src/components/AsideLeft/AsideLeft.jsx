@@ -2,8 +2,11 @@ import { NavLink } from "react-router-dom";
 import { IoMdHeart, IoMdHome, IoMdCompass, IoMdBookmark } from "react-icons/io";
 
 import "./AsideLeft.css";
+import { useDispatch } from "react-redux";
+import { postModalVisibility } from "../../features/postModalSlice";
 
 const AsideLeft = () => {
+  const dispatch = useDispatch();
   const activeLink = ({ isActive }) => ({
     backgroundColor: isActive ? "rgb(215 228 255)" : "",
   });
@@ -48,7 +51,12 @@ const AsideLeft = () => {
         </NavLink>
       </nav>
 
-      <button className="aside-left-post">Post</button>
+      <button
+        className="aside-left-post"
+        onClick={() => dispatch(postModalVisibility(true))}
+      >
+        Post
+      </button>
     </div>
   );
 };

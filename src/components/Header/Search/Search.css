@@ -1,3 +1,15 @@
+.add-post-content-s {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+
+#cross-post-modal-s {
+  position: absolute;
+}
+
 @media (min-width: 1201px) {
   .search-container {
     position: relative;
@@ -25,5 +37,23 @@
   #search-input:focus {
     background-color: white;
     outline: 1px solid var(--primary-color);
+  }
+  .add-post-content-s {
+    width: 550px;
+  }
+
+  #cross-post-modal-s {
+    top: 5px;
+    right: 5px;
+    font-size: 1.1rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transition: all 0.2s linear;
+  }
+  #cross-post-modal-s:hover {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
   }
 }

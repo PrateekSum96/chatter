@@ -34,7 +34,7 @@ export const addPost = createAsyncThunk("appPosts/addPost", async (post) => {
       authorization: encodedToken,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ postData: { content: post } }),
+    body: JSON.stringify({ postData: post }),
   });
   const result = await response.json();
   return result;
