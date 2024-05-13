@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAUser, setLayover } from "../../features/userSlice";
-import "./UserDetail.css";
 import { followUser, logOutUser, unFollowUser } from "../../features/authSlice";
 import { clearBookmarks } from "../../features/bookmarkSlice";
 import EditProfile from "../../components/Modals/EditProfile/EditProfile";
 import Layover from "../../components/Layover/Layover";
 import ShowFollow from "../../components/Modals/ShowFollow/ShowFollow";
+import { MdClose } from "react-icons/md";
+
+import "./UserDetail.css";
 
 const UserDetail = ({ username }) => {
   const dispatch = useDispatch();
@@ -136,56 +138,78 @@ const UserDetail = ({ username }) => {
           </p>
         </div>
       </div>
-      {showEditProfile && (
-        <EditProfile user={user} setEditProfile={setEditProfile} />
-      )}
-      {showFollowers && (
-        <div className="show-followers">
+
+      <div
+        className="show-edit-profile-class-ud"
+        id={`${showEditProfile ? "show-edit-profile-ud" : ""}`}
+      >
+        <EditProfile
+          user={user}
+          setEditProfile={setEditProfile}
+          showEditProfile={showEditProfile}
+        />
+      </div>
+
+      <div
+        className="show-followers"
+        id={`${showFollowers ? "show-followers-id-ud" : ""}`}
+      >
+        <div className="heading-modal-ud">
           <div className="follower-title-ud">Followers</div>
-          <div
+          <MdClose
             className="cross-followers-ud"
             onClick={() => {
               setShowFollowers(false);
               dispatch(setLayover(false));
             }}
-          >
-            &#x2715;
-          </div>
+          />
+        </div>
+        <div>
           {user?.followers?.length === 0 ? (
             <div className="no-follow-msg">No follower Yet!</div>
           ) : (
             user?.followers?.map((followers) => (
               <div key={followers?._id}>
-                <ShowFollow userData={followers} />
+                <ShowFollow
+                  userData={followers}
+                  closeModalFunc={setShowFollowers}
+                />
               </div>
             ))
           )}
         </div>
-      )}
-      {showFollowings && (
-        <div className="show-followers">
+      </div>
+
+      <div
+        className="show-followers"
+        id={`${showFollowings ? "show-following-id-ud" : ""}`}
+      >
+        <div className="heading-modal-ud">
           <div className="follower-title-ud">Followings</div>
-          <div
+          <MdClose
             className="cross-followers-ud"
             onClick={() => {
               setShowFollowings(false);
               dispatch(setLayover(false));
             }}
-          >
-            &#x2715;
-          </div>
+          />
+        </div>
 
+        <div>
           {user?.following?.length === 0 ? (
             <div className="no-follow-msg">No Following Yet!</div>
           ) : (
             user?.following?.map((following) => (
               <div key={following?._id}>
-                <ShowFollow userData={following} />
+                <ShowFollow
+                  userData={following}
+                  closeModalFunc={setShowFollowings}
+                />
               </div>
             ))
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

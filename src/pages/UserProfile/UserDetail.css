@@ -1,3 +1,16 @@
+.show-edit-profile-class-ud {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  transform: scale(0) translate(-50%, -50%);
+  transition: all 0.2s linear;
+}
+
+#show-edit-profile-ud {
+  transform: scale(1) translate(-50%, -50%);
+}
+
 @media (min-width: 1201px) {
   .user-detail {
     width: 100%;
@@ -94,34 +107,52 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     background-color: var(--secondary-color);
     width: 200px;
-    max-height: 300px;
     border-radius: 0.3rem;
-    padding: 0.5rem 1rem;
+    border: 2px solid white;
     box-sizing: border-box;
+    transform: scale(0) translate(-50%, -50%);
+    transition: all 0.2s linear;
+    transform-origin: 0 0;
     z-index: 11;
+  }
+  .show-followers > div:nth-of-type(2) {
     overflow: hidden;
     overflow-y: scroll;
+    max-height: 250px;
+    padding: 0.8rem 0.5rem 0;
   }
+  #show-followers-id-ud {
+    transform: scale(1) translate(-50%, -50%);
+  }
+
+  #show-following-id-ud {
+    transform: scale(1) translate(-50%, -50%);
+  }
+
   .follower-title-ud {
-    text-align: center;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    margin-bottom: 0.5rem;
   }
-  .cross-followers-ud {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-weight: bold;
-    width: 23px;
-    height: 23px;
+  .heading-modal-ud {
+    position: sticky;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50px;
+    top: 0px;
+    height: 40px;
+    width: 100%;
+    border-bottom: 2px solid var(--primary-color);
+  }
+  .cross-followers-ud {
+    position: absolute;
+    top: 12px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+
     transition: all 0.2s ease-in-out;
   }
   .cross-followers-ud:hover {
@@ -131,5 +162,6 @@
   }
   .no-follow-msg {
     text-align: center;
+    padding-bottom: 0.5rem;
   }
 }

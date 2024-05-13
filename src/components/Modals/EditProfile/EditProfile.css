@@ -1,15 +1,20 @@
+#edit-profile-id {
+  transform: scale(1) translate(-50%, -50%);
+}
 @media (min-width: 1201px) {
   .edit-profile {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%); */
+    transform: scale(1) translate(-50%, -50%);
     background-color: var(--secondary-color);
     width: 330px;
     padding: 0.5rem 1rem;
     border-radius: 0.3rem;
     border: 2px solid white;
-    z-index: 11;
+    z-index: 100;
+    transition: all 0.2s linear;
   }
   .input-edit-form {
     display: flex;
@@ -57,20 +62,14 @@
     width: 23px;
     height: 23px;
     top: 10px;
-    right: 15px;
-    font-size: 15px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    right: 5px;
     border-radius: 50%;
     transition: all 0.2s ease-in-out;
   }
   #close-edit-profile:hover {
     cursor: pointer;
-    background-color: var(--primary-color);
     color: white;
+    background-color: var(--primary-color);
   }
   #image-edit-user {
     border: none;
@@ -93,6 +92,9 @@
 
   #icon-camera-ep {
     position: absolute;
+    background-color: white;
+    color: var(--primary-color);
+    border-radius: 0.3rem;
     top: 33px;
     left: 33px;
     font-size: 1.2rem;
@@ -146,5 +148,17 @@
     font-size: 1.2rem;
     font-weight: bold;
     background-color: rgb(238, 207, 144);
+  }
+  .avatar-shimmer {
+    display: flex;
+    padding: 0;
+  }
+  .avatar-shimmer > div {
+    outline: 2px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
   }
 }

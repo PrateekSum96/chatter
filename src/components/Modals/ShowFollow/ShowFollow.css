@@ -5,6 +5,9 @@
     padding-bottom: 0.7rem;
     border-bottom: 1px solid var(--primary-color);
   }
+  .show-follow-sf:hover {
+    cursor: pointer;
+  }
   .show-avatar-sf {
     width: 45px;
     height: 45px;
@@ -20,5 +23,7 @@
     font-size: 1.1rem;
     padding-right: 0.3rem;
     font-weight: bold;
+    text-wrap: nowrap;
+    overflow: hidden;
   }
 }

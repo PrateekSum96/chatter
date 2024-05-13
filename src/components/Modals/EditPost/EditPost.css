@@ -5,16 +5,17 @@
 @media (min-width: 1201px) {
   .edit-post-modal {
     width: 500px;
-
     padding: 0.5rem;
     background-color: var(--secondary-color);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 11;
+    z-index: 100;
     box-sizing: border-box;
     border-radius: 0.3rem;
+    transform: scale(0);
+    transition: all 0.2s linear;
+  }
+  #edit-post-modal-id-ep {
+    transform: scale(1);
+    transform-origin: center;
   }
   .edit-post-header {
     position: relative;
@@ -25,24 +26,20 @@
     text-align: center;
     font-size: 1.2rem;
   }
-  .edit-post-header > div:nth-of-type(2) {
+  #close-modal-ep {
     position: absolute;
     right: 5px;
     top: 0px;
     font-size: 1.1rem;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     transition: all 0.2s ease-in-out;
   }
-  .edit-post-header > div:nth-of-type(2):hover {
+  #close-modal-ep:hover {
     background-color: var(--primary-color);
     color: white;
     cursor: pointer;
-    font-weight: bold;
   }
 
   .post-content-ep {

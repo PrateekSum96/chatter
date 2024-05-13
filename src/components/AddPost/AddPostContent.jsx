@@ -30,7 +30,6 @@ const AddPostContent = () => {
       dispatch(postModalVisibility(false));
     }
   };
-
   return (
     <div className="post-content-container">
       <div className="post-input-pc">
@@ -101,8 +100,8 @@ const AddPostContent = () => {
           )}
 
           <div
-            id={`${emojiContainer ? "emojis-animate" : "no-animate"}`}
             className="emojis"
+            id={`${emojiContainer ? "emojis-animate" : ""}`}
           >
             {emojis?.map(({ emoji, name }) => (
               <span
@@ -114,7 +113,7 @@ const AddPostContent = () => {
                   })
                 }
               >
-                <span>{emoji}</span>
+                {emoji}
               </span>
             ))}
           </div>
