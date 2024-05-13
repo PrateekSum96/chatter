@@ -1,3 +1,17 @@
+import img1 from "../../asset/avatar/img1.jpg";
+import img2 from "../../asset/avatar/img2.jpg";
+import img3 from "../../asset/avatar/img3.jpg";
+import img4 from "../../asset/avatar/img4.jpg";
+import img5 from "../../asset/avatar/img5.jpg";
+
+export const avatarList = [
+  { name: "img1", path: img1 },
+  { name: "img2", path: img2 },
+  { name: "img3", path: img3 },
+  { name: "img4", path: img4 },
+  { name: "img5", path: img5 },
+];
+
 export const LOGIN_PAGE_IMAGE_URL =
   "https://res.cloudinary.com/dosmdkl9i/image/upload/v1708189514/hiii/photo/pexels-mikotoraw-photographer-3367850_h8qy6j.jpg";
 

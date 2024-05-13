@@ -111,49 +111,29 @@
   }
   .emojis {
     position: absolute;
-    width: 200px;
     top: 10px;
     left: 80px;
+    transform: scale(0);
+    width: 200px;
     background-color: var(--secondary-color);
     z-index: 100;
     padding: 0.5rem;
     border-radius: 0.3rem;
-    cursor: pointer;
+    transform-origin: top left;
+    transition: all 0.2s linear;
   }
-  #no-animate {
-    animation: 0.2s linear 0s 1 normal forwards running emoji-close;
-  }
-  @keyframes emoji-close {
-    from {
-      transform: scale(1, 1);
-      transform-origin: top left;
-    }
-    to {
-      transform: scale(0, 0);
 
-      transform-origin: top left;
-    }
-  }
   #emojis-animate {
-    animation: 0.2s linear 0s 1 normal forwards running emoji-open;
+    transform: scale(1);
   }
 
-  @keyframes emoji-open {
-    from {
-      transform: scale(0, 0);
-      transform-origin: top left;
-    }
-    to {
-      transform: scale(1, 1);
-      transform-origin: top left;
-    }
-  }
   .emojis > span {
     font-size: 1.5rem;
   }
   .emojis > span:hover {
     background-color: var(--hover-color);
     border-radius: 0.3rem;
+    cursor: pointer;
   }
 
   #emoji-name {

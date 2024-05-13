@@ -1,12 +1,13 @@
 import { useRef, useState } from "react";
-import "./EditPost.css";
 import { editUserPost, setPostLayover } from "../../../features/postSlice";
 import { TiDelete } from "react-icons/ti";
+import { MdClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { FaImage } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import "./EditPost.css";
 
-const EditPost = ({ post, setShowEditModal }) => {
+const EditPost = ({ post, setShowEditModal, showEditModal }) => {
   const dispatch = useDispatch();
   const mediaRef = useRef();
 
@@ -15,20 +16,23 @@ const EditPost = ({ post, setShowEditModal }) => {
     mediaURL: post?.mediaURL,
   };
   const [postContent, setPostContent] = useState(postInitialState);
-  const [imageSize, setImageSize] = useState();
-
+  const [imageSize, setImageSize] = useState(0);
+  // console.log(showEditModal, post);
   return (
-    <div className="edit-post-modal">
+    <div
+      className="edit-post-modal"
+      id={`${showEditModal ? "edit-post-modal-id-ep" : ""}`}
+    >
       <div className="edit-post-header">
         <div>Edit Post</div>
-        <div
-          onClick={() => {
+        <MdClose
+          id="close-modal-ep"
+          onClick={(e) => {
             setShowEditModal(false);
             dispatch(setPostLayover(false));
+            e.stopPropagation();
           }}
-        >
-          &#x2715;
-        </div>
+        />
       </div>
       <form
         onSubmit={(e) => {

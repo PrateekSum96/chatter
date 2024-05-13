@@ -35,15 +35,17 @@ const Search = () => {
       <IoMdSearch id="search-icon" />
       <input type="text" id="search-input" />
       <Layover showLayover={showPostModal} />
-      {showPostModal && (
-        <div className="add-post-content-s">
-          <MdClose
-            id="cross-post-modal-s"
-            onClick={() => dispatch(postModalVisibility(false))}
-          />
-          <AddPostContent />
-        </div>
-      )}
+
+      <div
+        className="add-post-content-s"
+        id={`${showPostModal ? "show-post-modal-s" : ""}`}
+      >
+        <MdClose
+          id="cross-post-modal-s"
+          onClick={() => dispatch(postModalVisibility(false))}
+        />
+        <AddPostContent />
+      </div>
     </div>
   );
 };

@@ -2,8 +2,16 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   z-index: 100;
+  transform: scale(0) translate(-50%, -50%);
+  transition: all 0.2s linear;
+  transform-origin: 0 0;
+  border: 2px solid var(--primary-color);
+  border-radius: 0.3rem;
+}
+
+#show-post-modal-s {
+  transform: scale(1) translate(-50%, -50%);
 }
 
 #cross-post-modal-s {

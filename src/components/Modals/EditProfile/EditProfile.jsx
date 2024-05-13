@@ -1,17 +1,15 @@
-import { useRef, useState } from "react";
-import "./EditProfile.css";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editUserInfo, setLayover } from "../../../features/userSlice";
 import { FaCamera } from "react-icons/fa";
-import img1 from "../../../asset/avatar/img1.jpg";
-import img2 from "../../../asset/avatar/img2.jpg";
-import img3 from "../../../asset/avatar/img3.jpg";
-import img4 from "../../../asset/avatar/img4.jpg";
-import img5 from "../../../asset/avatar/img5.jpg";
+import { MdClose } from "react-icons/md";
+import { avatarList } from "../../../utils/Constants/constants";
+import "./EditProfile.css";
 
-const EditProfile = ({ user, setEditProfile }) => {
+const EditProfile = ({ user, setEditProfile, showEditProfile }) => {
   const dispatch = useDispatch();
   const loggedInUser = useSelector((store) => store.auth.user);
+  const [showAvatar, setAvatar] = useState(false);
   const [imgAddress, setImgAddress] = useState(loggedInUser?.avatarUrl);
   const inputRef = useRef(null);
 
@@ -22,36 +20,42 @@ const EditProfile = ({ user, setEditProfile }) => {
   };
   const [editUser, setEditUser] = useState(initialState);
 
-  const avatarList = [
-    { name: "img1", path: img1 },
-    { name: "img2", path: img2 },
-    { name: "img3", path: img3 },
-    { name: "img4", path: img4 },
-    { name: "img5", path: img5 },
-  ];
+  useEffect(() => {
+    setEditUser(initialState);
+
+    // eslint-disable-next-line
+  }, [user]);
+
+  setTimeout(() => {
+    if (showEditProfile) {
+      setAvatar(true);
+    }
+  }, 1000);
 
   const handleImageClick = () => {
     inputRef.current.click();
   };
-
   return (
-    <div className="edit-profile">
+    <div
+      className="edit-profile"
+      id={`${showEditProfile ? "edit-profile-id" : ""}`}
+    >
       <div id="modal-name-ep">Edit Profile</div>
-      <div
+      <MdClose
         id="close-edit-profile"
         onClick={() => {
           dispatch(setLayover(false));
           setEditProfile(false);
+          setAvatar(false);
         }}
-      >
-        &#x2715;
-      </div>
+      />
       <form
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(editUserInfo(editUser));
           dispatch(setLayover(false));
           setEditProfile(false);
+          setAvatar(false);
         }}
       >
         <div id="img-edit-container-ep">
@@ -82,25 +86,31 @@ const EditProfile = ({ user, setEditProfile }) => {
             }}
           />
         </div>
+
         <div className="avatar-container-ep">
           <div>Select avatar</div>
-          {avatarList.map((img) => (
-            <span className="img-span-ep" key={img.name}>
-              <img
-                src={img.path}
-                alt={img.name}
-                id="img-avatar-ep"
-                onClick={(e) => {
-                  setEditUser({
-                    ...editUser,
-                    avatarUrl: img.path,
-                  });
-                  setImgAddress(img.path);
-                }}
-              />
-            </span>
-          ))}
+          {showAvatar ? (
+            avatarList?.map((img) => (
+              <span className="img-span-ep" key={img.name}>
+                <img
+                  src={img.path}
+                  alt={img.name}
+                  id="img-avatar-ep"
+                  onClick={(e) => {
+                    setEditUser({
+                      ...editUser,
+                      avatarUrl: img.path,
+                    });
+                    setImgAddress(img.path);
+                  }}
+                />
+              </span>
+            ))
+          ) : (
+            <AvatarShimmer />
+          )}
         </div>
+
         <div className="input-edit-form">
           <label htmlFor="">Bio</label>
           <input
@@ -121,6 +131,18 @@ const EditProfile = ({ user, setEditProfile }) => {
         </div>
         <button className="edit-button-ep">Save</button>
       </form>
+    </div>
+  );
+};
+
+const AvatarShimmer = () => {
+  return (
+    <div className="avatar-shimmer">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
   );
 };

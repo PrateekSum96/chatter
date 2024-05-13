@@ -24,21 +24,10 @@ import Layover from "../Layover/Layover";
 import EditPost from "../Modals/EditPost/EditPost";
 
 const ShowPost = ({ post }) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { pathname } = useLocation();
   const allUsers = useSelector((store) => store.appUsers?.allUsers);
 
   return (
-    <div
-      className="show-post-container"
-      onClick={() => {
-        if (!pathname.includes("/post/")) {
-          dispatch(loadingStatus());
-          navigate(`/post/${post._id}`);
-        }
-      }}
-    >
+    <div className="show-post-container">
       <UserInfo post={post} allUsers={allUsers} />
       <UserContentPost post={post} />
       <UserInteraction post={post} />
@@ -65,6 +54,7 @@ const UserInfo = ({ post, allUsers }) => {
     } else {
       document.body.style.overflow = "auto";
     }
+    // eslint-disable-next-line
   }, [showLayover]);
 
   //outside click close box
@@ -143,13 +133,26 @@ const UserInfo = ({ post, allUsers }) => {
           >
             Edit
           </div>
-          <div onClick={() => dispatch(deletePost(post?._id))}>Delete</div>
+          <div
+            onClick={() => {
+              dispatch(deletePost(post?._id));
+            }}
+          >
+            Delete
+          </div>
         </div>
       )}
+      <div
+        className="show-layover-modal-ui"
+        id={`${showEditModal ? "show-layover-modal-id-ui" : ""}`}
+      >
+        <EditPost
+          post={post}
+          setShowEditModal={setShowEditModal}
+          showEditModal={showEditModal}
+        />
+      </div>
       {showEditModal && <Layover showLayover={showLayover} />}
-      {showEditModal && (
-        <EditPost post={post} setShowEditModal={setShowEditModal} />
-      )}
     </div>
   );
 };
@@ -157,8 +160,19 @@ const UserInfo = ({ post, allUsers }) => {
 //UserContentPost
 
 const UserContentPost = ({ post }) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
   return (
-    <div className="user-content-show-post">
+    <div
+      className="user-content-show-post"
+      onClick={() => {
+        if (!pathname.includes("/post/")) {
+          dispatch(loadingStatus());
+          navigate(`/post/${post._id}`);
+        }
+      }}
+    >
       <div>{post?.content}</div>
       <div>
         {post?.mediaURL?.includes("mp4") && (
