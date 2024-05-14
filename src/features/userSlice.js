@@ -4,15 +4,11 @@ import { toast } from "react-toastify";
 export const getAllUsers = createAsyncThunk(
   "appUsers/getAllUsers",
   async () => {
-    try {
-      const response = await fetch("api/users", {
-        method: "GET",
-      });
-      const result = await response.json();
-      return result;
-    } catch (error) {
-      console.error(error);
-    }
+    const response = await fetch("api/users", {
+      method: "GET",
+    });
+    const result = await response.json();
+    return result;
   }
 );
 
