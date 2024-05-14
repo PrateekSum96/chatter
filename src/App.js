@@ -8,7 +8,6 @@ import { verifyUser } from "./features/authSlice";
 function App() {
   const dispatch = useDispatch();
   const userSliceStatus = useSelector((state) => state.appUsers.status);
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const encodedToken = localStorage.getItem("token");
 
@@ -23,6 +22,7 @@ function App() {
     if (encodedToken) {
       dispatch(verifyUser());
     }
+    // eslint-disable-next-line
   }, []);
 
   return (
