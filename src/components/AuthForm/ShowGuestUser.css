@@ -2,6 +2,8 @@
   /* height: 300px;
   overflow: hidden;
   overflow-y: scroll; */
+  white-space: nowrap;
+  overflow: hidden;
 }
 @media (min-width: 1201px) {
   .show-guest-container {
@@ -31,6 +33,7 @@
   .guest-user-detail {
     padding-left: 0.5rem;
   }
+
   .guest-name > span {
     font-weight: bold;
     padding: 0 0.1rem;
