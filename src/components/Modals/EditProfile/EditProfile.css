@@ -6,7 +6,6 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    /* transform: translate(-50%, -50%); */
     transform: scale(1) translate(-50%, -50%);
     background-color: var(--secondary-color);
     width: 330px;
@@ -121,10 +120,12 @@
     margin-bottom: 0.5rem;
   }
   .avatar-container-ep > div {
-    padding-bottom: 0.5rem;
+    padding: 0.5rem 0;
     text-align: left;
     position: relative;
     left: 6.5rem;
+    font-style: italic;
+    font-weight: 500;
   }
   #img-show-edit-ep {
     width: 50px;
@@ -132,7 +133,6 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
-    margin-bottom: 0.8rem;
     margin-right: 0.5rem;
     outline: 2px solid var(--primary-color);
   }
@@ -151,7 +151,7 @@
   }
   .avatar-shimmer {
     display: flex;
-    padding: 0;
+    margin: -0.4rem;
   }
   .avatar-shimmer > div {
     outline: 2px solid var(--primary-color);
@@ -160,5 +160,9 @@
     height: 40px;
     border-radius: 50%;
     margin-right: 0.4rem;
+  }
+  div#email-ep {
+    position: relative;
+    right: 137px;
   }
 }

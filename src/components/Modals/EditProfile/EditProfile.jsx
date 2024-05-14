@@ -69,7 +69,6 @@ const EditProfile = ({ user, setEditProfile, showEditProfile }) => {
               </div>
             )}
             <FaCamera id="icon-camera-ep" onClick={handleImageClick} />
-            <div>Upload Image</div>
           </div>
 
           <input
@@ -112,10 +111,14 @@ const EditProfile = ({ user, setEditProfile, showEditProfile }) => {
         </div>
 
         <div className="input-edit-form">
+          <label htmlFor="">Email</label>
+          <div id="email-ep">{user?.email}</div>
+        </div>
+        <div className="input-edit-form">
           <label htmlFor="">Bio</label>
           <input
             type="text"
-            value={editUser?.bio}
+            value={editUser?.bio || ""}
             onChange={(e) => setEditUser({ ...editUser, bio: e.target.value })}
           />
         </div>
@@ -123,7 +126,7 @@ const EditProfile = ({ user, setEditProfile, showEditProfile }) => {
           <label htmlFor="">Website</label>
           <input
             type="text"
-            value={editUser?.website}
+            value={editUser?.website || ""}
             onChange={(e) =>
               setEditUser({ ...editUser, website: e.target.value })
             }

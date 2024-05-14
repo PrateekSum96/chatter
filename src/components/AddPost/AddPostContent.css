@@ -120,10 +120,12 @@
     padding: 0.5rem;
     border-radius: 0.3rem;
     transform-origin: top left;
+    opacity: 0;
     transition: all 0.2s linear;
   }
 
   #emojis-animate {
+    opacity: 1;
     transform: scale(1);
   }
 
