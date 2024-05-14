@@ -78,6 +78,8 @@
   .user-fn-ln-ui {
     font-size: 1.1rem;
     color: var(--primary-color);
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .user-fn-ln-ui > span:nth-last-of-type(2) {

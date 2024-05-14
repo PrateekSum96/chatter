@@ -138,8 +138,8 @@ const authSlice = createSlice({
           return;
         }
         state.isLoggedIn = true;
-        state.error = null;
         state.user = createdUser;
+        state.error = null;
         localStorage.setItem("token", encodedToken);
         state.status = "succeeded";
         toast.success("Successfully account created!");

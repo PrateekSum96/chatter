@@ -102,6 +102,7 @@ const FormComponent = ({ signup }) => {
             </label>
             <input
               type="text"
+              placeholder="First Name"
               required
               id="first-name"
               className="auth-form-input"
@@ -119,6 +120,7 @@ const FormComponent = ({ signup }) => {
             </label>
             <input
               type="text"
+              placeholder="Last Name"
               required
               id="last-name"
               className="auth-form-input"
@@ -135,6 +137,7 @@ const FormComponent = ({ signup }) => {
           </label>
           <input
             type="email"
+            placeholder="Email"
             required
             id="email"
             className="auth-form-input"
@@ -151,6 +154,7 @@ const FormComponent = ({ signup }) => {
             </label>
             <input
               type="text"
+              placeholder="Username"
               required
               id="user-name"
               className="auth-form-input"
@@ -168,6 +172,7 @@ const FormComponent = ({ signup }) => {
           </label>
           <input
             type={eyeOne ? "text" : "password"}
+            placeholder="Password"
             required
             id="password"
             className="auth-form-input"
@@ -187,6 +192,7 @@ const FormComponent = ({ signup }) => {
             </label>
             <input
               type={eyeTwo ? "text" : "password"}
+              placeholder="Confirm Password"
               required
               id="confirm-password"
               className="auth-form-input"
