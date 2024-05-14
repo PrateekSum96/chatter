@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
+const getEncodedToken = () => localStorage.getItem("token");
+
 //Auth
 export const handleUserLogin = createAsyncThunk(
   "auth/handleUserLogin",
@@ -32,11 +34,23 @@ export const handleUserSignUp = createAsyncThunk(
   }
 );
 
+//VerifyUser
+export const verifyUser = createAsyncThunk("auth/verifyUser", async () => {
+  const encodedToken = getEncodedToken();
+  const response = await fetch("/api/auth/verify", {
+    method: "POST",
+    body: JSON.stringify({ encodedToken }),
+  });
+
+  const result = await response.json();
+  return result;
+});
+
 //Following
 export const followUser = createAsyncThunk(
-  "follow/followUser",
+  "auth/followUser",
   async (followUserId) => {
-    const encodedToken = localStorage.getItem("token");
+    const encodedToken = getEncodedToken();
     const response = await fetch(`/api/users/follow/${followUserId}`, {
       method: "POST",
       headers: { authorization: encodedToken },
@@ -48,16 +62,15 @@ export const followUser = createAsyncThunk(
   }
 );
 export const unFollowUser = createAsyncThunk(
-  "follow/unFollowUser",
+  "auth/unFollowUser",
   async (followUserId) => {
-    const encodedToken = localStorage.getItem("token");
+    const encodedToken = getEncodedToken();
     const response = await fetch(`/api/users/unfollow/${followUserId}`, {
       method: "POST",
       headers: { authorization: encodedToken },
     });
 
     const result = await response.json();
-
     return result;
   }
 );
@@ -77,7 +90,6 @@ const authSlice = createSlice({
       state.status = "idle";
       state.error = null;
       state.user = null;
-      localStorage.removeItem("foundUser");
       localStorage.removeItem("token");
     },
     updateLoggedInUser: (state, action) => {
@@ -104,7 +116,6 @@ const authSlice = createSlice({
         state.error = null;
         state.user = foundUser;
         localStorage.setItem("token", encodedToken);
-        localStorage.setItem("foundUser", JSON.stringify(foundUser));
         state.status = "succeeded";
         toast.success("Login successful!");
       })
@@ -130,7 +141,6 @@ const authSlice = createSlice({
         state.error = null;
         state.user = createdUser;
         localStorage.setItem("token", encodedToken);
-        localStorage.setItem("foundUser", JSON.stringify(createdUser));
         state.status = "succeeded";
         toast.success("Successfully account created!");
       })
@@ -166,6 +176,30 @@ const authSlice = createSlice({
       .addCase(unFollowUser.rejected, (state) => {
         state.status = "failed";
         state.error = "Failed to unfollow";
+      })
+      //verify-user
+      .addCase(verifyUser.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(verifyUser.fulfilled, (state, action) => {
+        const { user } = action.payload;
+
+        if (user) {
+          state.isLoggedIn = true;
+          state.error = null;
+          state.user = user;
+          state.status = "succeeded";
+          return;
+        }
+        state.isLoggedIn = false;
+        state.error = "Something went wrong";
+        state.status = "error";
+      })
+      .addCase(verifyUser.rejected, (state) => {
+        state.status = "error";
+        state.error = "Something went wrong!";
+        toast.error(state.error);
       });
   },
 });

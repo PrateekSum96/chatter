@@ -8,7 +8,6 @@ const UserInfo = () => {
   const navigate = useNavigate();
   const [themeDark, setThemeDark] = useState(false);
   const user = useSelector((store) => store.auth.user);
-  const { firstName, lastName, username, avatarUrl } = user;
 
   return (
     <div className="user-info-container">
@@ -27,23 +26,23 @@ const UserInfo = () => {
       <div
         className="user-login-ui"
         onClick={() => {
-          navigate(`/profile/${username}`);
+          navigate(`/profile/${user?.username}`);
         }}
       >
         <div className="image-container">
-          {avatarUrl ? (
-            <img src={avatarUrl} alt="user_image" id="user-image" />
+          {user?.avatarUrl ? (
+            <img src={user?.avatarUrl} alt="user_image" id="user-image" />
           ) : (
-            <div>{firstName.substring(0, 1)}</div>
+            <div>{user?.firstName.substring(0, 1)}</div>
           )}
         </div>
 
         <div className="user-name-ui">
           <div className="user-fn-ln-ui">
-            <span>{firstName}</span>
-            <span>{lastName}</span>
+            <span>{user?.firstName}</span>
+            <span>{user?.lastName}</span>
           </div>
-          <div id="username-ui">@{username}</div>
+          <div id="username-ui">@{user?.username}</div>
         </div>
       </div>
     </div>

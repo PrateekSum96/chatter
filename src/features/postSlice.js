@@ -151,7 +151,7 @@ const postSlice = createSlice({
       const showPostHome = state.allPosts?.filter(
         (post) =>
           userLoggedIn?.username === post.username ||
-          userLoggedInFollowing.some(
+          userLoggedInFollowing?.some(
             (followingUser) => followingUser.username === post.username
           )
       );

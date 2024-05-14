@@ -10,9 +10,11 @@ import { getAllUsers } from "../../../features/userSlice";
 import AddPostContent from "../../AddPost/AddPostContent";
 import Layover from "../../Layover/Layover";
 import { postModalVisibility } from "../../../features/postModalSlice";
+import { useLocation } from "react-router-dom";
 
 const Search = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const showPostModal = useSelector((store) => store.postModal.showPostModal);
 
   useEffect(() => {
@@ -29,6 +31,11 @@ const Search = () => {
       document.body.style.overflow = "auto";
     }
   }, [showPostModal]);
+
+  // scroll top
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return (
     <div className="search-container">
