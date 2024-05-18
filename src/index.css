@@ -17,8 +17,20 @@ code {
   --primary-color: rgb(83, 83, 238);
   --secondary-color: rgb(215, 228, 255);
   --hover-color: rgb(106, 106, 235);
-  --background-color-dark: black;
-  --background-color-light: white;
-  --color-light: white;
-  --color-dark: black;
+  --bg-color: white;
+  --color-text: black;
+}
+
+/* [data-theme="dark"] {
+  --bg-color: black;
+  --color-text: white;
+} */
+
+.dark {
+  --bg-color: black;
+  --color-text: white;
+}
+
+* {
+  transition: background-color 0.2s linear, color 0.1s linear;
 }

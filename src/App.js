@@ -8,25 +8,27 @@ import { verifyUser } from "./features/authSlice";
 function App() {
   const dispatch = useDispatch();
   const userSliceStatus = useSelector((state) => state.appUsers.status);
-
+  const darkMode = useSelector((store) => store.colorMode.darkMode);
   const encodedToken = localStorage.getItem("token");
 
   useEffect(() => {
     if (userSliceStatus === "idle") {
       dispatch(getAllUsers());
     }
-    // eslint-disable-next-line
-  }, []);
-
-  useEffect(() => {
     if (encodedToken) {
       dispatch(verifyUser());
     }
     // eslint-disable-next-line
   }, []);
 
+  // if (darkMode) {
+  //   document.querySelector("body").setAttribute("data-theme", "dark");
+  // } else {
+  //   document.querySelector("body").setAttribute("data-theme", "light");
+  // }
+
   return (
-    <div className="App">
+    <div className={`App ${darkMode ? "dark" : "light"}`}>
       <Router />
     </div>
   );

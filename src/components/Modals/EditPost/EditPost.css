@@ -7,6 +7,7 @@
     width: 500px;
     padding: 0.5rem;
     background-color: var(--secondary-color);
+    color: black;
     z-index: 100;
     box-sizing: border-box;
     border-radius: 0.3rem;
