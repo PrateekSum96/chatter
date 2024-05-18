@@ -1,26 +1,34 @@
-import { useState } from "react";
 import "./UserInfo.css";
 import { IoIosSunny, IoIosMoon } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { onDarkMode } from "../../../features/darkModeSlice";
 
 const UserInfo = () => {
   const navigate = useNavigate();
-  const [themeDark, setThemeDark] = useState(false);
+  const dispatch = useDispatch();
+  const darkMode = useSelector((store) => store.colorMode.darkMode);
   const user = useSelector((store) => store.auth.user);
 
   return (
     <div className="user-info-container">
-      <div
-        className="dark-light-toggle"
-        onClick={() => setThemeDark(!themeDark)}
-      >
-        <IoIosSunny className={"dark-light-icons"} />
+      <div className="dark-light-toggle">
+        <IoIosSunny
+          className={"dark-light-icons"}
+          onClick={() => {
+            dispatch(onDarkMode(false));
+          }}
+        />
         <div
-          className={themeDark ? "theme-change-dark" : "theme-change-light"}
+          className={darkMode ? "theme-change-dark" : "theme-change-light"}
           id="toggle-pointer"
         ></div>
-        <IoIosMoon className="dark-light-icons" />
+        <IoIosMoon
+          className="dark-light-icons"
+          onClick={() => {
+            dispatch(onDarkMode(true));
+          }}
+        />
       </div>
 
       <div

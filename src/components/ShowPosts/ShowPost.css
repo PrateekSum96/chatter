@@ -138,6 +138,8 @@
     width: 80px;
     border-radius: 0.3rem;
     background-color: var(--secondary-color);
+
+    color: black;
     box-sizing: border-box;
     text-align: center;
   }

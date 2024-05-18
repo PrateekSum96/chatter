@@ -7,13 +7,13 @@
     top: 50%;
     left: 50%;
     transform: scale(1) translate(-50%, -50%);
-    background-color: var(--secondary-color);
     width: 330px;
     padding: 0.5rem 1rem;
     border-radius: 0.3rem;
-    border: 2px solid white;
     z-index: 100;
     transition: all 0.2s linear;
+    background-color: var(--secondary-color);
+    color: black;
   }
   .input-edit-form {
     display: flex;
