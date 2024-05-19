@@ -2,7 +2,6 @@
   .single-post-sp {
     margin-top: 1rem;
     width: 550px;
-
     border: 1px solid rgb(220, 218, 218);
     border-radius: 0.3rem;
     padding: 0.7rem;
@@ -30,7 +29,7 @@
   }
   .media-sp {
     width: 100%;
-    height: 200px;
+    height: 180px;
     background-color: rgb(220, 218, 218);
     border-radius: 0.3rem;
     margin-bottom: 0.5rem;

@@ -21,16 +21,11 @@ code {
   --color-text: black;
 }
 
-/* [data-theme="dark"] {
-  --bg-color: black;
-  --color-text: white;
-} */
-
 .dark {
   --bg-color: black;
   --color-text: white;
 }
 
 * {
-  transition: background-color 0.2s linear, color 0.1s linear;
+  transition: background-color 0.2s linear;
 }

@@ -53,6 +53,7 @@ const initialState = {
   status: "idle",
   error: null,
   bookmarkedPost: [],
+  showShimmer: false,
 };
 
 const bookmarkSlice = createSlice({
@@ -110,6 +111,7 @@ const bookmarkSlice = createSlice({
       //get-all-bookmark-post
       .addCase(getBookmarkedPost.pending, (state) => {
         state.status = "loading";
+        state.showShimmer = true;
         state.error = null;
       })
       .addCase(getBookmarkedPost.fulfilled, (state, action) => {
@@ -121,6 +123,7 @@ const bookmarkSlice = createSlice({
         }
         state.status = "succeeded";
         state.error = null;
+        state.showShimmer = false;
         state.bookmarkedPost = action.payload.bookmarks;
       })
       .addCase(getBookmarkedPost.rejected, (state) => {

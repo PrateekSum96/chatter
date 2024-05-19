@@ -1,16 +1,9 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllPostsOfAUser } from "../../features/userSlice";
+import { useSelector } from "react-redux";
 import ShowPost from "../../components/ShowPosts/ShowPost";
 import { useLatestPost } from "../../utils/CustomHooks/useLatestPost";
 
-const UserPost = ({ username }) => {
-  const dispatch = useDispatch();
+const UserPost = () => {
   const allUserPosts = useSelector((store) => store.appUsers.allPostsUser);
-  useEffect(() => {
-    dispatch(getAllPostsOfAUser(username));
-    // eslint-disable-next-line
-  }, [username]);
 
   const latestPost = useLatestPost(allUserPosts);
 
