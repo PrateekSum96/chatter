@@ -1,6 +1,6 @@
 import "./SinglePostShimmer.css";
 
-const SinglePost = () => {
+const SinglePostShimmer = () => {
   return (
     <div className="single-post-sp">
       <div>
@@ -21,4 +21,4 @@ const SinglePost = () => {
   );
 };
 
-export default SinglePost;
+export default SinglePostShimmer;

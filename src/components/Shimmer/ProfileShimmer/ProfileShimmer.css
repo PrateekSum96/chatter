@@ -1,0 +1,71 @@
+@media (min-width: 1201px) {
+  .profile-shimmer {
+    margin: 1rem 0;
+    width: 550px;
+    height: 160px;
+    border: 1px solid rgb(220, 218, 218);
+    border-radius: 0.3rem;
+    padding: 0.7rem;
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+  }
+
+  .image-shimmer-ps {
+    width: 65px;
+    height: 65px;
+    background-color: rgb(220, 218, 218);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+
+  .info-shimmer-ps {
+    width: 450px;
+  }
+  #shimmer-one-ps > div:nth-of-type(1) {
+    height: 25px;
+    background-color: rgb(220, 218, 218);
+    width: 180px;
+    margin: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+  }
+  #shimmer-one-ps > div:nth-of-type(2) {
+    height: 15px;
+    background-color: rgb(220, 218, 218);
+    width: 140px;
+    margin: 0.5rem;
+    border-radius: 0.3rem;
+  }
+  #shimmer-two-ps {
+    margin-top: 1rem;
+  }
+  #shimmer-two-ps > div {
+    height: 15px;
+    background-color: rgb(220, 218, 218);
+    width: 150px;
+    margin: 0.3rem 0.5rem;
+    border-radius: 0.3rem;
+  }
+
+  #shimmer-three-ps {
+    display: flex;
+    justify-content: space-between;
+  }
+  #shimmer-three-ps > div {
+    height: 18px;
+    background-color: rgb(220, 218, 218);
+    width: 100px;
+    margin: 0.5rem;
+    border-radius: 0.3rem;
+  }
+
+  #btn-shimmer-ps {
+    height: 30px;
+    background-color: rgb(220, 218, 218);
+    width: 70px;
+    margin: 0.5rem;
+    border-radius: 0.3rem;
+    position: absolute;
+    right: 10px;
+  }
+}

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAUser, setLayover } from "../../features/userSlice";
+import { setLayover } from "../../features/userSlice";
 import { followUser, logOutUser, unFollowUser } from "../../features/authSlice";
 import { clearBookmarks } from "../../features/bookmarkSlice";
 import EditProfile from "../../components/Modals/EditProfile/EditProfile";
@@ -9,6 +9,7 @@ import ShowFollow from "../../components/Modals/ShowFollow/ShowFollow";
 import { MdClose } from "react-icons/md";
 
 import "./UserDetail.css";
+import { clearDataPostSlice } from "../../features/postSlice";
 
 const UserDetail = ({ username }) => {
   const dispatch = useDispatch();
@@ -21,11 +22,6 @@ const UserDetail = ({ username }) => {
   const loggedInUser = useSelector((store) => store.auth.user);
   const userPost = useSelector((store) => store.appUsers.allPostsUser);
   const layover = useSelector((store) => store.appUsers.showLayover);
-
-  useEffect(() => {
-    dispatch(getAUser(username));
-    // eslint-disable-next-line
-  }, [username, loggedInUser]);
 
   useEffect(() => {
     if (layover) {
@@ -96,6 +92,7 @@ const UserDetail = ({ username }) => {
                 onClick={() => {
                   dispatch(logOutUser());
                   dispatch(clearBookmarks());
+                  dispatch(clearDataPostSlice());
                 }}
               >
                 Logout

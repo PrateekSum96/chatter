@@ -21,12 +21,6 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  // if (darkMode) {
-  //   document.querySelector("body").setAttribute("data-theme", "dark");
-  // } else {
-  //   document.querySelector("body").setAttribute("data-theme", "light");
-  // }
-
   return (
     <div className={`App ${darkMode ? "dark" : "light"}`}>
       <Router />

@@ -9,10 +9,13 @@ import {
   trendingPost,
 } from "../../features/postSlice";
 
+import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
+
 const Home = () => {
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((store) => store.auth.user);
   const userHomePosts = useSelector((store) => store.appPosts.userHomePost);
+  const showShimmer = useSelector((store) => store.appPosts.showShimmer);
   const allUsersPosts = useSelector((store) => store.appPosts.allPosts);
   const sortBy = useSelector((store) => store.appPosts.sortBy);
 
@@ -29,6 +32,14 @@ const Home = () => {
     }
     // eslint-disable-next-line
   }, [sortBy, allUsersPosts, userLoggedIn]);
+
+  if (showShimmer) {
+    return (
+      <div>
+        <PageShimmer />
+      </div>
+    );
+  }
 
   return (
     <div className="home">

@@ -122,6 +122,7 @@ const initialState = {
   userHomePost: [],
   post: null,
   status: "idle",
+  showShimmer: false,
   error: null,
   sortBy: "latest", //"latest" || "trending"
   postLayover: false,
@@ -160,16 +161,29 @@ const postSlice = createSlice({
     loadingStatus: (state) => {
       state.status = "loading";
     },
+
+    clearDataPostSlice: (state) => {
+      state.allPosts = [];
+      state.userHomePost = [];
+      state.post = null;
+      state.status = "idle";
+      state.showShimmer = false;
+      state.error = null;
+      state.sortBy = "latest";
+      state.postLayover = false;
+    },
   },
   extraReducers(builder) {
     builder
       //get-all-post
       .addCase(getAllPosts.pending, (state) => {
         state.status = "loading";
+        state.showShimmer = true;
         state.error = null;
       })
       .addCase(getAllPosts.fulfilled, (state, action) => {
         state.status = "succeeded";
+        state.showShimmer = false;
         state.error = null;
         state.allPosts = action.payload.posts;
       })
@@ -285,5 +299,6 @@ export const {
   trendingPost,
   setPostLayover,
   loadingStatus,
+  clearDataPostSlice,
 } = postSlice.actions;
 export default postSlice.reducer;

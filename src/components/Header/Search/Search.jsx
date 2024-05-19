@@ -4,7 +4,6 @@ import { MdClose } from "react-icons/md";
 import "./Search.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBookmarkedPost } from "../../../features/bookmarkSlice";
 import { getAllPosts } from "../../../features/postSlice";
 import { getAllUsers } from "../../../features/userSlice";
 import AddPostContent from "../../AddPost/AddPostContent";
@@ -23,7 +22,6 @@ const Search = () => {
 
   useEffect(() => {
     dispatch(getAllPosts());
-    dispatch(getBookmarkedPost());
     dispatch(getAllUsers());
     // eslint-disable-next-line
   }, []);

@@ -4,14 +4,13 @@ import { useParams } from "react-router-dom";
 import { getAPost } from "../../features/postSlice";
 import ShowPost from "../../components/ShowPosts/ShowPost";
 import "./PostPage.css";
-import SinglePostShimmer from "../../components/Shimmer/SinglePost/SinglePostShimmer";
+import SinglePostShimmer from "../../components/Shimmer/SinglePostShimmer/SinglePostShimmer";
 
 const PostPage = () => {
   const { postId } = useParams();
   const dispatch = useDispatch();
   const post = useSelector((store) => store.appPosts.post);
   const allPosts = useSelector((store) => store.appPosts.allPosts);
-  const status = useSelector((store) => store.appPosts.status);
 
   useEffect(() => {
     dispatch(getAPost(postId));
@@ -19,7 +18,8 @@ const PostPage = () => {
   }, [allPosts]);
 
   // conditional rendering - shimmer
-  if (status === "loading") {
+
+  if (postId !== post?._id) {
     return (
       <div>
         <SinglePostShimmer />
