@@ -467,7 +467,7 @@ export const posts = [
     },
     comments: [],
     username: "janedoe",
-    createdAt: "2022-02-10T10:55:06+05:30",
+    createdAt: "2022-02-10T10:55:07+05:30",
     updatedAt: formatDate(),
   },
 ];
