@@ -2,15 +2,12 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ShowPost from "../../components/ShowPosts/ShowPost";
 import AddPostContent from "../../components/AddPost/AddPostContent";
-import {
-  getUserPosts,
-  homePostShimmerTrue,
-  latestPost,
-  trendingPost,
-} from "../../features/postSlice";
+import { getUserPosts, homePostShimmerTrue } from "../../features/postSlice";
 import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
 
 import "./Home.css";
+import { getTrendingPost } from "../../utils/utilityFunction/getTendingPost";
+import { getLatestPost } from "../../utils/utilityFunction/getLatestPost";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -35,10 +32,11 @@ const Home = () => {
   }, []);
 
   // latest or trending
+  let showHomePost = [];
   if (sortBy === "latest") {
-    dispatch(latestPost());
+    showHomePost = getLatestPost(userHomePosts);
   } else {
-    dispatch(trendingPost());
+    showHomePost = getTrendingPost(userHomePosts);
   }
 
   //shimmer
@@ -53,10 +51,10 @@ const Home = () => {
   return (
     <div className="home">
       <AddPostContent />
-      {userHomePosts?.length === 0 ? (
+      {showHomePost?.length === 0 ? (
         <p className="no-post-home">No Posts Yet!</p>
       ) : (
-        userHomePosts?.map((post) => (
+        showHomePost?.map((post) => (
           <div key={post._id}>
             <ShowPost post={post} />
           </div>
