@@ -30,13 +30,25 @@
     width: 25px;
     color: gray;
   }
-
+  #search-icon-close {
+    position: absolute;
+    color: gray;
+    top: 8px;
+    height: 25px;
+    width: 25px;
+    right: 2px;
+    transition: color 0.2s ease-in-out;
+  }
+  #search-icon-close:hover {
+    cursor: pointer;
+    color: rgb(108, 103, 103);
+  }
   #search-input {
     width: 450px;
     height: 40px;
     border-radius: 0.3rem;
     font-size: 1rem;
-    padding-left: 35px;
+    padding: 0 35px;
     box-sizing: border-box;
     border: 1px solid var(--hover-color);
     cursor: default;
@@ -70,13 +82,15 @@
   }
   .searched-user-container {
     width: 450px;
-
+    max-height: 300px;
     border: 1px solid var(--primary-color);
     position: absolute;
     top: 42px;
     border-radius: 0.3rem;
     background-color: var(--secondary-color);
     box-sizing: border-box;
+    overflow-y: scroll;
+    color: black;
   }
   .searched-user {
     display: flex;
@@ -122,5 +136,11 @@
   }
   .searched-user-info-s div:nth-of-type(2) {
     font-size: 0.9rem;
+  }
+  #no-searched-user {
+    padding: 0.5rem;
+    text-align: center;
+    font-weight: bold;
+    color: black;
   }
 }

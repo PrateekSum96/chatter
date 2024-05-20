@@ -16,6 +16,7 @@ const Search = () => {
   const navigate = useNavigate();
   const [searchedText, setSearchedText] = useState("");
   const [searchedUser, setSearchedUser] = useState([]);
+  const [searchedUserBox, setSearchedUserBox] = useState(false);
   const showPostModal = useSelector((store) => store.postModal.showPostModal);
   const allUsers = useSelector((store) => store.appUsers.allUsers);
 
@@ -48,62 +49,74 @@ const Search = () => {
     // eslint-disable-next-line
   }, [searchedText]);
 
+  //Function
   const searchingUser = () => {
-    if (searchedText.length !== 0) {
-      const userFound = allUsers.filter(
-        ({ firstName, lastName, username }) =>
-          firstName.toLowerCase().includes(searchedText.toLowerCase()) ||
-          lastName.toLowerCase().includes(searchedText.toLowerCase()) ||
-          username.toLowerCase().includes(searchedText.toLowerCase())
-      );
+    const userFound = allUsers.filter(
+      ({ firstName, lastName, username }) =>
+        firstName.toLowerCase().includes(searchedText.toLowerCase()) ||
+        lastName.toLowerCase().includes(searchedText.toLowerCase()) ||
+        username.toLowerCase().includes(searchedText.toLowerCase())
+    );
+    if (userFound) {
       setSearchedUser([...userFound]);
-    } else {
-      setSearchedUser([]);
     }
   };
 
   return (
     <div className="search-container">
       <IoMdSearch id="search-icon" />
+      <MdClose
+        id="search-icon-close"
+        onClick={() => {
+          setSearchedText("");
+          setSearchedUserBox(false);
+        }}
+      />
       <input
         type="text"
         value={searchedText}
+        placeholder="Search"
         id="search-input"
         onChange={(e) => setSearchedText(e.target.value)}
+        onFocus={() => setSearchedUserBox(true)}
       />
-      {searchedUser.length !== 0 && (
+      {searchedUserBox && (
         <div className="searched-user-container">
-          {searchedUser?.slice(0, 5).map((user) => (
-            <div
-              key={user?._id}
-              className="searched-user"
-              onClick={() => {
-                navigate(`/profile/${user?.username}`);
-                setSearchedText("");
-                setSearchedUser([]);
-              }}
-            >
-              {user?.avatarUrl ? (
-                <img
-                  src={user?.avatarUrl}
-                  alt={user?.firstName}
-                  id="searched-user-image-s"
-                />
-              ) : (
-                <div className="no-avatar-s">
-                  {user?.firstName.substring(0, 1)}
-                </div>
-              )}
+          {searchedUser.length !== 0 ? (
+            searchedUser?.map((user) => (
+              <div
+                key={user?._id}
+                className="searched-user"
+                onClick={() => {
+                  navigate(`/profile/${user?.username}`);
+                  setSearchedText(user?.firstName + " " + user?.lastName);
+                  setSearchedUserBox(false);
+                }}
+              >
+                {user?.avatarUrl ? (
+                  <img
+                    src={user?.avatarUrl}
+                    alt={user?.firstName}
+                    id="searched-user-image-s"
+                  />
+                ) : (
+                  <div className="no-avatar-s">
+                    {user?.firstName.substring(0, 1)}
+                  </div>
+                )}
 
-              <div className="searched-user-info-s">
-                <div>
-                  <span>{user?.firstName}</span>
-                  <span>{user?.lastName}</span>
+                <div className="searched-user-info-s">
+                  <div>
+                    <span>{user?.firstName}</span>
+                    <span>{user?.lastName}</span>
+                  </div>
+                  <div>@{user?.username}</div>
                 </div>
-                <div>@{user?.username}</div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <div id="no-searched-user">No user found!</div>
+          )}
         </div>
       )}
 
