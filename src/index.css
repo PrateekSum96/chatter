@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: rgb(96, 95, 95); */
+  background-color: var(--bg-color);
+  color: var(--color-text);
 }
 
 code {
@@ -20,8 +21,7 @@ code {
   --bg-color: white;
   --color-text: black;
 }
-
-.dark {
+[data-theme="dark"] {
   --bg-color: black;
   --color-text: white;
 }
