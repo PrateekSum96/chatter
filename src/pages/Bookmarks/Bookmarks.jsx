@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ShowPost from "../../components/ShowPosts/ShowPost";
-import { useLatestPost } from "../../utils/CustomHooks/useLatestPost";
 import { getBookmarkedPost } from "../../features/bookmarkSlice";
 import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
+import { getLatestPost } from "../../utils/utilityFunction/getLatestPost";
 import "./Bookmarks.css";
 
 const Bookmarks = () => {
@@ -27,7 +27,7 @@ const Bookmarks = () => {
   });
 
   //show latest post
-  const getLatestBookmarkPost = useLatestPost(postsInBookmarks);
+  const getLatestBookmarkPost = getLatestPost(postsInBookmarks);
 
   if (showShimmer || onLoadShimmer) {
     return (

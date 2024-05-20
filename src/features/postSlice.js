@@ -135,14 +135,7 @@ const postSlice = createSlice({
     setPostLayover: (state, action) => {
       state.postLayover = action.payload;
     },
-    latestPost: (state) => {
-      state.userHomePost?.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
-    },
-    trendingPost: (state) => {
-      state.userHomePost?.sort((a, b) => b.likes.likeCount - a.likes.likeCount);
-    },
+
     sortPost: (state, action) => {
       state.sortBy = action.payload;
     },
@@ -303,9 +296,7 @@ const postSlice = createSlice({
 });
 
 export const {
-  latestPost,
   sortPost,
-  trendingPost,
   setPostLayover,
   loadingStatus,
   clearDataPostSlice,

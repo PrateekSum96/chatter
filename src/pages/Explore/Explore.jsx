@@ -2,17 +2,17 @@ import { useDispatch, useSelector } from "react-redux";
 import ShowPost from "../../components/ShowPosts/ShowPost";
 
 import "./Explore.css";
-import { useLatestPost } from "../../utils/CustomHooks/useLatestPost";
 import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
 import { useEffect } from "react";
 import { getAllPosts } from "../../features/postSlice";
+import { getLatestPost } from "../../utils/utilityFunction/getLatestPost";
 
 const Explore = () => {
   const dispatch = useDispatch();
   const allPosts = useSelector((store) => store.appPosts.allPosts);
   const showShimmer = useSelector((store) => store.appPosts.showShimmer);
 
-  const getLatestPost = useLatestPost(allPosts);
+  const latestPost = getLatestPost(allPosts);
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -28,7 +28,7 @@ const Explore = () => {
   }
   return (
     <div className="explore">
-      {getLatestPost?.map((post) => (
+      {latestPost?.map((post) => (
         <div key={post._id}>
           <ShowPost post={post} />
         </div>
