@@ -14,14 +14,13 @@ export const getAllPosts = createAsyncThunk(
   }
 );
 
-export const getUserPost = createAsyncThunk(
+export const getUserPosts = createAsyncThunk(
   "appPosts/getUserPost",
   async (username) => {
     const response = await fetch(`/api/posts/user/${username}`, {
       method: "GET",
     });
     const result = await response.json();
-
     return result;
   }
 );
@@ -126,6 +125,7 @@ const initialState = {
   error: null,
   sortBy: "latest", //"latest" || "trending"
   postLayover: false,
+  homePostShimmer: true,
 };
 
 const postSlice = createSlice({
@@ -146,22 +146,9 @@ const postSlice = createSlice({
     sortPost: (state, action) => {
       state.sortBy = action.payload;
     },
-    showHomePost: (state, action) => {
-      const userLoggedIn = action.payload;
-      const userLoggedInFollowing = userLoggedIn?.following;
-      const showPostHome = state.allPosts?.filter(
-        (post) =>
-          userLoggedIn?.username === post.username ||
-          userLoggedInFollowing?.some(
-            (followingUser) => followingUser.username === post.username
-          )
-      );
-      state.userHomePost = showPostHome;
-    },
     loadingStatus: (state) => {
       state.status = "loading";
     },
-
     clearDataPostSlice: (state) => {
       state.allPosts = [];
       state.userHomePost = [];
@@ -171,6 +158,9 @@ const postSlice = createSlice({
       state.error = null;
       state.sortBy = "latest";
       state.postLayover = false;
+    },
+    homePostShimmerTrue: (state) => {
+      state.homePostShimmer = true;
     },
   },
   extraReducers(builder) {
@@ -194,11 +184,13 @@ const postSlice = createSlice({
       //add-post
       .addCase(addPost.pending, (state) => {
         state.status = "loading";
+        state.showShimmer = true;
         state.error = null;
       })
       .addCase(addPost.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.error = null;
+        state.showShimmer = false;
         state.allPosts = action.payload.posts;
       })
       .addCase(addPost.rejected, (state) => {
@@ -288,6 +280,24 @@ const postSlice = createSlice({
       .addCase(getAPost.rejected, (state, action) => {
         state.status = "failed";
         state.error = "Failed to get post";
+      })
+      //get-user-posts
+      .addCase(getUserPosts.pending, (state) => {
+        state.status = "loading";
+        // state.showShimmer = true;
+        state.error = null;
+      })
+      .addCase(getUserPosts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        // state.showShimmer = false;
+        state.error = null;
+        state.homePostShimmer = false;
+        state.userHomePost = action.payload.posts;
+      })
+      .addCase(getUserPosts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = "Failed to get user's post";
+        state.homePostShimmer = false;
       });
   },
 });
@@ -295,10 +305,10 @@ const postSlice = createSlice({
 export const {
   latestPost,
   sortPost,
-  showHomePost,
   trendingPost,
   setPostLayover,
   loadingStatus,
   clearDataPostSlice,
+  homePostShimmerTrue,
 } = postSlice.actions;
 export default postSlice.reducer;

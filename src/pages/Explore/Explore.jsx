@@ -11,6 +11,7 @@ const Explore = () => {
   const dispatch = useDispatch();
   const allPosts = useSelector((store) => store.appPosts.allPosts);
   const showShimmer = useSelector((store) => store.appPosts.showShimmer);
+
   const getLatestPost = useLatestPost(allPosts);
 
   useEffect(() => {
