@@ -89,8 +89,9 @@ const Search = () => {
                 className="searched-user"
                 onClick={() => {
                   navigate(`/profile/${user?.username}`);
-                  setSearchedText(user?.firstName + " " + user?.lastName);
+                  setSearchedText(user?.username);
                   setSearchedUserBox(false);
+                  setSearchedUser([{ ...user }]);
                 }}
               >
                 {user?.avatarUrl ? (
