@@ -21,8 +21,12 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
+  //className={`App ${darkMode ? "dark" : "light"}`}
   return (
-    <div className={`App ${darkMode ? "dark" : "light"}`}>
+    <div>
       <Router />
     </div>
   );
