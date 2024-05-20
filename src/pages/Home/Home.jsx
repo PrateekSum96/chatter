@@ -1,16 +1,16 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ShowPost from "../../components/ShowPosts/ShowPost";
 import AddPostContent from "../../components/AddPost/AddPostContent";
-import "./Home.css";
-import { useEffect } from "react";
 import {
   getUserPosts,
   homePostShimmerTrue,
   latestPost,
   trendingPost,
 } from "../../features/postSlice";
-
 import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
+
+import "./Home.css";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -28,21 +28,20 @@ const Home = () => {
   }, [allPosts]);
 
   useEffect(() => {
-    if (sortBy === "latest") {
-      dispatch(latestPost());
-    } else {
-      dispatch(trendingPost());
-    }
-    // eslint-disable-next-line
-  }, [sortBy, allPosts, userHomePosts]);
-
-  useEffect(() => {
     return () => {
       dispatch(homePostShimmerTrue());
     };
     // eslint-disable-next-line
   }, []);
 
+  // latest or trending
+  if (sortBy === "latest") {
+    dispatch(latestPost());
+  } else {
+    dispatch(trendingPost());
+  }
+
+  //shimmer
   if (homePostShimmer) {
     return (
       <div>
