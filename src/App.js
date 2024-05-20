@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     document.body.setAttribute("data-theme", darkMode ? "dark" : "light");
   }, [darkMode]);
-  //className={`App ${darkMode ? "dark" : "light"}`}
+
   return (
     <div>
       <Router />
