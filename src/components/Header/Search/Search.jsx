@@ -4,7 +4,6 @@ import { MdClose } from "react-icons/md";
 import "./Search.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPosts } from "../../../features/postSlice";
 import { getAllUsers } from "../../../features/userSlice";
 import AddPostContent from "../../AddPost/AddPostContent";
 import Layover from "../../Layover/Layover";
@@ -21,7 +20,6 @@ const Search = () => {
   const allUsers = useSelector((store) => store.appUsers.allUsers);
 
   useEffect(() => {
-    dispatch(getAllPosts());
     dispatch(getAllUsers());
     // eslint-disable-next-line
   }, []);

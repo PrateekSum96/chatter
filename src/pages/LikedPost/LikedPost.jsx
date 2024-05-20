@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
 import ShowPost from "../../components/ShowPosts/ShowPost";
 import "./LikedPost.css";
+import { useLatestPost } from "../../utils/CustomHooks/useLatestPost";
 
 const LikedPost = () => {
   const [likedPosts, setLikedPosts] = useState([]);
@@ -18,6 +19,8 @@ const LikedPost = () => {
     // eslint-disable-next-line
   }, [allPosts]);
 
+  const getLatestLikedPost = useLatestPost(likedPosts);
+
   if (onLoadShimmer) {
     return (
       <div>
@@ -31,7 +34,7 @@ const LikedPost = () => {
   }
   return (
     <div className="liked-post">
-      {likedPosts?.map((post) => (
+      {getLatestLikedPost?.map((post) => (
         <div key={post._id}>{<ShowPost post={post} />}</div>
       ))}
     </div>

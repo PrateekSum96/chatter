@@ -4,8 +4,9 @@ import AddPostContent from "../../components/AddPost/AddPostContent";
 import "./Home.css";
 import { useEffect } from "react";
 import {
+  getUserPosts,
+  homePostShimmerTrue,
   latestPost,
-  showHomePost,
   trendingPost,
 } from "../../features/postSlice";
 
@@ -15,14 +16,16 @@ const Home = () => {
   const dispatch = useDispatch();
   const userLoggedIn = useSelector((store) => store.auth.user);
   const userHomePosts = useSelector((store) => store.appPosts.userHomePost);
-  const showShimmer = useSelector((store) => store.appPosts.showShimmer);
-  const allUsersPosts = useSelector((store) => store.appPosts.allPosts);
+  const allPosts = useSelector((store) => store.appPosts.allPosts);
   const sortBy = useSelector((store) => store.appPosts.sortBy);
+  const homePostShimmer = useSelector(
+    (store) => store.appPosts.homePostShimmer
+  );
 
   useEffect(() => {
-    dispatch(showHomePost(userLoggedIn));
+    dispatch(getUserPosts(userLoggedIn?.username));
     // eslint-disable-next-line
-  }, [userLoggedIn, allUsersPosts]);
+  }, [allPosts]);
 
   useEffect(() => {
     if (sortBy === "latest") {
@@ -31,9 +34,16 @@ const Home = () => {
       dispatch(trendingPost());
     }
     // eslint-disable-next-line
-  }, [sortBy, allUsersPosts, userLoggedIn]);
+  }, [sortBy, allPosts, userHomePosts]);
 
-  if (showShimmer) {
+  useEffect(() => {
+    return () => {
+      dispatch(homePostShimmerTrue());
+    };
+    // eslint-disable-next-line
+  }, []);
+
+  if (homePostShimmer) {
     return (
       <div>
         <PageShimmer />
