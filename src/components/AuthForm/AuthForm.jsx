@@ -5,7 +5,7 @@ import "./AuthForm.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { handleUserLogin, handleUserSignUp } from "../../features/authSlice.js";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ShowGuestUser from "./ShowGuestUser.jsx";
 import { validateData } from "../../utils/Validate/validate.js";
 import img1 from "../../asset/chatter-logo.png";
@@ -23,6 +23,7 @@ const AuthForm = ({ signup }) => {
 
 const FormComponent = ({ signup }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const dispatch = useDispatch();
   const [eyeOne, setEyeOne] = useState(false);
   const [eyeTwo, setEyeTwo] = useState(false);
@@ -49,8 +50,12 @@ const FormComponent = ({ signup }) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      // const returnLocation = location?.state?.from?.pathname || "/";
-      navigate("/");
+      const returnLocation = location?.state?.from?.pathname || "/";
+      if (returnLocation.includes("profile")) {
+        navigate("/");
+      } else {
+        navigate(returnLocation);
+      }
     }
     // eslint-disable-next-line
   }, [isLoggedIn]);
