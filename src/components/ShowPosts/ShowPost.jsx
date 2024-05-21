@@ -1,5 +1,6 @@
 import "./ShowPost.css";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import {
   FaHeart,
@@ -235,7 +236,13 @@ const UserInteraction = ({ post }) => {
       />
       <FaRegShareSquare
         className="icon-show-post"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          navigator.clipboard.writeText(
+            `https://app-chatter.netlify.app/post/${post._id}`
+          );
+          toast.success("Link copied!");
+        }}
       />
     </div>
   );
