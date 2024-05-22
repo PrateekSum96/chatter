@@ -10,23 +10,14 @@ import {
   FaRegComment,
   FaRegShareSquare,
 } from "react-icons/fa";
-import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
-import {
-  deletePost,
-  disLikePost,
-  likePost,
-  loadingStatus,
-  setPostLayover,
-} from "../../features/postSlice";
+import { disLikePost, likePost, loadingStatus } from "../../features/postSlice";
 import { bookmarkPost, removeBookmarkPost } from "../../features/bookmarkSlice";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import Layover from "../Layover/Layover";
-import EditPost from "../Modals/EditPost/EditPost";
+
+import { UserInfo } from "./UserInfo";
 
 const ShowPost = ({ post }) => {
   const allUsers = useSelector((store) => store.appUsers?.allUsers);
-
   return (
     <div className="show-post-container">
       <UserInfo post={post} allUsers={allUsers} />
@@ -37,126 +28,6 @@ const ShowPost = ({ post }) => {
 };
 
 //components
-
-//UserInfo
-const UserInfo = ({ post, allUsers }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const refPostControl = useRef();
-  const [showPostControl, setPostControl] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const loggedInUser = useSelector((store) => store.auth?.user);
-  const showLayover = useSelector((store) => store.appPosts.postLayover);
-
-  //modal-open-hide-scrollbar
-  useEffect(() => {
-    if (showLayover) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    // eslint-disable-next-line
-  }, [showLayover]);
-
-  //outside click close box
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [showPostControl]);
-
-  const handleClickOutside = (e) => {
-    if (!refPostControl.current?.contains(e.target)) {
-      setPostControl(false);
-    }
-  };
-
-  const getUserFromUsername = allUsers?.find(
-    (user) => user?.username === post?.username
-  );
-
-  const formatDate = (timestamp) => {
-    const date = new Date(timestamp);
-    return `${date.toLocaleString("default", {
-      month: "short",
-    })} ${date.getDate()}, ${date.getFullYear()}`;
-  };
-  return (
-    <div className="userinfo-container-show-post">
-      <div
-        className="user-info-show-post"
-        onClick={(e) => {
-          navigate(`/profile/${post.username}`);
-          e.stopPropagation();
-        }}
-      >
-        {getUserFromUsername?.avatarUrl ? (
-          <img
-            src={getUserFromUsername?.avatarUrl}
-            alt="user-avatar"
-            id="user-image-show-post"
-          />
-        ) : (
-          <div className="no-avatar-sp">
-            {loggedInUser?.firstName.substring(0, 1)}
-          </div>
-        )}
-
-        <div className="username-show-post">
-          <div>
-            <span>{getUserFromUsername?.firstName}</span>
-            <span>{getUserFromUsername?.lastName}</span>
-          </div>
-          <div className="post-username-show-post">@{post?.username}</div>
-        </div>
-        <div className="postdate-show-post">{formatDate(post?.createdAt)}</div>
-      </div>
-      {loggedInUser.username === post?.username && (
-        <div
-          ref={refPostControl}
-          onClick={() => {
-            setPostControl((prev) => !prev);
-          }}
-        >
-          <PiDotsThreeOutlineVerticalLight className="icon-post-show-post" />
-        </div>
-      )}
-
-      {showPostControl && (
-        <div className="post-control-sp">
-          <div
-            onClick={() => {
-              setShowEditModal(!showEditModal);
-              dispatch(setPostLayover(true));
-            }}
-          >
-            Edit
-          </div>
-          <div
-            onClick={() => {
-              dispatch(deletePost(post?._id));
-            }}
-          >
-            Delete
-          </div>
-        </div>
-      )}
-      <div
-        className="show-layover-modal-ui"
-        id={`${showEditModal ? "show-layover-modal-id-ui" : ""}`}
-      >
-        <EditPost
-          post={post}
-          setShowEditModal={setShowEditModal}
-          showEditModal={showEditModal}
-        />
-      </div>
-      {showEditModal && <Layover showLayover={showLayover} />}
-    </div>
-  );
-};
 
 //UserContentPost
 
@@ -195,6 +66,8 @@ const UserContentPost = ({ post }) => {
 //UserInteraction
 const UserInteraction = ({ post }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const loggedInUser = useSelector((store) => store.auth.user);
   const bookmarkedPosts = useSelector(
     (store) => store.appBookmarks.bookmarkedPost
@@ -207,7 +80,6 @@ const UserInteraction = ({ post }) => {
   const isBookmarked = bookmarkedPosts?.some(
     (bkPost) => bkPost._id === post._id
   );
-
   return (
     <div className="user-interaction-show-post">
       <div className="icon-show-post" onClick={(e) => e.stopPropagation()}>
@@ -219,7 +91,7 @@ const UserInteraction = ({ post }) => {
             onClick={() => dispatch(disLikePost(post._id))}
           />
         )}
-        <span id="like-count-show-post">{post?.likes.likeCount}</span>
+        <span className="like-count-show-post">{post?.likes.likeCount}</span>
       </div>
 
       <div className="icon-show-post" onClick={(e) => e.stopPropagation()}>
@@ -229,11 +101,17 @@ const UserInteraction = ({ post }) => {
           <FaRegBookmark onClick={() => dispatch(bookmarkPost(post._id))} />
         )}
       </div>
-
-      <FaRegComment
+      <div
         className="icon-show-post"
-        onClick={(e) => e.stopPropagation()}
-      />
+        onClick={() => {
+          if (!pathname.includes("/post/")) {
+            navigate(`/post/${post._id}`);
+          }
+        }}
+      >
+        <FaRegComment />
+        <span className="like-count-show-post">{post?.comments?.length}</span>
+      </div>
       <FaRegShareSquare
         className="icon-show-post"
         onClick={(e) => {

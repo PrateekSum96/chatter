@@ -8,8 +8,9 @@ import Layover from "../../components/Layover/Layover";
 import ShowFollow from "../../components/Modals/ShowFollow/ShowFollow";
 import { MdClose } from "react-icons/md";
 
-import "./UserDetail.css";
 import { clearDataPostSlice } from "../../features/postSlice";
+import { hideScrollBar } from "../../utils/utilityFunction/hideScrollBar";
+import "./UserDetail.css";
 
 const UserDetail = ({ username }) => {
   const dispatch = useDispatch();
@@ -24,11 +25,7 @@ const UserDetail = ({ username }) => {
   const layover = useSelector((store) => store.appUsers.showLayover);
 
   useEffect(() => {
-    if (layover) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    hideScrollBar(layover);
   }, [layover]);
 
   //function
