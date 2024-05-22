@@ -9,6 +9,7 @@ import AddPostContent from "../../AddPost/AddPostContent";
 import Layover from "../../Layover/Layover";
 import { postModalVisibility } from "../../../features/postModalSlice";
 import { useLocation, useNavigate } from "react-router-dom";
+import { hideScrollBar } from "../../../utils/utilityFunction/hideScrollBar";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -26,11 +27,7 @@ const Search = () => {
   }, []);
 
   useEffect(() => {
-    if (showPostModal) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    hideScrollBar(showPostModal);
   }, [showPostModal]);
 
   // scroll top

@@ -5,6 +5,7 @@ import postsReducer from "../features/postSlice";
 import bookmarkReducer from "../features/bookmarkSlice";
 import postModalReducer from "../features/postModalSlice";
 import darkModeReducer from "../features/darkModeSlice";
+import commentReducer from "../features/commentSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     appBookmarks: bookmarkReducer,
     postModal: postModalReducer,
     colorMode: darkModeReducer,
+    postComment: commentReducer,
   },
 });
