@@ -84,11 +84,13 @@ const UserInteraction = ({ post }) => {
     <div className="user-interaction-show-post">
       <div className="icon-show-post" onClick={(e) => e.stopPropagation()}>
         {!isLoggedInUserLikedPost ? (
-          <FaRegHeart onClick={() => dispatch(likePost(post._id))} />
+          <FaRegHeart
+            onClick={() => dispatch(likePost({ postId: post?._id }))}
+          />
         ) : (
           <FaHeart
             className="liked"
-            onClick={() => dispatch(disLikePost(post._id))}
+            onClick={() => dispatch(disLikePost({ postId: post._id }))}
           />
         )}
         <span className="like-count-show-post">{post?.likes.likeCount}</span>
@@ -96,9 +98,13 @@ const UserInteraction = ({ post }) => {
 
       <div className="icon-show-post" onClick={(e) => e.stopPropagation()}>
         {isBookmarked ? (
-          <FaBookmark onClick={() => dispatch(removeBookmarkPost(post._id))} />
+          <FaBookmark
+            onClick={() => dispatch(removeBookmarkPost({ postId: post._id }))}
+          />
         ) : (
-          <FaRegBookmark onClick={() => dispatch(bookmarkPost(post._id))} />
+          <FaRegBookmark
+            onClick={() => dispatch(bookmarkPost({ postId: post._id }))}
+          />
         )}
       </div>
       <div

@@ -20,7 +20,7 @@ const Home = () => {
   );
 
   useEffect(() => {
-    dispatch(getUserPosts(userLoggedIn?.username));
+    dispatch(getUserPosts({ username: userLoggedIn?.username }));
     // eslint-disable-next-line
   }, [allPosts]);
 

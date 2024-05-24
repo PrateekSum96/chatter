@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ShowUsersAR = ({ user }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { firstName, lastName, username, avatarUrl, _id } = user;
+  const { firstName, lastName, username, avatarUrl } = user;
 
   return (
     <div
@@ -31,7 +31,7 @@ const ShowUsersAR = ({ user }) => {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            dispatch(followUser(_id));
+            dispatch(followUser({ followUserId: user._id }));
           }}
         >
           Follow

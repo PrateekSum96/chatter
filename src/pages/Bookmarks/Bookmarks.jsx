@@ -25,7 +25,6 @@ const Bookmarks = () => {
   const postsInBookmarks = allPosts?.filter((post) => {
     return bookmarkedPosts.some((bkPost) => bkPost._id === post._id);
   });
-
   //show latest post
   const getLatestBookmarkPost = getLatestPost(postsInBookmarks);
 

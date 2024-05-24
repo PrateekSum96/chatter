@@ -105,7 +105,7 @@ export const UserInfo = ({ post, allUsers, fromComment, comment }) => {
           </div>
           <div
             onClick={() => {
-              !fromComment && dispatch(deletePost(post?._id));
+              !fromComment && dispatch(deletePost({ postId: post?._id }));
               fromComment &&
                 dispatch(
                   deleteComment({ postId: post?._id, commentId: comment?._id })

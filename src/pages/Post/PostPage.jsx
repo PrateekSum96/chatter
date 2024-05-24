@@ -19,7 +19,7 @@ const PostPage = () => {
   const commentAllPosts = useSelector((store) => store.postComment.allPosts);
 
   useEffect(() => {
-    dispatch(getAPost(postId));
+    dispatch(getAPost({ postId }));
     // eslint-disable-next-line
   }, [allPosts, comments]);
 

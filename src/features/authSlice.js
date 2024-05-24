@@ -6,72 +6,163 @@ const getEncodedToken = () => localStorage.getItem("token");
 //Auth
 export const handleUserLogin = createAsyncThunk(
   "auth/handleUserLogin",
-  async ({ email, password }) => {
-    const response = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    const result = await response.json();
-    return result;
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || error || "Invalid credentials or Network error"
+      );
+    }
   }
 );
 
 export const handleUserSignUp = createAsyncThunk(
   "auth/handleUserSignUp",
-  async ({ firstName, lastName, username, email, password }) => {
-    const response = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ firstName, lastName, username, email, password }),
-    });
-    const result = await response.json();
-    return result;
+  async (
+    { firstName, lastName, username, email, password },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          username,
+          email,
+          password,
+        }),
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(error?.message || error || " Network error");
+    }
   }
 );
 
 //VerifyUser
-export const verifyUser = createAsyncThunk("auth/verifyUser", async () => {
-  const encodedToken = getEncodedToken();
-  const response = await fetch("/api/auth/verify", {
-    method: "POST",
-    body: JSON.stringify({ encodedToken }),
-  });
-
-  const result = await response.json();
-  return result;
-});
+export const verifyUser = createAsyncThunk(
+  "auth/verifyUser",
+  async (args, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch("/api/auth/verify", {
+        method: "POST",
+        body: JSON.stringify({ encodedToken }),
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(error?.message || error || " Network error");
+    }
+  }
+);
 
 //Following
 export const followUser = createAsyncThunk(
   "auth/followUser",
-  async (followUserId) => {
-    const encodedToken = getEncodedToken();
-    const response = await fetch(`/api/users/follow/${followUserId}`, {
-      method: "POST",
-      headers: { authorization: encodedToken },
-      body: {},
-    });
-
-    const result = await response.json();
-    return result;
+  async ({ followUserId }, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch(`/api/users/follow/${followUserId}`, {
+        method: "POST",
+        headers: { authorization: encodedToken },
+        body: {},
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || error || "Invalid token or Network error"
+      );
+    }
   }
 );
 export const unFollowUser = createAsyncThunk(
   "auth/unFollowUser",
-  async (followUserId) => {
-    const encodedToken = getEncodedToken();
-    const response = await fetch(`/api/users/unfollow/${followUserId}`, {
-      method: "POST",
-      headers: { authorization: encodedToken },
-    });
-
-    const result = await response.json();
-    return result;
+  async ({ followUserId }, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch(`/api/users/unfollow/${followUserId}`, {
+        method: "POST",
+        headers: { authorization: encodedToken },
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || error || "Invalid token or Network error"
+      );
+    }
   }
 );
 
@@ -104,14 +195,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(handleUserLogin.fulfilled, (state, action) => {
-        const { foundUser, encodedToken, errors } = action.payload;
-        if (errors) {
-          state.error = "The email you entered is not registered.";
-          state.status = "error";
-          toast.error("The email you entered is not registered.");
-          return;
-        }
-
+        const { foundUser, encodedToken } = action.payload;
         state.isLoggedIn = true;
         state.error = null;
         state.user = foundUser;
@@ -119,10 +203,11 @@ const authSlice = createSlice({
         state.status = "succeeded";
         toast.success("Login successful!");
       })
-      .addCase(handleUserLogin.rejected, (state) => {
-        state.status = "error";
-        state.error = "Something went wrong!";
-        toast.error(state.error);
+      .addCase(handleUserLogin.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+        console.error(action.payload);
+        toast.error("Login failed!");
       })
       // SIGNUP
       .addCase(handleUserSignUp.pending, (state) => {
@@ -130,13 +215,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(handleUserSignUp.fulfilled, (state, action) => {
-        const { createdUser, encodedToken, errors } = action.payload;
-        if (errors) {
-          state.status = "error";
-          state.error = "Email or Username already exists";
-          toast.error(state.error);
-          return;
-        }
+        const { createdUser, encodedToken } = action.payload;
         state.isLoggedIn = true;
         state.user = createdUser;
         state.error = null;
@@ -144,12 +223,13 @@ const authSlice = createSlice({
         state.status = "succeeded";
         toast.success("Successfully account created!");
       })
-      .addCase(handleUserSignUp.rejected, (state) => {
-        state.status = "error";
-        state.error = "Something went wrong!";
-        toast.error(state.error);
+      .addCase(handleUserSignUp.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+        console.error(action.payload);
+        toast.error("Failed to create account!");
       })
-      //FOLLOW
+      //Follow-User
       .addCase(followUser.pending, (state) => {
         state.status = "pending";
         state.error = null;
@@ -159,11 +239,12 @@ const authSlice = createSlice({
         state.error = null;
         state.user = action.payload.user;
       })
-      .addCase(followUser.rejected, (state) => {
+      .addCase(followUser.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to follow";
+        state.error = action.payload;
+        console.error(action.payload);
       })
-      // unFollowUser
+      // Un-Follow-User
       .addCase(unFollowUser.pending, (state) => {
         state.status = "pending";
         state.error = null;
@@ -173,9 +254,10 @@ const authSlice = createSlice({
         state.error = null;
         state.user = action.payload.user;
       })
-      .addCase(unFollowUser.rejected, (state) => {
+      .addCase(unFollowUser.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to unfollow";
+        state.error = action.payload;
+        console.error(action.payload);
       })
       //verify-user
       .addCase(verifyUser.pending, (state) => {
@@ -183,23 +265,15 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(verifyUser.fulfilled, (state, action) => {
-        const { user } = action.payload;
-
-        if (user) {
-          state.isLoggedIn = true;
-          state.error = null;
-          state.user = user;
-          state.status = "succeeded";
-          return;
-        }
-        state.isLoggedIn = false;
-        state.error = "Something went wrong";
-        state.status = "error";
+        state.isLoggedIn = true;
+        state.error = null;
+        state.user = action.payload.user;
+        state.status = "succeeded";
       })
-      .addCase(verifyUser.rejected, (state) => {
-        state.status = "error";
-        state.error = "Something went wrong!";
-        toast.error(state.error);
+      .addCase(verifyUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+        console.error(action.payload);
       });
   },
 });

@@ -52,7 +52,7 @@ const EditProfile = ({ user, setEditProfile, showEditProfile }) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(editUserInfo(editUser));
+          dispatch(editUserInfo({ userData: editUser }));
           dispatch(setLayover(false));
           setEditProfile(false);
           setAvatar(false);
