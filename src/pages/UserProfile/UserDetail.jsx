@@ -69,7 +69,7 @@ const UserDetail = ({ username }) => {
               ? loggedInUser?._id !== user?._id && (
                   <button
                     onClick={(e) => {
-                      dispatch(unFollowUser(user?._id));
+                      dispatch(unFollowUser({ followUserId: user?._id }));
                     }}
                   >
                     Following
@@ -78,7 +78,7 @@ const UserDetail = ({ username }) => {
               : loggedInUser?._id !== user?._id && (
                   <button
                     onClick={(e) => {
-                      dispatch(followUser(user?._id));
+                      dispatch(followUser({ followUserId: user?._id }));
                     }}
                   >
                     Follow

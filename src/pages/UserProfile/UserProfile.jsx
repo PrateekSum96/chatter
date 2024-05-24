@@ -31,12 +31,12 @@ const UserProfile = () => {
   }, [toggleEdit]);
 
   useEffect(() => {
-    dispatch(getAllPostsOfAUser(username));
+    dispatch(getAllPostsOfAUser({ username }));
     // eslint-disable-next-line
   }, [username, allPosts]);
 
   useEffect(() => {
-    dispatch(getAUser(username));
+    dispatch(getAUser({ username }));
     setOnLoadShimmer(false);
     // eslint-disable-next-line
   }, [username, loggedInUser]);

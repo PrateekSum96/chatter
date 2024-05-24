@@ -10,6 +10,7 @@ import Layover from "../../Layover/Layover";
 import { postModalVisibility } from "../../../features/postModalSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { hideScrollBar } from "../../../utils/utilityFunction/hideScrollBar";
+import { getAllPosts } from "../../../features/postSlice";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ const Search = () => {
 
   useEffect(() => {
     dispatch(getAllUsers());
+    dispatch(getAllPosts());
     // eslint-disable-next-line
   }, []);
 

@@ -10,11 +10,17 @@ export const getUserComments = createAsyncThunk(
       const response = await fetch(`/api/comments/${postId}`, {
         method: "GET",
       });
-      if (response.status === 200) {
+      if (response?.ok) {
         const result = await response.json();
         return result;
       } else {
-        throw new Error("Failed to fetch comments");
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
       }
     } catch (error) {
       console.error(error?.message || error);
@@ -162,6 +168,7 @@ const commentSlice = createSlice({
       .addCase(getUserComments.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+        console.error(action.payload);
       })
       //add-comment
       .addCase(addNewComment.pending, (state) => {
@@ -176,6 +183,7 @@ const commentSlice = createSlice({
       .addCase(addNewComment.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+        console.error(action.payload);
       })
       //delete-comment
       .addCase(deleteComment.pending, (state) => {
@@ -190,6 +198,7 @@ const commentSlice = createSlice({
       .addCase(deleteComment.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+        console.error(action.payload);
       })
       //update-comment
       .addCase(updateComment.pending, (state) => {
@@ -204,6 +213,7 @@ const commentSlice = createSlice({
       .addCase(updateComment.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload;
+        console.error(action.payload);
       });
   },
 });

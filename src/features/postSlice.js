@@ -3,116 +3,249 @@ import { toast } from "react-toastify";
 
 const getEncodedToken = () => localStorage.getItem("token");
 
+//Get-All-Post
 export const getAllPosts = createAsyncThunk(
   "appPosts/getAllPosts",
-  async () => {
-    const response = await fetch("/api/posts", {
-      method: "GET",
-    });
-    const result = await response.json();
-    return result;
+  async (args, { rejectWithValue }) => {
+    try {
+      const response = await fetch("/api/posts", {
+        method: "GET",
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(error?.message || "Network error");
+    }
   }
 );
 
+//Get-User-Post
 export const getUserPosts = createAsyncThunk(
   "appPosts/getUserPost",
-  async (username) => {
-    const response = await fetch(`/api/posts/user/${username}`, {
-      method: "GET",
-    });
-    const result = await response.json();
-    return result;
+  async ({ username }, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`/api/posts/user/${username}`, {
+        method: "GET",
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(error?.message || "Network error");
+    }
   }
 );
 
-export const addPost = createAsyncThunk("appPosts/addPost", async (post) => {
-  const encodedToken = getEncodedToken();
-  const response = await fetch("/api/posts", {
-    method: "POST",
-    headers: {
-      authorization: encodedToken,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ postData: post }),
-  });
-  const result = await response.json();
-  return result;
-});
+//Add-Post
+export const addPost = createAsyncThunk(
+  "appPosts/addPost",
+  async ({ post }, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        headers: {
+          authorization: encodedToken,
+        },
+        body: JSON.stringify({ postData: post }),
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid token or Network error"
+      );
+    }
+  }
+);
 
 export const likePost = createAsyncThunk(
   "appPosts/likePost",
-  async (postId) => {
-    const encodedToken = getEncodedToken();
-    const response = await fetch(`/api/posts/like/${postId}`, {
-      method: "POST",
-      headers: {
-        authorization: encodedToken,
-      },
-    });
-    const result = await response.json();
-    return result;
+  async ({ postId }, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch(`/api/posts/like/${postId}`, {
+        method: "POST",
+        headers: {
+          authorization: encodedToken,
+        },
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid token or Network error"
+      );
+    }
   }
 );
 
 export const disLikePost = createAsyncThunk(
   "appPosts/disLikePost",
-  async (postId) => {
-    const encodedToken = getEncodedToken();
-    const response = await fetch(`/api/posts/dislike/${postId}`, {
-      method: "POST",
-      headers: {
-        authorization: encodedToken,
-      },
-    });
-    const result = await response.json();
-    return result;
+  async ({ postId }, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch(`/api/posts/dislike/${postId}`, {
+        method: "POST",
+        headers: {
+          authorization: encodedToken,
+        },
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid token or Network error"
+      );
+    }
   }
 );
 
 export const deletePost = createAsyncThunk(
   "appPosts/deletePost",
-  async (postId) => {
-    const encodedToken = getEncodedToken();
-
-    const response = await fetch(`/api/posts/${postId}`, {
-      method: "DELETE",
-      headers: {
-        authorization: encodedToken,
-      },
-    });
-
-    const result = await response.json();
-    return result;
+  async ({ postId }, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch(`/api/posts/${postId}`, {
+        method: "DELETE",
+        headers: {
+          authorization: encodedToken,
+        },
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid token or Network error"
+      );
+    }
   }
 );
 
 export const editUserPost = createAsyncThunk(
   "appPosts/editUserPost",
-  async ({ postId, postData }) => {
-    const encodedToken = getEncodedToken();
-
-    const response = await fetch(`/api/posts/edit/${postId}`, {
-      method: "POST",
-      headers: {
-        authorization: encodedToken,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ postData }),
-    });
-
-    const result = await response.json();
-    return result;
+  async ({ postId, postData }, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch(`/api/posts/edit/${postId}`, {
+        method: "POST",
+        headers: {
+          authorization: encodedToken,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ postData }),
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid token or Network error"
+      );
+    }
   }
 );
 
 export const getAPost = createAsyncThunk(
   "appPosts/getAPost",
-  async (postId) => {
-    const response = await fetch(`/api/posts/${postId}`, {
-      method: "GET",
-    });
-    const result = await response.json();
-    return result;
+  async ({ postId }, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`/api/posts/${postId}`, {
+        method: "GET",
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid token or Network error"
+      );
+    }
   }
 );
 
@@ -170,9 +303,10 @@ const postSlice = createSlice({
         state.error = null;
         state.allPosts = action.payload.posts;
       })
-      .addCase(getAllPosts.rejected, (state) => {
+      .addCase(getAllPosts.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to load posts";
+        state.error = action.payload || "Failed to load posts";
+        console.error(action.payload || "Failed to load posts");
       })
       //add-post
       .addCase(addPost.pending, (state) => {
@@ -186,9 +320,10 @@ const postSlice = createSlice({
         state.showShimmer = false;
         state.allPosts = action.payload.posts;
       })
-      .addCase(addPost.rejected, (state) => {
+      .addCase(addPost.rejected, (state, action) => {
         state.status = "failed";
         state.error = "Failed to add post";
+        console.error(action.payload);
       })
       //like-post
       .addCase(likePost.pending, (state) => {
@@ -196,18 +331,14 @@ const postSlice = createSlice({
         state.error = null;
       })
       .addCase(likePost.fulfilled, (state, action) => {
-        if (action.payload.errors) {
-          state.status = "failed";
-          state.error = "You already liked the post";
-          return;
-        }
         state.status = "succeeded";
         state.error = null;
         state.allPosts = action.payload.posts;
       })
-      .addCase(likePost.rejected, (state) => {
+      .addCase(likePost.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to like post";
+        state.error = action.payload || "Failed to like post";
+        console.error(action.payload || "Failed to like post");
       })
       //dislike-Post
       .addCase(disLikePost.pending, (state) => {
@@ -215,18 +346,14 @@ const postSlice = createSlice({
         state.error = null;
       })
       .addCase(disLikePost.fulfilled, (state, action) => {
-        if (action.payload.errors) {
-          state.status = "failed";
-          state.error = "You already disliked the post";
-          return;
-        }
         state.status = "succeeded";
         state.error = null;
         state.allPosts = action.payload.posts;
       })
-      .addCase(disLikePost.rejected, (state) => {
+      .addCase(disLikePost.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to dislike post";
+        state.error = action.payload || "Failed to dislike post";
+        console.error(action.payload || "Failed to dislike post");
       })
       //delete-Post
       .addCase(deletePost.pending, (state) => {
@@ -239,9 +366,10 @@ const postSlice = createSlice({
         state.allPosts = action.payload.posts;
         toast.success("Post deleted successfully!");
       })
-      .addCase(deletePost.rejected, (state) => {
+      .addCase(deletePost.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to delete post";
+        state.error = action.payload || "Failed to delete post";
+        console.error(action.payload || "Failed to delete post");
         toast.error("failed to delete post!");
       })
       //edit-post
@@ -255,9 +383,10 @@ const postSlice = createSlice({
         state.allPosts = action.payload.posts;
         toast.success("Post updated successfully!");
       })
-      .addCase(editUserPost.rejected, (state) => {
+      .addCase(editUserPost.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to update post";
+        state.error = action.payload || "Failed to update post";
+        console.error(action.payload || "Failed to update post");
         toast.error("failed to update post!");
       })
       //get-a-post
@@ -272,24 +401,24 @@ const postSlice = createSlice({
       })
       .addCase(getAPost.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to get post";
+        state.error = action.payload || "Failed to get post";
+        console.error(action.payload || "Failed to get post");
       })
       //get-user-posts
       .addCase(getUserPosts.pending, (state) => {
         state.status = "loading";
-        // state.showShimmer = true;
         state.error = null;
       })
       .addCase(getUserPosts.fulfilled, (state, action) => {
         state.status = "succeeded";
-        // state.showShimmer = false;
         state.error = null;
         state.homePostShimmer = false;
         state.userHomePost = action.payload.posts;
       })
       .addCase(getUserPosts.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to get user's post";
+        state.error = action.payload || "Failed to get user's post";
+        console.error(action.payload || "Failed to get user's post");
         state.homePostShimmer = false;
       });
   },

@@ -22,7 +22,7 @@ const AddPostContent = () => {
   const imageRef = useRef();
 
   const handlePostClick = () => {
-    dispatch(addPost(postInput));
+    dispatch(addPost({ post: postInput }));
     setPostInput(initialState);
     setEmojiContainer(false);
     imageRef.current.value = null;

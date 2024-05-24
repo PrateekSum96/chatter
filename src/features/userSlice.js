@@ -1,53 +1,121 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
+//Get-All-Users
 export const getAllUsers = createAsyncThunk(
   "appUsers/getAllUsers",
-  async () => {
-    const response = await fetch("api/users", {
-      method: "GET",
-    });
-    const result = await response.json();
-    return result;
+  async (args, { rejectWithValue }) => {
+    try {
+      const response = await fetch("api/users", {
+        method: "GET",
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(error?.message || "Network error");
+    }
   }
 );
 
+//GET-A-User
 export const getAUser = createAsyncThunk(
   "appUsers/getAUser",
-  async (username) => {
-    const response = await fetch(`/api/users/${username}`, {
-      method: "GET",
-    });
-    const result = await response.json();
-    return result;
+  async ({ username }, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`/api/users/${username}`, {
+        method: "GET",
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+
+        if (error?.message) {
+          throw new Error(error.message || "Network error");
+        }
+        return rejectWithValue("Invalid Username or Network error");
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid Username or Network error"
+      );
+    }
   }
 );
+
+//Get-All-Posts-Of-User
 
 export const getAllPostsOfAUser = createAsyncThunk(
   "appUsers/getAllPostsOfAUser",
-  async (username) => {
-    const response = await fetch(`/api/posts/user/${username}`, {
-      method: "GET",
-    });
-    const result = await response.json();
-    return result;
+  async ({ username }, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`/api/posts/user/${username}`, {
+        method: "GET",
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error.message || "Network error");
+        }
+        return rejectWithValue("Invalid Username or Network error");
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid Username or Network error"
+      );
+    }
   }
 );
 
+//Edit-User-Info
 export const editUserInfo = createAsyncThunk(
   "appUsers/editUserInfo",
-  async (userData) => {
+  async ({ userData }, { rejectWithValue }) => {
     const encodedToken = localStorage.getItem("token");
-    const response = await fetch("/api/users/edit", {
-      method: "POST",
-      headers: {
-        authorization: encodedToken,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userData }),
-    });
-    const result = await response.json();
-    return result;
+    try {
+      const response = await fetch("/api/users/edit", {
+        method: "POST",
+        headers: {
+          authorization: encodedToken,
+        },
+        body: JSON.stringify({ userData }),
+      });
+
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid token or Network error"
+      );
+    }
   }
 );
 
@@ -55,7 +123,7 @@ const initialState = {
   allUsers: [],
   user: null,
   allPostsUser: [],
-  status: "idle", //"loading"||"error"||"succeeded"
+  status: "idle", //"loading"|"succeeded"|"failed"
   error: null,
   showLayover: false,
   toggleEdit: false,
@@ -92,8 +160,9 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(getAllUsers.rejected, (state, action) => {
-        state.status = "error";
-        state.error = "Failed to get all users";
+        state.status = "failed";
+        state.error = action.payload;
+        console.error(action.payload);
       })
       //getAUser
       .addCase(getAUser.pending, (state) => {
@@ -105,9 +174,10 @@ const userSlice = createSlice({
         state.status = "succeeded";
         state.error = null;
       })
-      .addCase(getAUser.rejected, (state) => {
-        state.status = "error";
-        state.error = "Failed to get the user";
+      .addCase(getAUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+        console.error(action.payload);
       })
       //getAllPostsOfAUser
       .addCase(getAllPostsOfAUser.pending, (state) => {
@@ -119,9 +189,10 @@ const userSlice = createSlice({
         state.status = "succeeded";
         state.error = null;
       })
-      .addCase(getAllPostsOfAUser.rejected, (state) => {
-        state.status = "error";
-        state.error = "Failed to get the user";
+      .addCase(getAllPostsOfAUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || "Failed to get the user's posts";
+        console.error(action.payload);
       })
       //editUserInfo
       .addCase(editUserInfo.pending, (state) => {
@@ -135,9 +206,10 @@ const userSlice = createSlice({
         state.toggleEdit = !state.toggleEdit;
         toast.success("Details updated!");
       })
-      .addCase(editUserInfo.rejected, (state) => {
-        state.status = "error";
-        state.error = "Failed to edit the user info";
+      .addCase(editUserInfo.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+        console.error(action.payload);
         toast.error("Failed to update details!");
       });
   },

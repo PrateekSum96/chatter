@@ -3,49 +3,102 @@ import { toast } from "react-toastify";
 
 const getEncodedToken = () => localStorage.getItem("token");
 
+// Bookmark-Post
 export const bookmarkPost = createAsyncThunk(
   "appPosts/bookmarkPost",
-  async (postId) => {
-    const encodedToken = getEncodedToken();
-    const response = await fetch(`/api/users/bookmark/${postId}`, {
-      method: "POST",
-      headers: {
-        authorization: encodedToken,
-      },
-    });
-    const result = await response.json();
-
-    return result;
+  async ({ postId }, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch(`/api/users/bookmark/${postId}`, {
+        method: "POST",
+        headers: {
+          authorization: encodedToken,
+        },
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid token or Network error"
+      );
+    }
   }
 );
+
+//Remove-Bookmark-Post
 export const removeBookmarkPost = createAsyncThunk(
   "appPosts/removeBookmarkPost",
-  async (postId) => {
-    const encodedToken = getEncodedToken();
-    const response = await fetch(`/api/users/remove-bookmark/${postId}`, {
-      method: "POST",
-      headers: {
-        authorization: encodedToken,
-      },
-    });
-    const result = await response.json();
-
-    return result;
+  async ({ postId }, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch(`/api/users/remove-bookmark/${postId}`, {
+        method: "POST",
+        headers: {
+          authorization: encodedToken,
+        },
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid token or Network error"
+      );
+    }
   }
 );
 
+//Get-Bookmark-Post
 export const getBookmarkedPost = createAsyncThunk(
   "appPosts/getBookmarkedPost",
-  async () => {
-    const encodedToken = getEncodedToken();
-    const response = await fetch("/api/users/bookmark/", {
-      method: "GET",
-      headers: {
-        authorization: encodedToken,
-      },
-    });
-    const result = await response.json();
-    return result;
+  async (args, { rejectWithValue }) => {
+    try {
+      const encodedToken = getEncodedToken();
+      const response = await fetch(`/api/users/bookmark/`, {
+        method: "GET",
+        headers: {
+          authorization: encodedToken,
+        },
+      });
+      if (response?.ok) {
+        const result = await response.json();
+        return result;
+      } else {
+        const error = await response.json();
+        if (error?.message) {
+          throw new Error(error?.message || "network error");
+        }
+        return rejectWithValue(
+          error?.errors[0] ? error.errors[0] : "Unknown error"
+        );
+      }
+    } catch (error) {
+      console.error(error?.message || error);
+      return rejectWithValue(
+        error?.message || "Invalid token or Network error"
+      );
+    }
   }
 );
 
@@ -72,20 +125,16 @@ const bookmarkSlice = createSlice({
         state.error = null;
       })
       .addCase(bookmarkPost.fulfilled, (state, action) => {
-        if (action.payload.errors) {
-          state.status = "failed";
-          state.error = action.payload.errors[0];
-          toast.error(state.error);
-          return;
-        }
         state.status = "succeeded";
         state.error = null;
         state.bookmarkedPost = action.payload.bookmarks;
         toast.success("Added to bookmark!");
       })
-      .addCase(bookmarkPost.rejected, (state) => {
+      .addCase(bookmarkPost.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to bookmark the post";
+        state.error = action.payload;
+        console.error(action.payload);
+        toast.error("Failed to bookmark!");
       })
       //remove-bookmark-post
       .addCase(removeBookmarkPost.pending, (state) => {
@@ -93,20 +142,16 @@ const bookmarkSlice = createSlice({
         state.error = null;
       })
       .addCase(removeBookmarkPost.fulfilled, (state, action) => {
-        if (action.payload.errors) {
-          state.status = "failed";
-          state.error = action.payload.errors[0];
-          toast.error(state.error);
-          return;
-        }
         state.status = "succeeded";
         state.error = null;
         state.bookmarkedPost = action.payload.bookmarks;
         toast.success("Removed from bookmark!");
       })
-      .addCase(removeBookmarkPost.rejected, (state) => {
+      .addCase(removeBookmarkPost.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to remove from bookmark";
+        state.error = action.payload;
+        console.error(action.payload);
+        toast.error("Failed to remove from bookmark");
       })
       //get-all-bookmark-post
       .addCase(getBookmarkedPost.pending, (state) => {
@@ -115,20 +160,15 @@ const bookmarkSlice = createSlice({
         state.error = null;
       })
       .addCase(getBookmarkedPost.fulfilled, (state, action) => {
-        if (action.payload.errors) {
-          state.status = "failed";
-          state.error = action.payload.errors[0];
-          toast.error(state.error);
-          return;
-        }
         state.status = "succeeded";
         state.error = null;
         state.showShimmer = false;
         state.bookmarkedPost = action.payload.bookmarks;
       })
-      .addCase(getBookmarkedPost.rejected, (state) => {
+      .addCase(getBookmarkedPost.rejected, (state, action) => {
         state.status = "failed";
-        state.error = "Failed to load bookmarked posts";
+        state.error = action.payload;
+        console.error(action.payload);
       });
   },
 });
