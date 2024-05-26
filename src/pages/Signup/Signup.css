@@ -1,11 +1,23 @@
 .signup-form-container {
   color: white;
 }
+@media screen and (min-width: 320px) and (max-width: 1200px) {
+  #signup-page-img {
+    display: none;
+  }
+  .signup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    background-color: black;
+  }
+}
 @media (min-width: 1201px) {
   .signup {
     display: flex;
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     background-color: black;
   }
   .signup-form-container {
