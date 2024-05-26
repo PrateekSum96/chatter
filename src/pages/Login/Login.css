@@ -12,7 +12,7 @@
 .login-signup > a:hover {
   text-decoration: underline;
 }
-@media screen and (min-width: 320px) and (max-width: 768px) {
+@media screen and (min-width: 320px) and (max-width: 1200px) {
   .login {
     height: 100dvh;
     display: flex;
@@ -31,25 +31,7 @@
     font-weight: 600;
   }
 }
-@media screen and (min-width: 769px) and (max-width: 1200px) {
-  .login {
-    height: 100dvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  #login-page-img {
-    display: none;
-  }
-  .login-signup {
-    text-align: center;
-    margin: 0.3rem 0;
-    font-size: 1.1rem;
-  }
-  .login-signup > a {
-    font-weight: 600;
-  }
-}
+
 @media (min-width: 1201px) {
   .login {
     display: flex;
