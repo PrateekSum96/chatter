@@ -1,41 +1,47 @@
-.show-guest {
-  /* height: 300px;
-  overflow: hidden;
-  overflow-y: scroll; */
+.show-guest-container {
+  height: 60px;
+  border-radius: 0.3rem;
+  background-color: black;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 0.5rem;
+  box-sizing: border-box;
+  transition: all 0.2s linear;
+}
+.show-guest-container:hover {
+  outline: 3px solid var(--primary-color);
+  cursor: pointer;
+}
+#guest-user-img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  outline: 3px solid var(--primary-color);
+}
+.guest-user-detail {
+  padding-left: 0.5rem;
   white-space: nowrap;
   overflow: hidden;
 }
-@media (min-width: 1201px) {
-  .show-guest-container {
-    height: 60px;
-    border-radius: 0.3rem;
-    background-color: black;
-    margin: 0.5rem 0;
-    display: flex;
-    align-items: center;
-    padding: 0.3rem 0.5rem;
-    box-sizing: border-box;
-    transition: all 0.2s linear;
-  }
-  .show-guest-container:hover {
-    outline: 3px solid var(--primary-color);
-    cursor: pointer;
-  }
-  #guest-user-img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: top;
-    display: block;
-    outline: 3px solid var(--primary-color);
-  }
-  .guest-user-detail {
-    padding-left: 0.5rem;
-  }
 
-  .guest-name > span {
-    font-weight: bold;
-    padding: 0 0.1rem;
-  }
+.guest-name > span {
+  font-weight: bold;
+  padding: 0rem 0.1rem;
+}
+#no-user-img-sgu {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(238, 207, 144);
+  color: var(--primary-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+  outline: 3px solid var(--primary-color);
 }
