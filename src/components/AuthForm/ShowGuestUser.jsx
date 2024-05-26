@@ -19,7 +19,11 @@ const ShowGuestUser = () => {
             )
           }
         >
-          <img src={user.avatarUrl} alt="guest-user" id="guest-user-img" />
+          {user.avatarUrl ? (
+            <img src={user.avatarUrl} alt="guest-user" id="guest-user-img" />
+          ) : (
+            <div id="no-user-img-sgu">{user?.firstName?.substring(0, 1)}</div>
+          )}
           <div className="guest-user-detail">
             <div className="guest-name">
               <span> {user.firstName}</span>

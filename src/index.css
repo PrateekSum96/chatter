@@ -29,3 +29,15 @@ code {
 * {
   transition: background-color 0.2s linear;
 }
+
+/* Scroll */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--secondary-color);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 0.3rem;
+}

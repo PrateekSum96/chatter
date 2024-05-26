@@ -14,17 +14,118 @@
   overflow: hidden;
   overflow-y: scroll;
   padding: 0 0.5rem;
+  z-index: 1000;
   outline: 2px solid var(--primary-color);
 }
-::-webkit-scrollbar {
-  width: 7px;
-}
-::-webkit-scrollbar-track {
-  background-color: var(--secondary-color);
-}
-::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
+.auth-form-input {
   border-radius: 0.3rem;
+  border: 2px solid var(--primary-color);
+  box-sizing: border-box;
+  background-color: black;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  outline: none;
+}
+.auth-button {
+  border-radius: 0.3rem;
+  margin: 0.2rem auto;
+  background-color: black;
+  border: 1px solid white;
+  box-sizing: border-box;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+}
+.auth-button:hover {
+  cursor: pointer;
+  border: 2px solid var(--primary-color);
+}
+#form-button {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  color: white;
+  margin-top: 0.5rem;
+}
+#form-button:hover {
+  background-color: var(--hover-color);
+}
+.auth-form-container > div {
+  position: relative;
+}
+.guest-user-cross {
+  background-color: var(--secondary-color);
+  outline: 3px solid var(--primary-color);
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  transition: all 0.2s linear;
+  z-index: 1000;
+}
+
+.guest-user-cross:hover {
+  cursor: pointer;
+  font-weight: 900;
+  outline: 4px solid var(--primary-color);
+}
+.guest-user-cross {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+@media screen and (min-width: 320px) and (max-width: 1200px) {
+  .auth-form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #auth-logo-img {
+    width: 220px;
+  }
+  .auth-form > p {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin: 0.7rem;
+  }
+  .auth-form-container > div > label {
+    display: none;
+  }
+  .auth-form-input {
+    width: 280px;
+    height: 40px;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+  .auth-form-input:focus {
+    border: 2px solid var(--secondary-color);
+  }
+  .eye-container {
+    position: absolute;
+    color: white;
+    top: 10px;
+    right: 10px;
+    font-size: 1.1rem;
+  }
+  .auth-button {
+    width: 280px;
+    height: 40px;
+    display: block;
+  }
+  .guest-user-auth-form {
+    width: 200px;
+    height: 300px;
+    top: -100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .guest-user-cross {
+    top: -260px;
+    left: 120px;
+  }
 }
 
 @media (min-width: 1201px) {
@@ -48,9 +149,6 @@
   .auth-form-container {
     margin: 0.5rem 0 0 0;
   }
-  .auth-form-container > div {
-    position: relative;
-  }
   .eye-container {
     font-size: 20px;
     position: absolute;
@@ -64,17 +162,9 @@
   .auth-form-input {
     width: 400px;
     height: 40px;
-    border-radius: 0.3rem;
-    border: 2px solid var(--primary-color);
-    outline: none;
     margin: 0.5rem 0;
-    background-color: black;
-    color: white;
     font-size: 1.2rem;
-    padding: 0.2rem 0.5rem;
-    box-sizing: border-box;
   }
-
   .asterisk {
     color: red;
   }
@@ -85,30 +175,8 @@
   .auth-button {
     width: 400px;
     height: 40px;
-    border-radius: 0.3rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    background-color: white;
-    margin: 0.2rem 0;
-    background-color: black;
-    border: 1px solid white;
-    box-sizing: border-box;
-    color: white;
-    transition: all 0.2s ease-in-out;
   }
-  .auth-button:hover {
-    cursor: pointer;
-    border: 2px solid var(--primary-color);
-  }
-  #form-button {
-    margin-top: 1rem;
-    background-color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    color: white;
-  }
-  #form-button:hover {
-    background-color: var(--hover-color);
-  }
+
   .guest-user-auth-form {
     width: 200px;
     height: 300px;
@@ -116,24 +184,10 @@
     top: -200px;
   }
   .guest-user-cross {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
     top: -260px;
     left: -160px;
-    background-color: var(--secondary-color);
-    outline: 3px solid var(--primary-color);
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 500;
-    transition: all 0.2s linear;
   }
-  .guest-user-cross:hover {
-    cursor: pointer;
-    font-weight: 900;
-    outline: 4px solid var(--primary-color);
+  .layover-auth-form {
+    display: none;
   }
 }

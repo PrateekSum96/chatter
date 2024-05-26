@@ -1,14 +1,16 @@
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { toast } from "react-toastify";
-
-import "./AuthForm.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { handleUserLogin, handleUserSignUp } from "../../features/authSlice.js";
 import { useLocation, useNavigate } from "react-router-dom";
+
+import { handleUserLogin, handleUserSignUp } from "../../features/authSlice.js";
 import ShowGuestUser from "./ShowGuestUser.jsx";
 import { validateData } from "../../utils/Validate/validate.js";
 import img1 from "../../asset/chatter-logo.png";
+
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "./AuthForm.css";
+import Layover from "../Layover/Layover.jsx";
 
 const AuthForm = ({ signup }) => {
   return (
@@ -20,6 +22,8 @@ const AuthForm = ({ signup }) => {
     </div>
   );
 };
+
+//FORM-COMPONENT
 
 const FormComponent = ({ signup }) => {
   const navigate = useNavigate();
@@ -223,6 +227,8 @@ const FormComponent = ({ signup }) => {
   );
 };
 
+//GUEST-COMPONENT
+
 const GuestComponent = ({ signup }) => {
   const [showGuestUserBox, setShowGuestUserBox] = useState(false);
   return (
@@ -248,6 +254,9 @@ const GuestComponent = ({ signup }) => {
           Guest Mode
         </button>
       )}
+      <div className="layover-auth-form">
+        <Layover showLayover={showGuestUserBox} />
+      </div>
     </div>
   );
 };
