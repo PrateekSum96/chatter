@@ -1,7 +1,8 @@
 import "./ShowPost.css";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
 
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   FaHeart,
   FaRegHeart,
@@ -10,10 +11,9 @@ import {
   FaRegComment,
   FaRegShareSquare,
 } from "react-icons/fa";
+
 import { disLikePost, likePost, loadingStatus } from "../../features/postSlice";
 import { bookmarkPost, removeBookmarkPost } from "../../features/bookmarkSlice";
-import { useLocation, useNavigate } from "react-router-dom";
-
 import { UserInfo } from "./UserInfo";
 
 const ShowPost = ({ post }) => {

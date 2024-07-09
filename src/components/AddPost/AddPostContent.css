@@ -6,7 +6,7 @@
   background-color: var(--primary-color);
 }
 
-@media (min-width: 1201px) {
+@media (min-width: 769px) {
   .post-content-container {
     width: 100%;
     outline: 1px solid var(--secondary-color);
@@ -49,6 +49,7 @@
     font-size: 1rem;
     padding: 0.5rem;
     line-height: 1.1;
+    margin-bottom: 0.5rem;
     border: none;
     resize: none;
     background-color: var(--bg-color);
@@ -147,5 +148,11 @@
     background-color: var(--hover-color);
     border-radius: 0.3rem;
     padding: 0.2rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .post-input-div-pc {
+    width: 350px;
   }
 }

@@ -1,13 +1,15 @@
 import "./ShowPost.css";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { PiDotsThreeOutlineVerticalLight } from "react-icons/pi";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import Layover from "../Layover/Layover";
 import EditPost from "../Modals/EditPost/EditPost";
 import { formatDate } from "../../utils/utilityFunction/formateDate";
 import { hideScrollBar } from "../../utils/utilityFunction/hideScrollBar";
 import { deletePost, setPostLayover } from "../../features/postSlice";
-import { useLocation, useNavigate } from "react-router-dom";
 import { deleteComment } from "../../features/commentSlice";
 import EditComment from "../Modals/EditComment/EditComment";
 

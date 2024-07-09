@@ -1,7 +1,7 @@
 #edit-profile-id {
   transform: scale(1) translate(-50%, -50%);
 }
-@media (min-width: 1201px) {
+@media (min-width: 769px) {
   .edit-profile {
     position: absolute;
     top: 50%;

@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { IoMdHeart, IoMdHome, IoMdCompass, IoMdBookmark } from "react-icons/io";
+import { FaPlus } from "react-icons/fa6";
 
 import "./AsideLeft.css";
 import { useDispatch } from "react-redux";
@@ -17,7 +18,7 @@ const AsideLeft = () => {
           <div className="nav-icons">
             <IoMdHome />
           </div>
-          <div>Home</div>
+          <div className="link-name-al">Home</div>
         </NavLink>
         <NavLink
           to="/explore"
@@ -27,7 +28,7 @@ const AsideLeft = () => {
           <div className="nav-icons">
             <IoMdCompass />
           </div>
-          <div>Explore</div>
+          <div className="link-name-al">Explore</div>
         </NavLink>
         <NavLink
           to="/bookmarks"
@@ -37,7 +38,7 @@ const AsideLeft = () => {
           <div className="nav-icons">
             <IoMdBookmark />
           </div>
-          <div>Bookmarks</div>
+          <div className="link-name-al">Bookmarks</div>
         </NavLink>
         <NavLink
           to="/liked-post"
@@ -47,7 +48,7 @@ const AsideLeft = () => {
           <div className="nav-icons">
             <IoMdHeart />
           </div>
-          <div>Likes</div>
+          <div className="link-name-al">Likes</div>
         </NavLink>
       </nav>
 
@@ -56,6 +57,12 @@ const AsideLeft = () => {
         onClick={() => dispatch(postModalVisibility(true))}
       >
         Post
+      </button>
+      <button
+        className="show-plus-btn-al"
+        onClick={() => dispatch(postModalVisibility(true))}
+      >
+        <FaPlus />
       </button>
     </div>
   );
