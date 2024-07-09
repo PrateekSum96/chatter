@@ -1,3 +1,25 @@
+@media (min-width: 769px) and (max-width: 1200px) {
+  .post-page {
+    width: 450px;
+    padding-bottom: 2rem;
+  }
+  .comment-container-pp {
+    outline: 1px solid var(--secondary-color);
+    border-radius: 0.3rem;
+    padding: 0.6rem 0.6rem 0 0.6rem;
+    box-sizing: border-box;
+    margin-top: 1rem;
+  }
+
+  .comment-container-pp .comment-pp {
+    border-bottom: 1px solid var(--secondary-color);
+  }
+  .comment-container-pp .comment-pp:last-child {
+    border-bottom: none;
+    padding-bottom: 0rem;
+  }
+}
+
 @media (min-width: 1201px) {
   .post-page {
     width: 550px;

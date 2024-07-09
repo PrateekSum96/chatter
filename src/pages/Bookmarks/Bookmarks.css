@@ -1,3 +1,18 @@
+.no-bookmarks {
+  margin-top: 2rem;
+  color: var(--primary-color);
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .bookmarks {
+    width: 450px;
+    margin-bottom: 2rem;
+  }
+}
+
 @media (min-width: 1201px) {
   .bookmarks {
     width: 550px;

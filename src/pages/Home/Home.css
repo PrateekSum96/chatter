@@ -1,17 +1,28 @@
+.no-post-home {
+  width: 550px;
+  margin: 0;
+  font-size: 2rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .home {
+    width: 450px;
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+  }
+  .no-post-home {
+    width: 450px;
+  }
+}
+
 @media (min-width: 1201px) {
   .home {
     width: 550px;
     padding-bottom: 2rem;
     padding-top: 1rem;
-  }
-  .no-post-home {
-    width: 550px;
-
-    margin: 0;
-    font-size: 2rem;
-    color: var(--primary-color);
-    font-weight: bold;
-    padding: 0.5rem;
-    text-align: center;
   }
 }

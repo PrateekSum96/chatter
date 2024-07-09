@@ -1,14 +1,16 @@
+import "./EditComment.css";
+
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { MdClose } from "react-icons/md";
+
 import { setPostLayover } from "../../../features/postSlice";
-import { useState } from "react";
-import "./EditComment.css";
 import { updateComment } from "../../../features/commentSlice";
 
 const EditComment = ({ post, comment, setShowEditModal, showEditModal }) => {
   const dispatch = useDispatch();
   const [commentToEdit, setCommentToEdit] = useState(comment?.commentData);
-  // console.log(comment, post);
+
   return (
     <div
       className="edit-comment-ec"

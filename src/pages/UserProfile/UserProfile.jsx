@@ -1,9 +1,11 @@
-import { useParams } from "react-router-dom";
 import "./UserProfile.css";
+
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import UserPosts from "./UserPosts";
 import UserDetail from "./UserDetail";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 import { updateLoggedInUser } from "../../features/authSlice";
 import {
   getAUser,
@@ -16,6 +18,7 @@ const UserProfile = () => {
   const { username } = useParams();
   const dispatch = useDispatch();
   const [onLoadShimmer, setOnLoadShimmer] = useState(true);
+
   const editedUser = useSelector((store) => store.appUsers.user);
   const toggleEdit = useSelector((store) => store.appUsers.toggleEdit);
   const loggedInUser = useSelector((store) => store.auth.user);

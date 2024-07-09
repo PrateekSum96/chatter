@@ -2,7 +2,7 @@
   display: none;
 }
 
-@media (min-width: 1201px) {
+@media (min-width: 769px) {
   .edit-post-modal {
     width: 500px;
     padding: 0.5rem;

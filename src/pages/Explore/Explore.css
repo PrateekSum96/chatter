@@ -1,5 +1,11 @@
 .explore {
-  /* width: 600px; */
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .explore {
+    width: 450px;
+  }
 }
 
 @media (min-width: 1201px) {

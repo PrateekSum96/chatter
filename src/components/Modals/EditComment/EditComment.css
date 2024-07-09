@@ -2,7 +2,7 @@
   z-index: 100;
 }
 
-@media (min-width: 1201px) {
+@media (min-width: 769px) {
   .edit-comment-ec {
     width: 500px;
     padding: 0.5rem;

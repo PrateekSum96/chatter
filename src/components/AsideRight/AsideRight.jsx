@@ -46,13 +46,14 @@ const AsideRight = () => {
           </button>
         </div>
       )}
-
-      {usersToFollow?.length !== 0 && <h2>Suggestions for you</h2>}
-      {usersToFollow?.slice(0, 5).map((user) => (
-        <div key={user._id}>
-          <ShowUsersAR user={user} />
-        </div>
-      ))}
+      <div className="user-list-ar">
+        {usersToFollow?.length !== 0 && <h2>Suggestions for you</h2>}
+        {usersToFollow?.slice(0, 5).map((user) => (
+          <div key={user._id}>
+            <ShowUsersAR user={user} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

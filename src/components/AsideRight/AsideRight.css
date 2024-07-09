@@ -1,13 +1,12 @@
-@media (min-width: 1201px) {
+@media (min-width: 769px) {
   .aside-right-container {
     margin: 0.3rem 0.5rem;
   }
-  .aside-right-container > h2 {
+  .user-list-ar > h2 {
     margin: 0;
     color: var(--primary-color);
   }
   .filter-sort-ar {
-    /* border: 1px solid red; */
     height: 40px;
     display: flex;
     justify-content: space-around;
