@@ -1,9 +1,55 @@
-@media (min-width: 769px) and (max-width: 1200px) {
-  .add-comment-ac {
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid var(--secondary-color);
+.add-comment-ac {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+#comment-text-area:focus {
+  outline: none;
+  border: 1px solid var(--hover-color);
+  background-color: var(--bg-color);
+  color: var(--color-text);
+}
+
+.comment-btn {
+  background-color: var(--primary-color);
+  padding: 0.5rem;
+  color: white;
+  border: none;
+  box-sizing: border-box;
+  font-weight: bold;
+  border-radius: 0.3rem;
+  margin: 0.5rem 0;
+  align-self: flex-end;
+}
+
+.comment-btn:hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+#disabled-comment-btn {
+  opacity: 0.5;
+  cursor: default;
+  background-color: var(--primary-color);
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  #comment-text-area {
+    max-width: 768px;
+    height: 70px;
+    resize: none;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 0.3rem;
+    background-color: var(--bg-color);
+    color: var(--color-text);
+    transition: all 0.2s linear;
   }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
   #comment-text-area {
     width: 430px;
     height: 70px;
@@ -17,40 +63,9 @@
     color: var(--color-text);
     transition: all 0.2s linear;
   }
-  #comment-text-area:focus {
-    outline: none;
-    border: 1px solid var(--hover-color);
-    background-color: var(--bg-color);
-    color: var(--color-text);
-  }
-  .comment-btn {
-    background-color: var(--primary-color);
-    padding: 0.5rem;
-    color: white;
-    border: none;
-    box-sizing: border-box;
-    font-weight: bold;
-    border-radius: 0.3rem;
-    margin: 0.5rem 0;
-    align-self: flex-end;
-  }
-  .comment-btn:hover {
-    background-color: var(--hover-color);
-    cursor: pointer;
-  }
-  #disabled-comment-btn {
-    opacity: 0.5;
-    cursor: default;
-    background-color: var(--primary-color);
-  }
 }
 
 @media (min-width: 1201px) {
-  .add-comment-ac {
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid var(--secondary-color);
-  }
   #comment-text-area {
     width: 530px;
     height: 70px;
@@ -63,31 +78,5 @@
     background-color: var(--bg-color);
     color: var(--color-text);
     transition: all 0.2s linear;
-  }
-  #comment-text-area:focus {
-    outline: none;
-    border: 1px solid var(--hover-color);
-    background-color: var(--bg-color);
-    color: var(--color-text);
-  }
-  .comment-btn {
-    background-color: var(--primary-color);
-    padding: 0.5rem;
-    color: white;
-    border: none;
-    box-sizing: border-box;
-    font-weight: bold;
-    border-radius: 0.3rem;
-    margin: 0.5rem 0;
-    align-self: flex-end;
-  }
-  .comment-btn:hover {
-    background-color: var(--hover-color);
-    cursor: pointer;
-  }
-  #disabled-comment-btn {
-    opacity: 0.5;
-    cursor: default;
-    background-color: var(--primary-color);
   }
 }

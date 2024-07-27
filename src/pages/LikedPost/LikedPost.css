@@ -3,6 +3,17 @@
   color: var(--primary-color);
   font-size: 2rem;
   font-weight: bold;
+  text-align: center;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .liked-post {
+    max-width: 768px;
+    margin-bottom: 2rem;
+    padding-top: 0.1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1200px) {

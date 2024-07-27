@@ -1,3 +1,50 @@
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .user-info-container {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0.5rem 0.5rem 0rem;
+    box-sizing: border-box;
+    /* outline: 1px solid red; */
+  }
+  .user-name-ui {
+    display: none;
+  }
+  .image-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    outline: 3px solid var(--primary-color);
+    background-color: rgb(238, 207, 144);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  #user-image {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+  }
+  .dark-light-icons {
+    display: none;
+  }
+  .dark-light-toggle > .sunny {
+    color: var(--primary-color);
+    font-size: 30px;
+    display: block;
+  }
+  .dark-light-toggle > .moon {
+    color: var(--primary-color);
+    display: block;
+    font-size: 30px;
+  }
+}
+
 @media (min-width: 769px) {
   .user-info-container {
     display: flex;

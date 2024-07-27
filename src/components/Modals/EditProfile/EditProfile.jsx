@@ -87,7 +87,7 @@ const EditProfile = ({ user, setEditProfile, showEditProfile }) => {
         </div>
 
         <div className="avatar-container-ep">
-          <div>Select avatar</div>
+          <div id="avatar-title">Select avatar</div>
           {showAvatar ? (
             avatarList?.map((img) => (
               <span className="img-span-ep" key={img.name}>

@@ -1,11 +1,25 @@
 .no-post-home {
-  width: 550px;
+  width: 350px;
   margin: 0;
   font-size: 2rem;
   color: var(--primary-color);
   font-weight: bold;
   padding: 0.5rem;
   text-align: center;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .home {
+    max-width: 768px;
+    margin-bottom: 2rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .no-post-home {
+    width: 250px;
+    margin: auto;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1200px) {

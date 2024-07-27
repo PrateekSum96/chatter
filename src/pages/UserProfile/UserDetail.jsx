@@ -6,7 +6,9 @@ import { clearBookmarks } from "../../features/bookmarkSlice";
 import EditProfile from "../../components/Modals/EditProfile/EditProfile";
 import Layover from "../../components/Layover/Layover";
 import ShowFollow from "../../components/Modals/ShowFollow/ShowFollow";
-import { MdClose } from "react-icons/md";
+
+import { MdClose, MdOutlineLogout } from "react-icons/md";
+import { FaUserEdit } from "react-icons/fa";
 
 import { clearDataPostSlice } from "../../features/postSlice";
 import { hideScrollBar } from "../../utils/utilityFunction/hideScrollBar";
@@ -33,6 +35,17 @@ const UserDetail = ({ username }) => {
     (x) => x?.username === username
   );
 
+  const logoutFunc = () => {
+    dispatch(logOutUser());
+    dispatch(clearBookmarks());
+    dispatch(clearDataPostSlice());
+  };
+
+  const editUserFunc = () => {
+    dispatch(setLayover(true));
+    setEditProfile(true);
+  };
+
   return (
     <div className="user-detail">
       <Layover showLayover={layover} />
@@ -56,14 +69,15 @@ const UserDetail = ({ username }) => {
           </div>
           <div className="user-button-ud">
             {loggedInUser?._id === user?._id && (
-              <button
-                onClick={() => {
-                  dispatch(setLayover(true));
-                  setEditProfile(true);
-                }}
-              >
-                Edit
-              </button>
+              <div>
+                <button className="btn-profile" onClick={() => editUserFunc()}>
+                  Edit
+                </button>
+                <FaUserEdit
+                  className="icons-profile"
+                  onClick={() => editUserFunc()}
+                />
+              </div>
             )}
             {isFollowing
               ? loggedInUser?._id !== user?._id && (
@@ -85,15 +99,15 @@ const UserDetail = ({ username }) => {
                   </button>
                 )}
             {loggedInUser?._id === user?._id && (
-              <button
-                onClick={() => {
-                  dispatch(logOutUser());
-                  dispatch(clearBookmarks());
-                  dispatch(clearDataPostSlice());
-                }}
-              >
-                Logout
-              </button>
+              <div>
+                <button className="btn-profile" onClick={() => logoutFunc()}>
+                  Logout
+                </button>
+                <MdOutlineLogout
+                  className="icons-profile"
+                  onClick={() => logoutFunc()}
+                />
+              </div>
             )}
           </div>
         </div>

@@ -64,6 +64,7 @@ const Search = () => {
   return (
     <div className="search-container">
       <IoMdSearch id="search-icon" />
+
       <MdClose
         id="search-icon-close"
         onClick={() => {

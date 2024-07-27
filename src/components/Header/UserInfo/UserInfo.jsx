@@ -14,7 +14,7 @@ const UserInfo = () => {
     <div className="user-info-container">
       <div className="dark-light-toggle">
         <IoIosSunny
-          className={"dark-light-icons"}
+          className={`${darkMode ? "sunny" : ""} dark-light-icons`}
           onClick={() => {
             dispatch(onDarkMode(false));
           }}
@@ -24,7 +24,7 @@ const UserInfo = () => {
           id="toggle-pointer"
         ></div>
         <IoIosMoon
-          className="dark-light-icons"
+          className={`${darkMode ? "" : "moon"} dark-light-icons`}
           onClick={() => {
             dispatch(onDarkMode(true));
           }}

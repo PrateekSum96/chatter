@@ -6,6 +6,16 @@
   text-align: center;
 }
 
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .bookmarks {
+    max-width: 768px;
+    margin-bottom: 2rem;
+    padding-top: 0.1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 @media (min-width: 769px) and (max-width: 1200px) {
   .bookmarks {
     width: 450px;

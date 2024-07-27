@@ -1,11 +1,12 @@
+import "./Home.css";
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import ShowPost from "../../components/ShowPosts/ShowPost";
 import AddPostContent from "../../components/AddPost/AddPostContent";
 import { getUserPosts, homePostShimmerTrue } from "../../features/postSlice";
 import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
-
-import "./Home.css";
 import { getTrendingPost } from "../../utils/utilityFunction/getTendingPost";
 import { getLatestPost } from "../../utils/utilityFunction/getLatestPost";
 
@@ -18,7 +19,6 @@ const Home = () => {
   const homePostShimmer = useSelector(
     (store) => store.appPosts.homePostShimmer
   );
-
   useEffect(() => {
     dispatch(getUserPosts({ username: userLoggedIn?.username }));
     // eslint-disable-next-line

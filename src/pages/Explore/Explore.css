@@ -2,6 +2,15 @@
   margin-bottom: 2rem;
 }
 
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .explore {
+    max-width: 768px;
+    padding-top: 0.1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 @media (min-width: 769px) and (max-width: 1200px) {
   .explore {
     width: 450px;
