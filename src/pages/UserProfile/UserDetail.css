@@ -11,7 +11,183 @@
   transform: scale(1) translate(-50%, -50%);
 }
 
+.user-image-ud {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  outline: 3px solid var(--primary-color);
+  object-position: top;
+  object-fit: cover;
+}
+.user-not-image-ud {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  outline: 3px solid var(--primary-color);
+  background-color: rgb(238, 207, 144);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+.user-info-detail-ud p {
+  margin: 0;
+  padding: 0;
+}
+
+.user-info-detail-ud {
+  width: 100%;
+  margin-left: 0.5rem;
+}
+
+.user-name-detail-ud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.user-button-ud div {
+  display: inline;
+}
+
+.user-button-ud button {
+  background-color: var(--secondary-color);
+  font-weight: bold;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.5rem 1rem;
+  margin-left: 0.3rem;
+  transition: all 0.2s ease-in-out;
+}
+.user-button-ud button:hover {
+  cursor: pointer;
+  background-color: var(--hover-color);
+  color: white;
+}
+#user-bio-ud {
+  font-size: 1.1rem;
+  padding: 0.3rem 0;
+}
+#user-website-ud {
+  text-decoration: none;
+  color: var(--color-text);
+}
+#user-website-ud:hover {
+  text-decoration: underline;
+}
+.user-follow-info-ud {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+}
+.user-follow-info-ud > p > span {
+  padding-left: 0.2rem;
+}
+.follow-ud:hover {
+  cursor: pointer;
+}
+.show-followers {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: var(--secondary-color);
+  color: black;
+  width: 200px;
+  border-radius: 0.3rem;
+  border: 2px solid white;
+  box-sizing: border-box;
+  transform: scale(0) translate(-50%, -50%);
+  transition: all 0.2s linear;
+  transform-origin: 0 0;
+  z-index: 11;
+}
+.show-followers > div:nth-of-type(2) {
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 250px;
+  padding: 0.8rem 0.5rem 0;
+}
+#show-followers-id-ud {
+  transform: scale(1) translate(-50%, -50%);
+}
+
+#show-following-id-ud {
+  transform: scale(1) translate(-50%, -50%);
+}
+
+.follower-title-ud {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.heading-modal-ud {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  height: 40px;
+  width: 100%;
+  border-bottom: 2px solid var(--primary-color);
+}
+.cross-followers-ud {
+  position: absolute;
+  top: 12px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  transition: all 0.2s ease-in-out;
+}
+.cross-followers-ud:hover {
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+}
+.no-follow-msg {
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .user-detail {
+    width: 100%;
+    border-bottom: 2px solid var(--primary-color);
+    margin-top: 1rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    display: flex;
+  }
+
+  .user-name-ud > p > span {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding-right: 0.2rem;
+  }
+  .user-name-ud p:nth-of-type(2) {
+    font-size: 1rem;
+  }
+
+  .btn-profile {
+    display: none;
+  }
+
+  .user-follow-info-ud > p {
+    font-weight: bold;
+    font-size: 1rem;
+    color: var(--hover-color);
+  }
+
+  .icons-profile {
+    padding-left: 1rem;
+    font-size: 1.4rem;
+  }
+}
+
 @media (min-width: 769px) {
+  .icons-profile {
+    display: none;
+  }
   .user-detail {
     width: 100%;
     border-bottom: 2px solid var(--primary-color);
@@ -20,149 +196,20 @@
     box-sizing: border-box;
     display: flex;
   }
-  .user-image-ud {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    outline: 3px solid var(--primary-color);
-    object-position: top;
-    object-fit: cover;
-  }
-  .user-not-image-ud {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    outline: 3px solid var(--primary-color);
-    background-color: rgb(238, 207, 144);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-  }
-  .user-info-detail-ud p {
-    margin: 0;
-    padding: 0;
-  }
-  .user-info-detail-ud {
-    width: 100%;
-    margin-left: 0.5rem;
-  }
-  .user-name-detail-ud {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+
   .user-name-ud > p > span {
     font-size: 1.3rem;
     font-weight: bold;
     padding-right: 0.2rem;
   }
+
   .user-name-ud p:nth-of-type(2) {
     font-size: 1.1rem;
   }
-  .user-button-ud button {
-    background-color: var(--secondary-color);
-    font-weight: bold;
-    border: none;
-    border-radius: 0.3rem;
-    padding: 0.5rem 1rem;
-    margin-left: 0.3rem;
-    transition: all 0.2s ease-in-out;
-  }
-  .user-button-ud button:hover {
-    cursor: pointer;
-    background-color: var(--hover-color);
-    color: white;
-  }
-  #user-bio-ud {
-    font-size: 1.1rem;
-    padding: 0.3rem 0;
-  }
-  #user-website-ud {
-    text-decoration: none;
-    color: black;
-  }
-  #user-website-ud:hover {
-    text-decoration: underline;
-  }
-  .user-follow-info-ud {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.4rem;
-  }
+
   .user-follow-info-ud > p {
     font-weight: bold;
     font-size: 1.1rem;
     color: var(--hover-color);
-  }
-  .user-follow-info-ud > p > span {
-    padding-left: 0.2rem;
-  }
-  .follow-ud:hover {
-    cursor: pointer;
-  }
-  .show-followers {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    background-color: var(--secondary-color);
-    color: black;
-    width: 200px;
-    border-radius: 0.3rem;
-    border: 2px solid white;
-    box-sizing: border-box;
-    transform: scale(0) translate(-50%, -50%);
-    transition: all 0.2s linear;
-    transform-origin: 0 0;
-    z-index: 11;
-  }
-  .show-followers > div:nth-of-type(2) {
-    overflow: hidden;
-    overflow-y: scroll;
-    max-height: 250px;
-    padding: 0.8rem 0.5rem 0;
-  }
-  #show-followers-id-ud {
-    transform: scale(1) translate(-50%, -50%);
-  }
-
-  #show-following-id-ud {
-    transform: scale(1) translate(-50%, -50%);
-  }
-
-  .follower-title-ud {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  .heading-modal-ud {
-    position: sticky;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    top: 0px;
-    height: 40px;
-    width: 100%;
-    border-bottom: 2px solid var(--primary-color);
-  }
-  .cross-followers-ud {
-    position: absolute;
-    top: 12px;
-    right: 5px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-
-    transition: all 0.2s ease-in-out;
-  }
-  .cross-followers-ud:hover {
-    cursor: pointer;
-    background-color: var(--primary-color);
-    color: white;
-  }
-  .no-follow-msg {
-    text-align: center;
-    padding-bottom: 0.5rem;
   }
 }

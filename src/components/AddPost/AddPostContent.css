@@ -6,43 +6,160 @@
   background-color: var(--primary-color);
 }
 
-@media (min-width: 769px) {
-  .post-content-container {
-    width: 100%;
-    outline: 1px solid var(--secondary-color);
-    border-radius: 0.3rem;
-    padding: 0.7rem 0.7rem 0 0.7rem;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.post-content-container {
+  width: 100%;
+  outline: 1px solid var(--secondary-color);
+  border-radius: 0.3rem;
+  padding: 0.7rem 0.7rem 0 0.7rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--bg-color);
+  color: var(--color-text);
+}
+
+.post-input-pc {
+  display: flex;
+}
+
+.img-container-pc {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  outline: 3px solid var(--primary-color);
+  background-color: rgb(238, 207, 144);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  margin-right: 0.7rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+#image-pc {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.post-input-div-pc:focus {
+  outline: none;
+}
+
+.post-action-pc {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  border-top: 1px solid var(--secondary-color);
+  padding: 0 0.5rem;
+  position: relative;
+}
+.media-container-apc > div {
+  position: relative;
+  align-self: flex-end;
+}
+
+#remove-upload-image-pc {
+  position: absolute;
+  color: var(--primary-color);
+  background-color: white;
+  border-radius: 50%;
+  right: -5px;
+  top: -5px;
+  cursor: pointer;
+}
+
+#input-img-apc {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 0.3rem;
+}
+
+.icon-pc {
+  color: var(--primary-color);
+  font-size: 1.7rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.post-action-pc > button {
+  background-color: var(--primary-color);
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 0.3rem;
+  padding: 0.4rem 0.5rem;
+  font-size: 1.1rem;
+}
+.post-action-pc > button:hover {
+  cursor: pointer;
+  background-color: var(--hover-color);
+}
+.emojis {
+  position: absolute;
+  top: 10px;
+  left: 80px;
+  transform: scale(0);
+  width: 200px;
+  background-color: var(--secondary-color);
+  z-index: 100;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  transform-origin: top left;
+  opacity: 0;
+  transition: all 0.2s linear;
+}
+
+#emojis-animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.emojis > span {
+  font-size: 1.5rem;
+}
+.emojis > span:hover {
+  background-color: var(--hover-color);
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+
+#emoji-name {
+  position: absolute;
+  font-size: 1rem;
+  background-color: var(--hover-color);
+  border-radius: 0.3rem;
+  padding: 0.2rem;
+}
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .post-input-div-pc {
+    height: 100px;
+    font-size: 1rem;
+    padding: 0.5rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    border: none;
+    resize: none;
     background-color: var(--bg-color);
     color: var(--color-text);
   }
-  .post-input-pc {
+
+  .media-container-apc {
+    width: 100%;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  .img-container-pc {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    outline: 3px solid var(--primary-color);
-    background-color: rgb(238, 207, 144);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.3rem;
-    margin-right: 0.7rem;
-    font-weight: bold;
-    color: var(--primary-color);
-  }
-  #image-pc {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: top;
-  }
+}
+
+@media (min-width: 769px) {
   .post-input-div-pc {
     width: 450px;
     height: 100px;
@@ -55,99 +172,11 @@
     background-color: var(--bg-color);
     color: var(--color-text);
   }
-  .post-input-div-pc:focus {
-    outline: none;
-  }
-  .post-action-pc {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    border-top: 1px solid var(--secondary-color);
-    padding: 0 0.5rem;
-    position: relative;
-  }
 
   .media-container-apc {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-  .media-container-apc > div {
-    position: relative;
-    align-self: flex-end;
-  }
-  #remove-upload-image-pc {
-    position: absolute;
-    color: var(--primary-color);
-    background-color: white;
-    border-radius: 50%;
-    right: -5px;
-    top: -5px;
-    cursor: pointer;
-  }
-  #input-img-apc {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 0.3rem;
-  }
-  .icon-pc {
-    color: var(--primary-color);
-    font-size: 1.7rem;
-    margin-right: 0.5rem;
-    cursor: pointer;
-  }
-  .post-action-pc > button {
-    background-color: var(--primary-color);
-    color: white;
-    outline: none;
-    border: none;
-    border-radius: 0.3rem;
-    padding: 0.4rem 0.5rem;
-    font-size: 1.1rem;
-  }
-  .post-action-pc > button:hover {
-    cursor: pointer;
-    background-color: var(--hover-color);
-  }
-  .emojis {
-    position: absolute;
-    top: 10px;
-    left: 80px;
-    transform: scale(0);
-    width: 200px;
-    background-color: var(--secondary-color);
-    z-index: 100;
-    padding: 0.5rem;
-    border-radius: 0.3rem;
-    transform-origin: top left;
-    opacity: 0;
-    transition: all 0.2s linear;
-  }
-
-  #emojis-animate {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .emojis > span {
-    font-size: 1.5rem;
-  }
-  .emojis > span:hover {
-    background-color: var(--hover-color);
-    border-radius: 0.3rem;
-    cursor: pointer;
-  }
-
-  #emoji-name {
-    position: absolute;
-    font-size: 1rem;
-    background-color: var(--hover-color);
-    border-radius: 0.3rem;
-    padding: 0.2rem;
   }
 }
 

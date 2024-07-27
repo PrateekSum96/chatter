@@ -1,29 +1,27 @@
-@media (min-width: 769px) {
-  .show-follow-sf {
-    display: flex;
-    margin-bottom: 0.7rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid var(--primary-color);
-  }
-  .show-follow-sf:hover {
-    cursor: pointer;
-  }
-  .show-avatar-sf {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: top;
-    outline: 3px solid var(--primary-color);
-  }
-  .user-info-sf {
-    margin-left: 0.5rem;
-  }
-  .user-info-sf span {
-    font-size: 1.1rem;
-    padding-right: 0.3rem;
-    font-weight: bold;
-    text-wrap: nowrap;
-    overflow: hidden;
-  }
+.show-follow-sf {
+  display: flex;
+  margin-bottom: 0.7rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--primary-color);
+}
+.show-follow-sf:hover {
+  cursor: pointer;
+}
+.show-avatar-sf {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  outline: 3px solid var(--primary-color);
+}
+.user-info-sf {
+  margin-left: 0.5rem;
+}
+.user-info-sf span {
+  font-size: 1.1rem;
+  padding-right: 0.3rem;
+  font-weight: bold;
+  text-wrap: nowrap;
+  overflow: hidden;
 }

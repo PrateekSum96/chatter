@@ -1,6 +1,88 @@
 .edit-comment-ec {
   z-index: 100;
 }
+#edit-comment-modal-id-ec {
+  transform: scale(1);
+  transform-origin: center;
+}
+.edit-comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.edit-comment-header > div {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+#close-comment-modal {
+  position: absolute;
+  right: 5px;
+  top: 0px;
+  font-size: 1.1rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+#close-comment-modal:hover {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+}
+
+.text-area-comment-edit-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.5rem;
+}
+
+#text-area-edit-comment:focus {
+  outline: none;
+}
+.btn-edit-comment-container {
+  display: flex;
+  justify-content: center;
+}
+#btn-edit-comment {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  width: 80px;
+  height: 30px;
+  border-radius: 0.3rem;
+  font-size: 1.1rem;
+}
+#btn-edit-comment:hover {
+  cursor: pointer;
+  background-color: var(--hover-color);
+}
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .edit-comment-ec {
+    width: 320px;
+    padding: 0.5rem;
+    background-color: var(--secondary-color);
+    color: black;
+    box-sizing: border-box;
+    border-radius: 0.3rem;
+    transform: scale(0);
+    transition: all 0.2s linear;
+  }
+
+  #text-area-edit-comment {
+    width: 290px;
+    height: 100px;
+    border: 1px solid var(--primary-color);
+    border-radius: 0.3rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    font-size: 1.1rem;
+    resize: none;
+  }
+}
 
 @media (min-width: 769px) {
   .edit-comment-ec {
@@ -13,42 +95,7 @@
     transform: scale(0);
     transition: all 0.2s linear;
   }
-  #edit-comment-modal-id-ec {
-    transform: scale(1);
-    transform-origin: center;
-  }
-  .edit-comment-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 1rem;
-  }
-  .edit-comment-header > div {
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
 
-  #close-comment-modal {
-    position: absolute;
-    right: 5px;
-    top: 0px;
-    font-size: 1.1rem;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    transition: all 0.2s ease-in-out;
-  }
-  #close-comment-modal:hover {
-    background-color: var(--primary-color);
-    color: white;
-    cursor: pointer;
-  }
-  .text-area-comment-edit-container {
-    display: flex;
-    justify-content: center;
-    margin: 0.5rem;
-  }
   #text-area-edit-comment {
     width: 410px;
     height: 100px;
@@ -58,25 +105,5 @@
     box-sizing: border-box;
     font-size: 1.1rem;
     resize: none;
-  }
-  #text-area-edit-comment:focus {
-    outline: none;
-  }
-  .btn-edit-comment-container {
-    display: flex;
-    justify-content: center;
-  }
-  #btn-edit-comment {
-    background-color: var(--primary-color);
-    border: none;
-    color: white;
-    width: 80px;
-    height: 30px;
-    border-radius: 0.3rem;
-    font-size: 1.1rem;
-  }
-  #btn-edit-comment:hover {
-    cursor: pointer;
-    background-color: var(--hover-color);
   }
 }

@@ -2,61 +2,148 @@
   display: none;
 }
 
+.edit-post-modal {
+  width: 500px;
+  padding: 0.5rem;
+  background-color: var(--secondary-color);
+  color: black;
+  z-index: 100;
+  box-sizing: border-box;
+  border-radius: 0.3rem;
+  transform: scale(0);
+  transition: all 0.2s linear;
+}
+
+#edit-post-modal-id-ep {
+  transform: scale(1);
+  transform-origin: center;
+}
+
+.edit-post-header {
+  position: relative;
+  margin: 0.5rem 0 1rem;
+}
+
+.edit-post-header > div:nth-of-type(1) {
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+#close-modal-ep {
+  position: absolute;
+  right: 5px;
+  top: 0px;
+  font-size: 1.1rem;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+#close-modal-ep:hover {
+  background-color: var(--primary-color);
+  color: white;
+  cursor: pointer;
+}
+
+.post-content-ep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#text-input-ep {
+  width: 420px;
+  height: 100px;
+  font-size: 1.1rem;
+  border-radius: 0.3rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  border: 1px solid var(--primary-color);
+  resize: none;
+}
+.media-ep {
+  width: 420px;
+  height: 200px;
+  object-fit: cover;
+  margin: 0.5rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 0.3rem;
+  box-sizing: border-box;
+}
+.media-container-ep {
+  position: relative;
+}
+
+#media-delete-ep {
+  position: absolute;
+  right: -2px;
+  top: 2px;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  z-index: 11;
+  background-color: white;
+  border-radius: 50%;
+}
+
+#media-delete-ep:hover {
+  cursor: pointer;
+  color: var(--hover-color);
+}
+
+.user-action-ep {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+#edit-post-btn-ep {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
+  width: 80px;
+  height: 30px;
+  border-radius: 0.3rem;
+  font-size: 1.1rem;
+}
+#edit-post-btn-ep:hover {
+  cursor: pointer;
+  background-color: var(--hover-color);
+}
+
+#upload-image-ep {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+#upload-image-ep:hover {
+  cursor: pointer;
+}
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .edit-post-modal {
+    width: 300px;
+  }
+
+  #text-input-ep {
+    width: 260px;
+  }
+  #text-input-ep:focus {
+    outline: none;
+  }
+  .media-ep {
+    width: 260px;
+    height: 150px;
+  }
+}
+
 @media (min-width: 769px) {
   .edit-post-modal {
     width: 500px;
-    padding: 0.5rem;
-    background-color: var(--secondary-color);
-    color: black;
-    z-index: 100;
-    box-sizing: border-box;
-    border-radius: 0.3rem;
-    transform: scale(0);
-    transition: all 0.2s linear;
-  }
-  #edit-post-modal-id-ep {
-    transform: scale(1);
-    transform-origin: center;
-  }
-  .edit-post-header {
-    position: relative;
-    margin: 0.5rem 0 1rem;
-  }
-  .edit-post-header > div:nth-of-type(1) {
-    font-weight: bold;
-    text-align: center;
-    font-size: 1.2rem;
-  }
-  #close-modal-ep {
-    position: absolute;
-    right: 5px;
-    top: 0px;
-    font-size: 1.1rem;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    transition: all 0.2s ease-in-out;
-  }
-  #close-modal-ep:hover {
-    background-color: var(--primary-color);
-    color: white;
-    cursor: pointer;
   }
 
-  .post-content-ep {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   #text-input-ep {
     width: 420px;
-    height: 100px;
-    font-size: 1.1rem;
-    border-radius: 0.3rem;
-    padding: 0.5rem;
-    box-sizing: border-box;
-    border: 1px solid var(--primary-color);
-    resize: none;
   }
   #text-input-ep:focus {
     outline: none;
@@ -64,54 +151,5 @@
   .media-ep {
     width: 420px;
     height: 200px;
-    object-fit: cover;
-    margin: 0.5rem;
-    border: 1px solid var(--primary-color);
-    border-radius: 0.3rem;
-    box-sizing: border-box;
-  }
-  .media-container-ep {
-    position: relative;
-  }
-  #media-delete-ep {
-    position: absolute;
-    right: -2px;
-    top: 2px;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    z-index: 11;
-    background-color: white;
-    border-radius: 50%;
-  }
-  #media-delete-ep:hover {
-    cursor: pointer;
-    color: var(--hover-color);
-  }
-
-  .user-action-ep {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0.5rem;
-  }
-  #edit-post-btn-ep {
-    background-color: var(--primary-color);
-    border: none;
-    color: white;
-    width: 80px;
-    height: 30px;
-    border-radius: 0.3rem;
-    font-size: 1.1rem;
-  }
-  #edit-post-btn-ep:hover {
-    cursor: pointer;
-    background-color: var(--hover-color);
-  }
-  #upload-image-ep {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-  }
-  #upload-image-ep:hover {
-    cursor: pointer;
   }
 }

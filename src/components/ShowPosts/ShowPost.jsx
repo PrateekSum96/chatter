@@ -27,7 +27,7 @@ const ShowPost = ({ post }) => {
   );
 };
 
-//components
+//COMPONENTS
 
 //UserContentPost
 

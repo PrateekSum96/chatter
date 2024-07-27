@@ -1,27 +1,11 @@
-@media (min-width: 769px) and (max-width: 1200px) {
-  .comment-box-sc {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.6rem 0;
-  }
-
-  .text-comment {
-    padding: 0.6rem 0.1rem 0;
-    font-size: 1.1rem;
-    overflow-wrap: break-word;
-  }
+.comment-box-sc {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem 0;
 }
 
-@media (min-width: 1201px) {
-  .comment-box-sc {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.6rem 0;
-  }
-
-  .text-comment {
-    padding: 0.6rem 0.1rem 0;
-    font-size: 1.1rem;
-    overflow-wrap: break-word;
-  }
+.text-comment {
+  padding: 0.6rem 0.1rem 0;
+  font-size: 1.1rem;
+  overflow-wrap: break-word;
 }

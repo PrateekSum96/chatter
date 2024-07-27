@@ -1,6 +1,192 @@
 #edit-profile-id {
   transform: scale(1) translate(-50%, -50%);
 }
+.input-edit-form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.input-edit-form input {
+  border-radius: 0.3rem;
+  background-color: var(--secondary-color);
+  border: 2px solid var(--primary-color);
+  height: 40px;
+  font-size: 1.1rem;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+.input-edit-form input:focus {
+  outline: none;
+  border: 2px solid var(--hover-color);
+}
+
+#modal-name-ep {
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.edit-button-ep {
+  background-color: var(--primary-color);
+  border-radius: 0.3rem;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.2rem 0.5rem;
+  margin: 0 auto;
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.edit-button-ep:hover {
+  background-color: var(--hover-color);
+}
+#close-edit-profile {
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  top: 10px;
+  right: 5px;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+#close-edit-profile:hover {
+  cursor: pointer;
+  color: white;
+  background-color: var(--primary-color);
+}
+#image-edit-user {
+  border: none;
+  display: none;
+}
+#img-edit-container-ep {
+  margin-bottom: 0;
+  display: flex;
+}
+#img-edit-container-ep > label {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-right: 3rem;
+}
+
+#icon-camera-ep {
+  position: absolute;
+  background-color: white;
+  color: var(--primary-color);
+  border-radius: 0.3rem;
+  top: 33px;
+  left: 33px;
+  font-size: 1.2rem;
+}
+#icon-camera-ep:hover {
+  cursor: pointer;
+}
+
+#img-edit-container-ep > div {
+  display: flex;
+  align-items: baseline;
+  position: relative;
+}
+
+#img-show-edit-ep {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  margin-right: 0.5rem;
+  outline: 2px solid var(--primary-color);
+}
+
+#no-avatar-ep {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: var(--primary-color);
+  outline: 2px solid var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: rgb(238, 207, 144);
+}
+
+.avatar-shimmer {
+  display: flex;
+  margin: -0.4rem;
+}
+
+.avatar-shimmer > div {
+  outline: 2px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+}
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .edit-profile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: scale(1) translate(-50%, -50%);
+    width: 260px;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    z-index: 100;
+    transition: all 0.2s linear;
+    background-color: var(--secondary-color);
+    color: black;
+  }
+
+  .input-edit-form input {
+    width: 180px;
+  }
+
+  .avatar-container-ep {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+  }
+  #avatar-title {
+    position: relative;
+    right: 20px;
+  }
+  .avatar-container-ep > div {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  div #email-ep {
+    position: relative;
+    right: 59px;
+  }
+
+  #img-avatar-ep {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    outline: 2px solid var(--primary-color);
+  }
+  #img-avatar-ep:hover {
+    outline: 3px solid var(--primary-color);
+  }
+  .img-span-ep {
+    margin: 0 0.2rem;
+    cursor: pointer;
+  }
+}
+
 @media (min-width: 769px) {
   .edit-profile {
     position: absolute;
@@ -15,92 +201,7 @@
     background-color: var(--secondary-color);
     color: black;
   }
-  .input-edit-form {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-  .input-edit-form input {
-    border-radius: 0.3rem;
-    background-color: var(--secondary-color);
-    border: 2px solid var(--primary-color);
-    height: 40px;
-    font-size: 1.1rem;
-    padding: 0 0.5rem;
-    box-sizing: border-box;
-  }
-  .input-edit-form input:focus {
-    outline: none;
-    border: 2px solid var(--hover-color);
-  }
-  #modal-name-ep {
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  .edit-button-ep {
-    background-color: var(--primary-color);
-    border-radius: 0.3rem;
-    border: none;
-    color: white;
-    font-size: 1.1rem;
-    padding: 0.2rem 0.5rem;
-    margin: 0 auto;
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 0.3rem;
-  }
-  .edit-button-ep:hover {
-    background-color: var(--hover-color);
-  }
-  #close-edit-profile {
-    position: absolute;
-    width: 23px;
-    height: 23px;
-    top: 10px;
-    right: 5px;
-    border-radius: 50%;
-    transition: all 0.2s ease-in-out;
-  }
-  #close-edit-profile:hover {
-    cursor: pointer;
-    color: white;
-    background-color: var(--primary-color);
-  }
-  #image-edit-user {
-    border: none;
-    display: none;
-  }
-  #img-edit-container-ep {
-    margin-bottom: 0;
-    display: flex;
-  }
-  #img-edit-container-ep > label {
-    font-weight: bold;
-    font-size: 1.1rem;
-    margin-right: 3rem;
-  }
-  #img-edit-container-ep > div {
-    display: flex;
-    align-items: baseline;
-    position: relative;
-  }
 
-  #icon-camera-ep {
-    position: absolute;
-    background-color: white;
-    color: var(--primary-color);
-    border-radius: 0.3rem;
-    top: 33px;
-    left: 33px;
-    font-size: 1.2rem;
-  }
-  #icon-camera-ep:hover {
-    cursor: pointer;
-  }
   #img-avatar-ep {
     width: 40px;
     height: 40px;
@@ -127,42 +228,9 @@
     font-style: italic;
     font-weight: 500;
   }
-  #img-show-edit-ep {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: top;
-    margin-right: 0.5rem;
-    outline: 2px solid var(--primary-color);
-  }
-  #no-avatar-ep {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    color: var(--primary-color);
-    outline: 2px solid var(--primary-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    background-color: rgb(238, 207, 144);
-  }
-  .avatar-shimmer {
-    display: flex;
-    margin: -0.4rem;
-  }
-  .avatar-shimmer > div {
-    outline: 2px solid var(--primary-color);
-    background-color: var(--secondary-color);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 0.4rem;
-  }
+
   div#email-ep {
     position: relative;
-    right: 137px;
+    right: 115px;
   }
 }

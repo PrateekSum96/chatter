@@ -1,22 +1,34 @@
+.comment-container-pp {
+  outline: 1px solid var(--secondary-color);
+  border-radius: 0.3rem;
+  padding: 0.6rem 0.6rem 0 0.6rem;
+  box-sizing: border-box;
+  margin-top: 1rem;
+}
+
+.comment-container-pp .comment-pp {
+  border-bottom: 1px solid var(--secondary-color);
+}
+
+.comment-container-pp .comment-pp:last-child {
+  border-bottom: none;
+  padding-bottom: 0rem;
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .post-page {
+    max-width: 768px;
+    padding-top: 0.1rem;
+    padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 @media (min-width: 769px) and (max-width: 1200px) {
   .post-page {
     width: 450px;
     padding-bottom: 2rem;
-  }
-  .comment-container-pp {
-    outline: 1px solid var(--secondary-color);
-    border-radius: 0.3rem;
-    padding: 0.6rem 0.6rem 0 0.6rem;
-    box-sizing: border-box;
-    margin-top: 1rem;
-  }
-
-  .comment-container-pp .comment-pp {
-    border-bottom: 1px solid var(--secondary-color);
-  }
-  .comment-container-pp .comment-pp:last-child {
-    border-bottom: none;
-    padding-bottom: 0rem;
   }
 }
 
@@ -24,20 +36,5 @@
   .post-page {
     width: 550px;
     padding-bottom: 2rem;
-  }
-  .comment-container-pp {
-    outline: 1px solid var(--secondary-color);
-    border-radius: 0.3rem;
-    padding: 0.6rem 0.6rem 0 0.6rem;
-    box-sizing: border-box;
-    margin-top: 1rem;
-  }
-
-  .comment-container-pp .comment-pp {
-    border-bottom: 1px solid var(--secondary-color);
-  }
-  .comment-container-pp .comment-pp:last-child {
-    border-bottom: none;
-    padding-bottom: 0rem;
   }
 }
