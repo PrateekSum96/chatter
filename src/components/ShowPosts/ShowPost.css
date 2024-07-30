@@ -169,4 +169,7 @@
     background-color: var(--secondary-color);
     color: black;
   }
+  .show-post-container {
+    margin-top: 1rem;
+  }
 }

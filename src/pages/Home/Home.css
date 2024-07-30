@@ -20,6 +20,9 @@
     width: 250px;
     margin: auto;
   }
+  .home-post-add {
+    display: none;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1200px) {
@@ -31,9 +34,15 @@
   .no-post-home {
     width: 450px;
   }
+  .home-filter {
+    display: none;
+  }
 }
 
 @media (min-width: 1201px) {
+  .home-filter {
+    display: none;
+  }
   .home {
     width: 550px;
     padding-bottom: 2rem;
