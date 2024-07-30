@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ShowPost from "../../components/ShowPosts/ShowPost";
-import AddPostContent from "../../components/AddPost/AddPostContent";
+
 import { getUserPosts, homePostShimmerTrue } from "../../features/postSlice";
 import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
 import { getTrendingPost } from "../../utils/utilityFunction/getTendingPost";
