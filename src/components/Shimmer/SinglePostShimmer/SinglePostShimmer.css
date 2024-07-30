@@ -1,48 +1,79 @@
+.single-post-sp {
+  margin-top: 1rem;
+  border: 1px solid rgb(220, 218, 218);
+  border-radius: 0.3rem;
+  padding: 0.7rem;
+  box-sizing: border-box;
+}
+
+.single-post-sp > div:nth-of-type(1) {
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid rgb(220, 218, 218);
+  display: flex;
+}
+.image-sp {
+  border-radius: 50%;
+  background-color: rgb(220, 218, 218);
+  margin-right: 5px;
+}
+
+.info-sp {
+  background-color: rgb(220, 218, 218);
+  margin-bottom: 7px;
+  border-radius: 0.3rem;
+}
+.media-sp {
+  width: 100%;
+  background-color: rgb(220, 218, 218);
+  border-radius: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+.action-sp {
+  display: flex;
+}
+.action-sp > div {
+  width: 25px;
+  height: 25px;
+  margin-right: 0.5rem;
+  background-color: rgb(220, 218, 218);
+  border-radius: 0.3rem;
+}
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .single-post-sp {
+    width: 95%;
+    margin: 1rem auto;
+  }
+
+  .image-sp {
+    width: 45px;
+    height: 45px;
+  }
+  .info-sp {
+    width: 150px;
+    height: 18px;
+  }
+  .media-sp {
+    height: 150px;
+  }
+}
+
 @media (min-width: 769px) {
   .single-post-sp {
     margin-top: 1rem;
     width: 440px;
-    border: 1px solid rgb(220, 218, 218);
-    border-radius: 0.3rem;
-    padding: 0.7rem;
-    box-sizing: border-box;
   }
-  .single-post-sp > div:nth-of-type(1) {
-    width: 100%;
-    height: 60px;
-    border-bottom: 1px solid rgb(220, 218, 218);
-    display: flex;
-  }
+
   .image-sp {
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    background-color: rgb(220, 218, 218);
-    margin-right: 5px;
   }
   .info-sp {
     width: 200px;
     height: 20px;
-    background-color: rgb(220, 218, 218);
-    margin-bottom: 7px;
-    border-radius: 0.3rem;
   }
   .media-sp {
-    width: 100%;
     height: 180px;
-    background-color: rgb(220, 218, 218);
-    border-radius: 0.3rem;
-    margin-bottom: 0.5rem;
-  }
-  .action-sp {
-    display: flex;
-  }
-  .action-sp > div {
-    width: 25px;
-    height: 25px;
-    margin-right: 0.5rem;
-    background-color: rgb(220, 218, 218);
-    border-radius: 0.3rem;
   }
 }
 

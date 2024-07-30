@@ -4,11 +4,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ShowPost from "../../components/ShowPosts/ShowPost";
-import AddPostContent from "../../components/AddPost/AddPostContent";
 import { getUserPosts, homePostShimmerTrue } from "../../features/postSlice";
 import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
 import { getTrendingPost } from "../../utils/utilityFunction/getTendingPost";
 import { getLatestPost } from "../../utils/utilityFunction/getLatestPost";
+import AsideRight from "../../components/AsideRight/AsideRight";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <AddPostContent />
+      <AsideRight />
       {showHomePost?.length === 0 ? (
         <p className="no-post-home">No Posts Yet!</p>
       ) : (
