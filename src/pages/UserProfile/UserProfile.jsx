@@ -45,6 +45,7 @@ const UserProfile = () => {
   }, [username, loggedInUser]);
 
   //shimmer
+
   if (username !== user?.username || onLoadShimmer) {
     return (
       <div>

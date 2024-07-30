@@ -47,9 +47,7 @@
     font-size: 0.9rem;
     font-weight: 500;
   }
-  .f-btn-container-su {
-    /* outline: 1px solid red; */
-  }
+
   .f-btn-container-su > button {
     background-color: var(--primary-color);
     color: white;

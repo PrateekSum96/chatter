@@ -9,6 +9,7 @@ import { getUserPosts, homePostShimmerTrue } from "../../features/postSlice";
 import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
 import { getTrendingPost } from "../../utils/utilityFunction/getTendingPost";
 import { getLatestPost } from "../../utils/utilityFunction/getLatestPost";
+import AsideRight from "../../components/AsideRight/AsideRight";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -50,7 +51,8 @@ const Home = () => {
 
   return (
     <div className="home">
-      <AddPostContent />
+      <AsideRight />
+      {/* <AddPostContent /> */}
       {showHomePost?.length === 0 ? (
         <p className="no-post-home">No Posts Yet!</p>
       ) : (

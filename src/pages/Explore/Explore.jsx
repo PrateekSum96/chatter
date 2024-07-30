@@ -26,6 +26,7 @@ const Explore = () => {
       </div>
     );
   }
+
   return (
     <div className="explore">
       {latestPost?.map((post) => (

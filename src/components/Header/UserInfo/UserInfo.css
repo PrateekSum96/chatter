@@ -6,7 +6,6 @@
     align-items: center;
     padding: 0.5rem 0.5rem 0.5rem 0rem;
     box-sizing: border-box;
-    /* outline: 1px solid red; */
   }
   .user-name-ui {
     display: none;
