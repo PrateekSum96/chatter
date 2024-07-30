@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ShowPost from "../../components/ShowPosts/ShowPost";
+import AddPostContent from "../../components/AddPost/AddPostContent";
 import { getUserPosts, homePostShimmerTrue } from "../../features/postSlice";
 import PageShimmer from "../../components/Shimmer/PageShimmer/PageShimmer";
 import { getTrendingPost } from "../../utils/utilityFunction/getTendingPost";
@@ -50,7 +51,14 @@ const Home = () => {
 
   return (
     <div className="home">
-      <AsideRight />
+      <div className="home-filter">
+        <AsideRight />
+      </div>
+
+      <div className="home-post-add">
+        <AddPostContent />
+      </div>
+
       {showHomePost?.length === 0 ? (
         <p className="no-post-home">No Posts Yet!</p>
       ) : (
